@@ -1,84 +1,118 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Вхід до кабінету</title>
+  <meta charset="UTF-8" />
+  <title>Вхід до платформи</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #fddaff, #c79eff);
-      height: 100vh;
+      background: linear-gradient(to right, #ffe1f0, #ffd0f8);
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
     .login-box {
       background: #fff;
       padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      width: 350px;
-      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
     }
 
     .login-box h2 {
+      text-align: center;
+      color: #e91e63;
       margin-bottom: 30px;
-      color: #e60073;
     }
 
-    .login-box input[type="text"],
-    .login-box input[type="password"] {
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 16px;
     }
 
-    .login-box button {
+    .login-btn {
       width: 100%;
-      padding: 12px;
-      background-color: #e60073;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
+      padding: 14px;
+      background-color: #e91e63;
+      color: white;
       font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
-    .login-box button:hover {
-      background-color: #cc005f;
+    .login-btn:hover {
+      background-color: #c2185b;
     }
 
-    .back-link {
-      margin-top: 20px;
-      display: inline-block;
-      color: #e60073;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
     }
   </style>
 </head>
 <body>
-
   <div class="login-box">
-    <h2>Вхід до кабінету</h2>
-    <form action="/login" method="POST">
-      <input type="text" name="email" placeholder="Електронна пошта" required>
-      <input type="password" name="password" placeholder="Пароль" required>
-      <button type="submit">Увійти</button>
-    </form>
-    <a href="registerstudent.html" class="back-link">Ще не зареєстровані?</a>
+    <h2>Вхід до особистого кабінету</h2>
+    <div class="form-group">
+      <label for="email">Електронна пошта</label>
+      <input type="email" id="email" placeholder="example@gmail.com" />
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" id="password" placeholder="Ваш пароль" />
+    </div>
+    <button class="login-btn">Увійти</button>
+    <div class="error" id="errorMsg">Невірна електронна пошта або пароль.</div>
   </div>
 
+  <script>
+    document.querySelector('.login-btn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const res = await fetch('http://localhost:3001/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const text = await res.text();
+
+        if (res.ok && text.includes('успішний')) {
+          window.location.href = 'cabinet.html';
+        } else {
+          document.getElementById('errorMsg').style.display = 'block';
+        }
+      } catch (err) {
+        console.error('Помилка запиту:', err);
+        alert('Сталася помилка при з’єднанні з сервером.');
+      }
+    });
+  </script>
 </body>
 </html>
