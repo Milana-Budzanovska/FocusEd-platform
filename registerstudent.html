@@ -172,7 +172,7 @@
       };
 
       try {
-        const res = await fetch('http://localhost:3001/register-student', {
+        const res = await fetch('https://focused-server.onrender.com/register-student', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
