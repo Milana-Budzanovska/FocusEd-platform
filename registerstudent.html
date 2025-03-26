@@ -160,6 +160,36 @@
                     console.error('❌ Помилка при запиті:', err);
                     alert('Сталася помилка. Спробуйте ще раз.');
                 }
+                <!-- Кнопка "Увійти, якщо вже зареєстровані" -->
+<div class="login-btn-container">
+  <a href="login.html" class="login-btn">Увійти, якщо вже зареєстровані</a>
+</div>
+
+<style>
+  .login-btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .login-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #fff;
+    color: #e91e63;
+    border: 2px solid #e91e63;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .login-btn:hover {
+    background-color: #e91e63;
+    color: #fff;
+  }
+</style>
+
             });
         </script>
     </div>
