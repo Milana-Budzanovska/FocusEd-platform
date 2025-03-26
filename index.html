@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Почати навчання</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #fddaff, #f8c8ff);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin: 20px auto;
+            width: 90%;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        .active {
+            background: #ffd6eb;
+        }
+        .section {
+            padding: 50px;
+        }
+        .registration-form {
+            width: 60%;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ff66b2;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #e60073;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="StartEdu.html" class="active">Почати навчання</a>
+    </div>
+
+    <div class="section">
+        <div class="registration-form">
+            <h2>Форма реєстрації</h2>
+            <div class="form-group">
+                <label for="name">Ім'я</label>
+                <input type="text" id="name">
+            </div>
+            <div class="form-group">
+                <label for="surname">Прізвище</label>
+                <input type="text" id="surname">
+            </div>
+            <div class="form-group">
+                <label for="dob">Дата народження</label>
+                <input type="date" id="dob">
+            </div>
+            <div class="form-group">
+                <label for="email">Електронна пошта</label>
+                <input type="email" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password">
+            </div>
+            <div class="form-group">
+                <label for="avatar">Обрати аватар-помічника</label>
+                <select id="avatar">
+                    <option>Флік</option>
+                    <option>Смарі</option>
+                    <option>Люмі</option>
+                    <option>Кріс</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="learning-style">Стиль навчання</label>
+                <select id="learning-style">
+                    <option>Візуальний</option>
+                    <option>Аудіальний</option>
+                    <option>Текстовий</option>
+                    <option>Комбінований</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" id="support"> Потрібні додаткові інструменти підтримки?</label>
+            </div>
+            <button class="submit-btn">Зареєструватися</button>
+        </div>
+
+        <script>
+            document.querySelector('.submit-btn').addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                const data = {
+                    name: document.getElementById('name').value,
+                    surname: document.getElementById('surname').value,
+                    dob: document.getElementById('dob').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    avatar: document.getElementById('avatar').value,
+                    learning_style: document.getElementById('learning-style').value,
+                    support_tools: document.getElementById('support').checked ? 1 : 0
+                };
+
+                try {
+                    const res = await fetch('http://localhost:3001/register-student', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    const msg = await res.text();
+                    alert(msg);
+
+                    if (res.ok && msg.includes("успішна")) {
+                        // Переходить до кабінету після реєстрації
+                        window.location.href = 'holovna.html';
+                    }
+                } catch (err) {
+                    console.error('❌ Помилка при запиті:', err);
+                    alert('Сталася помилка. Спробуйте ще раз.');
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
