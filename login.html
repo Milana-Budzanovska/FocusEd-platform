@@ -1,101 +1,118 @@
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const bcrypt = require('bcryptjs');
-
-const app = express();
-const port = 3001;
-
-app.use(cors());
-app.use(bodyParser.json());
-
-const db = new sqlite3.Database('./focused.db', (err) => {
-    if (err) console.error('❌ Помилка підключення до БД:', err.message);
-    else console.log('🟢 Connected to SQLite database.');
-});
-
-// Створення таблиці студентів (якщо ще не створена)
-db.run(`
-    CREATE TABLE IF NOT EXISTS students (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        surname TEXT,
-        dob TEXT,
-        email TEXT UNIQUE,
-        password TEXT,
-        avatar TEXT,
-        learning_style TEXT,
-        support_tools INTEGER
-    )
-`);
-
-// Перевірка сервера
-app.get('/', (req, res) => {
-    res.send('Сервер працює, база даних підключена!');
-});
-
-// Реєстрація нового студента
-app.post('/register-student', (req, res) => {
-    const {
-        name, surname, dob, email,
-        password, avatar, learning_style, support_tools
-    } = req.body;
-
-    if (!name || !surname || !email || !password) {
-        return res.status(400).send('Будь ласка, заповніть усі обовʼязкові поля.');
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Вхід до платформи</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ffe1f0, #ffd0f8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
-
-    const sql = `INSERT INTO students 
-        (name, surname, dob, email, password, avatar, learning_style, support_tools) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-
-    db.run(sql, [
-        name, surname, dob, email,
-        hashedPassword, avatar, learning_style, support_tools ? 1 : 0
-    ], function(err) {
-        if (err) {
-            console.error('❌ Помилка збереження в БД:', err.message);
-            return res.status(500).send('Помилка при збереженні користувача.');
-        }
-
-        console.log('✅ Новий студент зареєстрований:', name, surname);
-        res.send('Реєстрація успішна!');
-    });
-});
-
-// Вхід (логін) користувача
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).send('Введіть email та пароль!');
+    .login-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
     }
 
-    const sql = 'SELECT * FROM students WHERE email = ?';
-    db.get(sql, [email], (err, user) => {
-        if (err) {
-            console.error('❌ Помилка при вході:', err.message);
-            return res.status(500).send('Помилка сервера.');
-        }
+    .login-box h2 {
+      text-align: center;
+      color: #e91e63;
+      margin-bottom: 30px;
+    }
 
-        if (!user) {
-            return res.status(401).send('Користувача не знайдено.');
-        }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-        const isMatch = bcrypt.compareSync(password, user.password);
-        if (!isMatch) {
-            return res.status(401).send('Невірний пароль.');
-        }
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
 
-        console.log('✅ Вхід виконано для:', user.email);
-        res.send('Вхід успішний!');
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #e91e63;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: #c2185b;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Вхід до особистого кабінету</h2>
+    <div class="form-group">
+      <label for="email">Електронна пошта</label>
+      <input type="email" id="email" placeholder="example@gmail.com" />
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" id="password" placeholder="Ваш пароль" />
+    </div>
+    <button class="login-btn">Увійти</button>
+    <div class="error" id="errorMsg">Невірна електронна пошта або пароль.</div>
+  </div>
+
+  <script>
+    document.querySelector('.login-btn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const res = await fetch('http://localhost:3001/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const text = await res.text();
+
+        if (res.ok && text.includes('успішний')) {
+          window.location.href = 'cabinet.html';
+        } else {
+          document.getElementById('errorMsg').style.display = 'block';
+        }
+      } catch (err) {
+        console.error('Помилка запиту:', err);
+        alert('Сталася помилка при з’єднанні з сервером.');
+      }
     });
-});
-
-// Запуск сервера
-app.listen(port, () => {
-    console.log(`🚀 Server running at http://localhost:${port}`);
-});
+  </script>
+</body>
+</html>
