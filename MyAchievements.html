@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Досягнення - Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e3baff, #f2c7ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навігаційне меню */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar .active {
+            background: #e0aaff;
+            color: white;
+        }
+
+        /* Контейнер */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .achievements-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .achievement {
+            width: 45%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .achievement img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .progress-box {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <div class="navbar">
+       <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+    </div>
+
+    <!-- Контент сторінки -->
+    <div class="container">
+        <h1>Отримані бейджі:</h1>
+
+        <div class="achievements-container">
+            <div class="achievement">
+                <h2>Майстер біології</h2>
+                <img src="1000043574-fotor-bg-remover-20250312223519.png" alt="Бейдж біології">
+            </div>
+            <div class="achievement">
+                <h2>Завершено 5 тем</h2>
+                <img src="1000043595-fotor-bg-remover-20250312221551.png" alt="Бейдж завершення 5 тем">
+            </div>
+        </div>
+
+        <!-- Прогрес до нового рівня -->
+        <div class="progress-box">
+            <p><strong>Прогрес до наступного рівня</strong></p>
+            <p>Ще 3 уроки – і ти отримаєш новий бейдж!</p>
+            <img src="1000043577-fotor-bg-remover-20250312223545.png" alt="Прогрес" width="80">
+        </div>
+
+
+        </div>
+
+    </div>
+
+</body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>

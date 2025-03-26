@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогрес - Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e3baff, #f2c7ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навігаційне меню */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar .active {
+            background: #e0aaff;
+            color: white;
+        }
+
+        /* Контейнер для контенту */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 120px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .activity-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .activity-container img {
+            width: 120px;
+        }
+
+        .activity-info {
+            flex-grow: 1;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .chart-container img {
+            width: 130px;
+        }
+
+        .chart-info {
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .interaction-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .interaction-block {
+            text-align: center;
+            width: 200px;
+        }
+
+        .interaction-block img {
+            width: 120px;
+        }
+
+        .interaction-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .interaction-description {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <div class="navbar">
+        <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+    </div>
+
+    <!-- Контент сторінки -->
+    <div class="container">
+        <h1>Графік активності</h1>
+        
+        <div class="activity-container">
+            <img src="1000043583-fotor-bg-remover-20250312223354.png" alt="Графік">
+            <div class="activity-info">
+                Понеділок - 2 години <br>
+                Вівторок - 3 години <br>
+                Середа - 1 година <br>
+                Четвер - 2,5 години <br>
+                П’ятниця - 40 хвилин
+            </div>
+            <div class="chart-container">
+                <img src="1000043585-fotor-bg-remover-20250312222936.png" alt="Прохідність">
+                <div class="chart-info">
+                    <strong>Прохідність тем</strong> <br>
+                    <span style="color: black;"><b>Легко:</b> біологія, історія.</span> <br>
+                    <span style="color: black;"><b>Повторення:</b> математика, українська мова, англійська.</span>
+                </div>
+            </div>
+        </div>
+
+        <h1>Аналіз взаємодії з платформою</h1>
+
+        <div class="interaction-container">
+            <div class="interaction-block">
+                <img src="1000043578-fotor-bg-remover-20250312223247.png" alt="Інтерактиви">
+                <div class="interaction-text">інтерактиви 50%</div>
+            </div>
+            
+            <div class="interaction-block">
+                <img src="1000043625-removebg-preview.png" alt="Відео">
+                <div class="interaction-text">відео 35%</div>
+            </div>
+
+            <div class="interaction-block">
+                <img src="1000043575-fotor-bg-remover-20250312223315.png" alt="Текст">
+                <div class="interaction-text">текст 15%</div>
+            </div>
+        </div>
+
+        <div class="interaction-description">
+            Відео та інтерактиви використовуються більше, ніж текст, а найбільш популярними є саме інтерактивні елементи.
+        </div>
+    </div>
+
+</body>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>
+
+
+</html>

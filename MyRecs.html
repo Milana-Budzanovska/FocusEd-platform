@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендації - Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e3baff, #f2c7ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навігаційне меню */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar .active {
+            background: #e0aaff;
+            color: white;
+        }
+
+        /* Контейнер для контенту */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .subject-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .subject {
+            width: 30%;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .subject p {
+            font-size: 16px;
+            color: #5a5a5a;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <div class="navbar">
+        <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+    </div>
+
+    <!-- Контент сторінки -->
+    <div class="container">
+        <h1>Що переглянути ще раз?</h1>
+
+        <div class="subject-container">
+            <div class="subject">
+                <h2>Біологія:</h2>
+                <p>Повтори тему "Будова рослин" – зверни увагу, які частини є у дерева, квітки та куща.</p>
+            </div>
+            <div class="subject">
+                <h2>Історія України:</h2>
+                <p>Переглянь розповідь про Київську Русь – згадай, хто такий князь Володимир і чому його називають Великим.</p>
+            </div>
+            <div class="subject">
+                <h2>Математика:</h2>
+                <p>Потренуйся в множенні та діленні – повтори таблицю множення, щоб швидше рахувати.</p>
+            </div>
+        </div>
+
+        <div class="subject-container">
+            <div class="subject">
+                <h2>Українська мова:</h2>
+                <p>Згадай правила написання апострофа – знайди у своєму зошиті слова з апострофом і ще раз їх перечитай.</p>
+            </div>
+            <div class="subject">
+                <h2>Англійська мова:</h2>
+                <p>Повтори назви кольорів – спробуй знайти вдома предмети різних кольорів і назвати їх англійською.</p>
+            </div>
+        </div>
+
+        <h1>Які методи спрацювали найкраще?</h1>
+
+        <div class="subject-container">
+            <div class="subject">
+                <h2>Біологія:</h2>
+                <p><strong>Інтерактивні відео та анімації:</strong>  
+                Короткі відеоуроки та анімації допомагають учням краще уявити складні біологічні процеси і запам'ятати матеріал через активний перегляд і повторення.</p>
+            </div>
+            <div class="subject">
+                <h2>Історія України:</h2>
+                <p><strong>Інтерактивні карти та хронології:</strong>  
+                Використання візуальних матеріалів, таких як карти та часові лінії, допомагає учням краще розуміти послідовність історичних подій та географічні особливості.</p>
+            </div>
+            <div class="subject">
+                <h2>Математика:</h2>
+                <p><strong>Ігрові вправи та головоломки:</strong>  
+                Завдання у формі ігор або головоломок сприяють розвитку логічного мислення. Візуалізація математичних задач (графіки, малюнки геометричних фігур) допомагає зменшити абстрактність і краще засвоїти матеріал.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>

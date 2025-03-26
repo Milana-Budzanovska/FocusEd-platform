@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мої курси - Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e3baff, #f2c7ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навігаційне меню */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar .active {
+            background: #e0aaff;
+            color: white;
+        }
+
+        /* Контейнер для контенту */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 120px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Блок для кнопок */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background-color: #f4d4ff;
+        }
+
+        /* Таблиця для прогресу */
+        .progress-table {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 20px;
+            width: 60%;
+            margin: auto;
+        }
+
+        .subject-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .subject {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .subject-name {
+            font-weight: bold;
+            width: 200px;
+            text-align: left;
+        }
+
+        /* Стилі для шкали прогресу */
+        .progress-bar {
+            width: 70%;
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .percentage {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* Різні кольори шкали */
+        .progress-70 { width: 70%; background-color: #ffba88; }
+        .progress-50 { width: 50%; background-color: #ffdd55; }
+        .progress-80 { width: 80%; background-color: #99dd99; }
+        .progress-100 { width: 100%; background-color: #66bbff; }
+
+        /* Кнопка внизу */
+        .big-button {
+            background-color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: 2px solid black;
+            transition: 0.3s;
+            margin-top: 50px; /* 🔹 ОПУСТИВ КНОПКУ ЩЕ НИЖЧЕ */
+        }
+
+        .big-button:hover {
+            background-color: #f4d4ff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <div class="navbar">
+            <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+    </div>
+
+    <!-- Контент сторінки -->
+    <div class="container">
+        <!-- Кнопки "Початі", "Завершені", "Рекомендовані" -->
+        <div class="buttons">
+            <button class="button">Початі</button>
+            <button class="button">Завершені</button>
+            <button class="button">Рекомендовані</button>
+        </div>
+
+        <h1>Список предметів:</h1>
+
+        <div class="progress-table">
+            <div class="subject-container">
+                <div class="subject">
+                    <span class="subject-name">Біологія</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-70"></div>
+                    </div>
+                    <span class="percentage">70%</span>
+                </div>
+
+                <div class="subject">
+                    <span class="subject-name">Історія України</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-50"></div>
+                    </div>
+                    <span class="percentage">50%</span>
+                </div>
+
+                <div class="subject">
+                    <span class="subject-name">Математика</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-80"></div>
+                    </div>
+                    <span class="percentage">80%</span>
+                </div>
+
+                <div class="subject">
+                    <span class="subject-name">Українська мова</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-100"></div>
+                    </div>
+                    <span class="percentage">100%</span>
+                </div>
+
+                <div class="subject">
+                    <span class="subject-name">Англійська мова</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-70"></div>
+                    </div>
+                    <span class="percentage">70%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Велика кнопка -->
+        <button class="big-button">Переглянути всі формати матеріалу</button>
+    </div>
+
+</body>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Налаштування - Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e3baff, #f2c7ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навігаційне меню */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar .active {
+            background: #e0aaff;
+            color: white;
+        }
+
+        /* Контейнер */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .settings-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .profile-settings, .site-settings {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .setting-box {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 150px;
+        }
+
+        /* Декоративні зображення */
+        .decor-img {
+            position: absolute;
+            width: 100px;
+        }
+
+        .img-left {
+            left: 50px;
+            top: 200px;
+        }
+
+        .img-right {
+            right: 50px;
+            top: 200px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <div class="navbar">
+        <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="EduStyle.html">Мій стиль навчання</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+        <a href="MySettings.html">Налаштування</a>
+    </div>
+
+    <!-- Контент сторінки -->
+    <div class="container">
+        <h1>Редагування профілю</h1>
+
+        <div class="profile-settings">
+            <div class="setting-box">Ім'я</div>
+            <div class="setting-box">Аватар</div>
+            <div class="setting-box">Біографія</div>
+        </div>
+
+        <h1>Налаштування вигляду сайту</h1>
+
+        <div class="site-settings">
+            <div class="setting-box">Темна тема</div>
+            <div class="setting-box">Розмір шрифту</div>
+            <div class="setting-box">Світла тема</div>
+        </div>
+    </div>
+
+    <!-- Декоративні зображення (PNG) -->
+    <img src="decor-left.png" alt="Декор зліва" class="decor-img img-left">
+    <img src="decor-right.png" alt="Декор справа" class="decor-img img-right">
+
+</body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест на стиль навчання</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .options label {
+            display: block;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #a18cd1;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест: Визнач свій стиль навчання</h1>
+    <form id="learningStyleForm">
+        <div class="question">
+            <p>1. Коли ти читаєш текст, чи ти уявляєш собі картинки в голові?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="visual"> Так, дуже чітко.</label>
+                <label><input type="radio" name="q1" value="mixed"> Іноді, але не завжди.</label>
+                <label><input type="radio" name="q1" value="audial"> Ні, я більше зосереджений на словах.</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>2. Як ти відчуваєш себе, коли чуєш інформацію на слух?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="visual"> Мені складно зосередитись, я краще сприймаю через зображення.</label>
+                <label><input type="radio" name="q2" value="audial"> Це не важливо, я можу слухати і розуміти.</label>
+                <label><input type="radio" name="q2" value="mixed"> Я запам’ятовую лише частину, коли чую інформацію.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Коли тобі потрібно вивчити нову тему, що ти робиш перш за все?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="visual"> Я шукаю відео чи картинки.</label>
+                <label><input type="radio" name="q3" value="kinesthetic"> Я читаю текст і роблю нотатки.</label>
+                <label><input type="radio" name="q3" value="audial"> Я питаю когось або слухаю пояснення.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. Як ти зазвичай запам’ятовуєш нову інформацію?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="visual"> Я прив'язую її до образів чи асоціацій.</label>
+                <label><input type="radio" name="q4" value="audial"> Я зазвичай повторюю слова або слухаю.</label>
+                <label><input type="radio" name="q4" value="kinesthetic"> Я намагаюсь зрозуміти логіку чи схеми.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>5. Коли ти дивишся на карту, як ти орієнтуєшся?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="visual"> Я пам'ятаю місця, які я вже бачив.</label>
+                <label><input type="radio" name="q5" value="kinesthetic"> Я аналізую всі деталі на карті.</label>
+                <label><input type="radio" name="q5" value="audial"> Я орієнтуюсь по напрямках або тексту.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>6. Якщо тобі показують малюнок, що ти помічаєш в першу чергу?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="visual"> Колір і форми.</label>
+                <label><input type="radio" name="q6" value="kinesthetic"> Деталі та предмети.</label>
+                <label><input type="radio" name="q6" value="audial"> Як всі частини з'єднуються.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>7. Як ти реагуєш, коли хтось пояснює тобі щось нове?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="kinesthetic"> Я ставлю багато питань, щоб зрозуміти краще.</label>
+                <label><input type="radio" name="q7" value="audial"> Я слухаю, але іноді мені важко зберегти увагу.</label>
+                <label><input type="radio" name="q7" value="visual"> Я намагаюся уявити це в голові.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>8. Як ти зазвичай розв’язуєш проблему?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="visual"> Я використовую візуальні підказки або малюнки.</label>
+                <label><input type="radio" name="q8" value="audial"> Я розповідаю або думаю в словах.</label>
+                <label><input type="radio" name="q8" value="kinesthetic"> Я аналізую ситуацію крок за кроком.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>9. Як ти орієнтуєшся у незнайомому місці?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="visual"> Я пам’ятаю знакові місця та їх вигляд.</label>
+                <label><input type="radio" name="q9" value="audial"> Я слухаю вказівки та підказки.</label>
+                <label><input type="radio" name="q9" value="kinesthetic"> Я шукаю логіку в напрямках.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>10. Як ти вчишся, коли щось не розумієш?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="visual"> Я шукаю аналогії або малюнки.</label>
+                <label><input type="radio" name="q10" value="audial"> Я намагаюсь зрозуміти через текст.</label>
+                <label><input type="radio" name="q10" value="kinesthetic"> Я ставлю багато запитань.</label>
+            </div>
+        </div>
+<div class="question">
+            <p>11. Як ти зазвичай запам’ятовуєш нову інформацію?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="visual"> Я прив'язую її до образів чи асоціацій.</label>
+                <label><input type="radio" name="q11" value="audial"> Я зазвичай повторюю слова або слухаю.</label>
+                <label><input type="radio" name="q11" value="kinesthetic"> Я намагаюсь зрозуміти логіку чи схеми.</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>12. Як ти відчуваєш себе, коли треба запам’ятовувати числові дані?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="visual"> Я створюю візуальні образи для чисел.</label>
+                <label><input type="radio" name="q12" value="audial"> Я просто повторюю їх кілька разів.</label>
+                <label><input type="radio" name="q12" value="kinesthetic"> Я шукаю логічну структуру або схему в цих числах.</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>13. Якщо тобі показують малюнок, що ти помічаєш в першу чергу?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="visual"> Колір і форми.</label>
+                <label><input type="radio" name="q13" value="kinesthetic"> Деталі та предмети.</label>
+                <label><input type="radio" name="q13" value="audial"> Як всі частини з'єднуються.</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>14. Як ти реагуєш, коли хтось пояснює тобі щось нове?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="kinesthetic"> Я ставлю багато питань, щоб зрозуміти це краще.</label>
+                <label><input type="radio" name="q14" value="audial"> Я слухаю, але іноді мені важко зберегти увагу.</label>
+                <label><input type="radio" name="q14" value="visual"> Я намагаюся уявити це в голові.</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>15. Коли ти навчаєшся, що тобі важливіше:</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="kinesthetic"> Як це буде виглядати на практиці?</label>
+                <label><input type="radio" name="q15" value="audial"> Як це описано словами?</label>
+                <label><input type="radio" name="q15" value="visual"> Як можна структурувати це в логічні етапи?</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>16. Як ти зазвичай розв’язуєш проблему?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="visual"> Я використовую візуальні підказки або малюнки.</label>
+                <label><input type="radio" name="q16" value="audial"> Я розповідаю або думаю в словах.</label>
+                <label><input type="radio" name="q16" value="kinesthetic"> Я аналізую ситуацію крок за кроком.</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>17. Як ти орієнтуєшся у незнайомому місці?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="visual"> Я пам’ятаю знакові місця та їх вигляд.</label>
+                <label><input type="radio" name="q17" value="audial"> Я слухаю вказівки та підказки.</label>
+                <label><input type="radio" name="q17" value="kinesthetic"> Я шукаю логіку в напрямках.</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>18. Що для тебе важливіше під час навчання?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="visual"> Структура та організація матеріалу.</label>
+                <label><input type="radio" name="q18" value="audial"> Емоційне залучення та цікавість.</label>
+                <label><input type="radio" name="q18" value="kinesthetic"> Візуальні елементи або приклади.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>19. Як ти сприймаєш числові задачі?</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="visual"> Я шукаю схеми або графіки.</label>
+                <label><input type="radio" name="q19" value="audial"> Я проговорюю умову та рішення.</label>
+                <label><input type="radio" name="q19" value="kinesthetic"> Я пробую кілька варіантів самостійно.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>20. Як ти краще вивчаєш нову мову?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="visual"> Я використовую картинки або відео.</label>
+                <label><input type="radio" name="q20" value="audial"> Я слухаю аудіо та повторюю.</label>
+                <label><input type="radio" name="q20" value="kinesthetic"> Я використовую практичні вправи та приклади.</label>
+            </div>
+        </div>
+
+
+        <button type="button" onclick="calculateResult()">Отримати результат</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('learningStyleForm');
+            const data = new FormData(form);
+            let visual = 0, audial = 0, kinesthetic = 0;
+            for (let value of data.values()) {
+                if (value === 'visual') visual++;
+                else if (value === 'audial') audial++;
+                else if (value === 'kinesthetic') kinesthetic++;
+            }
+            let resultText = '';
+            if (visual > audial && visual > kinesthetic) resultText = 'Твій стиль навчання: Візуал';
+            else if (audial > visual && audial > kinesthetic) resultText = 'Твій стиль навчання: Аудіал';
+            else if (kinesthetic > visual && kinesthetic > audial) resultText = 'Твій стиль навчання: Кінестетик';
+            else resultText = 'Твій стиль навчання змішаний';
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+</body>
+</html>

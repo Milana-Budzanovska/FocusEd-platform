@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мій стиль навчання - Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #e3baff, #f2c7ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навігаційне меню */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar .active {
+            background: #e0aaff;
+            color: white;
+        }
+
+        /* Контейнер для контенту */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 120px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-text {
+            font-size: 18px;
+            color: #5a5a5a;
+            margin-top: 20px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .button {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 40px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #ffecff;
+            transform: scale(1.05);
+        }
+
+        .button img {
+            width: 24px;
+            margin-right: 10px;
+        }
+
+        .trophy-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .trophy-container img {
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <div class="navbar">
+        <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="EduStyle.html">Мій стиль навчання</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+    </div>
+
+    <!-- Контент сторінки -->
+    <div class="container">
+        <h1>Результати тесту:</h1>
+        <h1>10 балів з 12</h1>
+
+        <p class="result-text">
+            Ти просто неймовірн(а)! 10 із 12 — це чудовий показник! <br>
+            Ти справді розумн(а)! Видно, що ти докладав зусиль, і це окупилося. <br>
+            Ти молодець, і я пишаюся тобою! Так тримати! <br>
+            Ти – візуал, тому матеріал подається у вигляді схем, малюнків, таблиць.
+        </p>
+
+        <div class="button-container">
+            <a href="retry_test.html" class="button">
+                <img src="check.png" alt="Повторити">
+                Пройти тест заново
+            </a>
+
+            <a href="adjust_learning_style.html" class="button">
+                <img src="check.png" alt="Налаштувати">
+                Налаштування балансу стилів
+            </a>
+        </div>
+
+        <div class="trophy-container">
+            <img src="trophy.png" alt="Трофей">
+        </div>
+
+    </div>
+
+</body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f5c6ff, #e5a1ff);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 15px;
+        }
+        .navbar .active {
+            background: #e5a1ff;
+            color: white;
+        }
+        .content {
+            margin-top: 80px;
+            padding: 30px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .button {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .progress-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .progress-bar {
+            background: black;
+            height: 10px;
+            border-radius: 5px;
+            width: 100px;
+        }
+        .progress-text {
+            margin-left: 10px;
+        }
+        .footer-button {
+            margin-top: 30px;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="holovna.html">Головна</a>
+        <a href="MyCourses.html" class="active">Мої курси</a>
+        <a href="MyProgress.html">Прогрес</a>
+        <a href="EduStyle.html">Мій стиль навчання</a>
+        <a href="MyRecs.html">Рекомендації</a>
+        <a href="MyAchievements.html">Досягнення</a>
+        <a href="MySettings.html">Налаштування</a>
+    </div>
+
+    <div class="content">
+        <div class="button-container">
+            <div class="button">Почати</div>
+            <div class="button">Завершені</div>
+            <div class="button">Рекомендовані</div>
+        </div>
+        <h2>Список предметів:</h2>
+        <div class="progress-list">
+            <div class="progress-item"><span>Біологія</span><div class="progress-bar" style="width: 70px;"></div> <span>70%</span></div>
+            <div class="progress-item"><span>Історія України</span><div class="progress-bar" style="width: 50px;"></div> <span>50%</span></div>
+            <div class="progress-item"><span>Математика</span><div class="progress-bar" style="width: 80px;"></div> <span>80%</span></div>
+            <div class="progress-item"><span>Українська мова</span><div class="progress-bar" style="width: 100px;"></div> <span>100%</span></div>
+            <div class="progress-item"><span>Англійська мова</span><div class="progress-bar" style="width: 70px;"></div> <span>70%</span></div>
+        </div>
+        <div class="footer-button">✅ Переглянути всі формати матеріалу</div>
+    </div>
+</body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перехід на головну</title>
+    <style>
+        body {
+            margin-top: 2cm;
+            text-align: center;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="main3.html">
+        <button class="home-button">На головну</button>
+    </a>
+
+</body>
+</html>

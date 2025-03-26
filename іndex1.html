@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Чат Бот Люмі</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #FFB07C 0%, #FF90B3 50%, #D7B4F3 100%);
+    }
+
+    #chat {
+      width: 400px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    #messages {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .message {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    input {
+      width: 70%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin-left: 10px;
+      background-color: #FF69B4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #FF1493;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chat">
+  <h3 style="text-align: center; color: #FF69B4;">💬 Чат Бот Люмі</h3>
+  <div id="messages"></div>
+  <input id="userInput" type="text" placeholder="Напиши щось..." />
+  <button onclick="sendMessage()">Відправити</button>
+</div>
+
+<script>
+  async function sendMessage() {
+    const inputField = document.getElementById('userInput');
+    const input = inputField.value.trim();
+    if (input === '') return;
+
+    const messagesDiv = document.getElementById('messages');
+    messagesDiv.innerHTML += `<div class="message"><strong>Ти:</strong> ${input}</div>`;
+    inputField.value = '';
+
+    const response = await fetch('http://localhost:3000/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: input })
+    });
+
+    const data = await response.json();
+    const botReply = data.reply;
+    messagesDiv.innerHTML += `<div class="message"><strong>Люмі:</strong> ${botReply}</div>`;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
