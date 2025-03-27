@@ -103,9 +103,9 @@
 
         const json = await res.json();
 
-        if (res.ok && json.student) {
-          localStorage.setItem('studentId', json.student.id);
-          window.location.href = 'MyCabinet.html';
+        if (res.ok && json.student && json.student.id) {
+          // Переходимо на кабінет з ID у URL
+          window.location.href = `MyCabinet.html?id=${json.student.id}`;
         } else {
           document.getElementById('errorMsg').style.display = 'block';
         }
