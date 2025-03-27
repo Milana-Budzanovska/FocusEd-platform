@@ -97,7 +97,9 @@ app.post('/login', (req, res) => {
 });
 
 // 📌 Отримання даних студента по ID
-app.get('/student/:id', (req, res) => {
+app.get('/', (req, res) => {
+res.send('🔧 FocusEd сервер працює');
+});
   const id = req.params.id;
 
   db.get(`SELECT id, name, avatar, learning_style FROM students WHERE id = ?`, [id], (err, row) => {
