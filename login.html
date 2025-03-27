@@ -21,22 +21,23 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       width: 100%;
       max-width: 400px;
+      text-align: center;
     }
 
     .login-box h2 {
-      text-align: center;
       color: #e91e63;
       margin-bottom: 30px;
     }
 
     .form-group {
       margin-bottom: 20px;
+      text-align: left;
     }
 
     .form-group label {
       font-weight: bold;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .form-group input {
@@ -91,27 +92,28 @@
     document.querySelector('.login-btn').addEventListener('click', async () => {
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
+      const errorDiv = document.getElementById('errorMsg');
 
       try {
-        const res = await fetch('https://focused-server.onrender.com/login-student', {
+        const response = await fetch('https://focused-server.onrender.com/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password })
         });
 
-        const json = await res.json();
+        const data = await response.json();
+        console.log('Відповідь від сервера:', data);
 
-        if (res.ok && json.student && json.student.id) {
-          // Переходимо на кабінет з ID у URL
-          window.location.href = `MyCabinet.html?id=${json.student.id}`;
+        if (response.ok && data.success && data.student) {
+          window.location.href = `MyCabinet.html?id=${data.student.id}`;
         } else {
-          document.getElementById('errorMsg').style.display = 'block';
+          errorDiv.style.display = 'block';
         }
       } catch (err) {
         console.error('Помилка запиту:', err);
-        alert('Сталася помилка при з’єднанні з сервером.');
+        alert('Помилка з’єднання з сервером.');
       }
     });
   </script>
