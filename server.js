@@ -16,7 +16,7 @@ const db = new sqlite3.Database('./focused.db', (err) => {
   else console.log('🟢 Connected to SQLite database.');
 });
 
-// 📌 Створення таблиці студентів, якщо ще не існує
+// 📌 Створення таблиці студентів
 db.run(`
   CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,18 +88,18 @@ app.post('/login', (req, res) => {
     console.log('🔓 Успішний вхід для:', row.email);
     res.json({
       success: true,
-      studentId: row.id,
-      name: row.name,
-      avatar: row.avatar,
-      learning_style: row.learning_style
+      student: {
+        id: row.id,
+        name: row.name,
+        avatar: row.avatar,
+        learning_style: row.learning_style
+      }
     });
   });
 });
 
 // 📌 Отримання даних студента по ID
-app.get('/', (req, res) => {
-res.send('🔧 FocusEd сервер працює');
-});
+app.get('/student/:id', (req, res) => {
   const id = req.params.id;
 
   db.get(`SELECT id, name, avatar, learning_style FROM students WHERE id = ?`, [id], (err, row) => {
@@ -112,6 +112,11 @@ res.send('🔧 FocusEd сервер працює');
     }
     res.json(row);
   });
+});
+
+// 📌 Статус сервера
+app.get('/', (req, res) => {
+  res.send('🔧 FocusEd сервер працює');
 });
 
 // 📌 Запуск сервера
