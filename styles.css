@@ -1,0 +1,98 @@
+/* === Базові стилі для всіх пристроїв === */
+body {
+  font-family: 'Comic Sans MS', sans-serif;
+  background: linear-gradient(to bottom, #e1f5fe, #ffffff, #e3f2fd);
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1 {
+  font-size: 36px;
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+
+.question, .section {
+  background: #ffffffcc;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+label {
+  display: block;
+  margin: 8px;
+  text-align: left;
+  font-size: 18px;
+}
+
+button, .button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: #64b5f6;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover, .button:hover {
+  background-color: #42a5f5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* === Адаптивність: мобільні телефони (до 600px) === */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 22px;
+    padding: 0 10px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  button, .button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .question, .section {
+    padding: 12px;
+  }
+}
+
+/* === Планшети (600-900px) === */
+@media (min-width: 601px) and (max-width: 900px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  button, .button {
+    font-size: 17px;
+  }
+}
+
+/* === Великі екрани (ноутбуки, ПК) === */
+@media (min-width: 901px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  button, .button {
+    font-size: 18px;
+  }
+}
