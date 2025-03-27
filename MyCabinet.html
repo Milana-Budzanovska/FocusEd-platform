@@ -5,109 +5,74 @@
   <title>Особистий кабінет</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #fff1fa, #ffd6f5);
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #fbeaff, #e0cfff);
-      color: #333;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 50px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    .cabinet-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       text-align: center;
-      position: relative;
+      width: 90%;
+      max-width: 500px;
     }
 
-    h1 {
-      color: #9c27b0;
+    .cabinet-container h2 {
+      color: #e91e63;
       margin-bottom: 30px;
     }
 
-    .info-block {
-      margin: 20px 0;
+    .info {
       font-size: 18px;
-    }
-
-    .info-label {
-      font-weight: bold;
-      color: #555;
+      margin-bottom: 15px;
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 50%;
-      border: 4px solid #d46de0;
       margin-top: 20px;
-    }
-
-    /* PNG декор */
-    .decor-top-left {
-      position: absolute;
-      top: -30px;
-      left: -30px;
-      width: 100px;
-    }
-
-    .decor-bottom-right {
-      position: absolute;
-      bottom: -40px;
-      right: -30px;
-      width: 120px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <img src="images/star1.png" class="decor-top-left" alt="decor">
-    <img src="images/star2.png" class="decor-bottom-right" alt="decor">
-
-    <h1>👩‍🎓 Особистий кабінет учня</h1>
-
-    <div class="info-block"><span class="info-label">Імʼя:</span> <span id="name"></span></div>
-    <div class="info-block"><span class="info-label">Стиль навчання:</span> <span id="style"></span></div>
-    <div class="info-block"><span class="info-label">Електронна пошта:</span> <span id="email"></span></div>
-    <img id="avatar" class="avatar" src="" alt="Аватар">
-
+  <div class="cabinet-container">
+    <h2>Ваш особистий кабінет</h2>
+    <div id="studentInfo">
+      Завантаження даних...
+    </div>
   </div>
 
   <script>
-    // ID студента передається через параметр у URL (наприклад ?id=3)
     const urlParams = new URLSearchParams(window.location.search);
     const studentId = urlParams.get('id');
 
     if (!studentId) {
-      alert('ID користувача не знайдено в URL');
+      document.getElementById('studentInfo').innerText = "❌ Не вказано ID користувача.";
     } else {
-      fetch(`https://YOUR_RENDER_URL/student/${studentId}`)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('name').textContent = data.name;
-          document.getElementById('style').textContent = data.learning_style;
-          document.getElementById('email').textContent = data.email;
-
-          // Підключення аватара
-          const avatarMap = {
-            "Флік": "flik.png",
-            "Смарі": "smari.png",
-            "Люмі": "lumi.png",
-            "Кріс": "kris.png"
-          };
-          const avatarFile = avatarMap[data.avatar] || "default.png";
-          document.getElementById('avatar').src = `images/${avatarFile}`;
+      fetch(`https://focused-server.onrender.com/student/${studentId}`)
+        .then(res => {
+          if (!res.ok) throw new Error("Не вдалося завантажити дані");
+          return res.json();
+        })
+        .then(student => {
+          document.getElementById('studentInfo').innerHTML = `
+            <div class="info"><strong>Ім’я:</strong> ${student.name}</div>
+            <div class="info"><strong>Стиль навчання:</strong> ${student.learning_style}</div>
+            <div class="info avatar"><strong>Аватар:</strong> ${student.avatar}</div>
+          `;
         })
         .catch(err => {
-          console.error('❌ Не вдалося завантажити дані:', err);
-          alert('Помилка при завантаженні даних користувача.');
+          console.error(err);
+          document.getElementById('studentInfo').innerText = "❌ Помилка завантаження.";
         });
     }
   </script>
-
 </body>
 </html>
