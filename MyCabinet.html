@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Особистий кабінет</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe0f0, #d4e3ff);
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      background: white;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .decor {
+      position: absolute;
+      width: 120px;
+      opacity: 0.2;
+    }
+
+    .decor.top-left {
+      top: 10px;
+      left: 10px;
+    }
+
+    .decor.bottom-right {
+      bottom: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <img src="img/image1_no_bg_smooth_local.png" class="decor top-left" />
+  <img src="img/image2_no_bg_smooth_local.png" class="decor bottom-right" />
+
+  <header>Особистий кабінет учня</header>
+
+  <div class="container">
+    <img id="avatar-img" class="avatar" src="img/placeholder.png" alt="Аватар" />
+    <div class="label">Ім'я: <span id="student-name">...</span></div>
+    <div class="label">Стиль навчання: <span id="learning-style">...</span></div>
+    <div class="label">Асистент: <span id="avatar-name">...</span></div>
+  </div>
+
+  <script>
+    // Припускаємо, що ID користувача збережено в localStorage після логіну
+    const studentId = localStorage.getItem('studentId');
+
+    if (!studentId) {
+      alert("Не вдалося завантажити дані. Ви не авторизовані.");
+      window.location.href = "login.html";
+    }
+
+    fetch(`http://localhost:3001/student/${studentId}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('student-name').textContent = data.name;
+        document.getElementById('learning-style').textContent = data.learning_style;
+        document.getElementById('avatar-name').textContent = data.avatar;
+
+        // Якщо є свій аватар-файл, можна автоматично змінити картинку
+        const avatarPath = `img/${data.avatar.toLowerCase()}.png`;
+        document.getElementById('avatar-img').src = avatarPath;
+      })
+      .catch(err => {
+        console.error("❌ Не вдалося завантажити дані:", err);
+        alert("Сталася помилка при завантаженні кабінету.");
+      });
+  </script>
+</body>
+</html>
