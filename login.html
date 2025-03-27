@@ -93,7 +93,7 @@
       const password = document.getElementById('password').value.trim();
 
       try {
-        const res = await fetch('https://focused-server.onrender.com/login', {
+        const res = await fetch('https://focused-server.onrender.com/login-student', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -101,9 +101,12 @@
           body: JSON.stringify({ email, password }),
         });
 
-        const text = await res.text();
+        const json = await res.json();
 
-        if (res.ok && text.includes('успішний')) {
+        if (res.ok && json.success) {
+          // Зберігаємо ID користувача в localStorage
+          localStorage.setItem('studentId', json.studentId);
+          // Переходимо до кабінету
           window.location.href = 'MyCabinet.html';
         } else {
           document.getElementById('errorMsg').style.display = 'block';
