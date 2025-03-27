@@ -2,115 +2,64 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Реєстрація</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #fddaff, #e8c6ff);
-      padding: 30px;
-      text-align: center;
-    }
-
-    h2 {
-      color: #8c52ff;
-    }
-
-    form {
-      display: inline-block;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    input {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      width: 250px;
-      font-size: 16px;
-    }
-
-    .submit-btn {
-      background-color: #8c52ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .submit-btn:hover {
-      background-color: #6d3fd2;
-    }
-
-    .message {
-      margin-top: 20px;
-      color: green;
-    }
-
-    .error {
-      color: red;
-    }
-  </style>
+  <title>Реєстрація учня</title>
 </head>
 <body>
-
-  <h2>Реєстрація на платформі</h2>
+  <h2>Реєстрація</h2>
   <form id="registerForm">
-    <input type="text" id="name" placeholder="Ім’я" required>
-    <input type="text" id="surname" placeholder="Прізвище" required>
-    <input type="date" id="dob" required>
-    <input type="email" id="email" placeholder="Електронна пошта" required>
-    <input type="password" id="password" placeholder="Пароль" required>
-    <input type="text" id="avatar" placeholder="Аватар (наприклад: Флік)">
-    <input type="text" id="learningStyle" placeholder="Стиль навчання (наприклад: Візуальний)">
-    <label><input type="checkbox" id="supportTools"> Потрібні інструменти підтримки</label>
-    <input class="submit-btn" type="submit" value="Зареєструватися">
-    <div class="message" id="responseMsg"></div>
+    <input type="text" id="name" placeholder="Ім’я" required><br>
+    <input type="text" id="surname" placeholder="Прізвище" required><br>
+    <input type="date" id="dob" placeholder="Дата народження"><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Пароль" required><br>
+    <select id="avatar">
+      <option value="Флік">Флік</option>
+      <option value="Міла">Міла</option>
+    </select><br>
+    <select id="learning_style">
+      <option value="Візуальний">Візуальний</option>
+      <option value="Аудіальний">Аудіальний</option>
+      <option value="Кінестетичний">Кінестетичний</option>
+    </select><br>
+    <label><input type="checkbox" id="support_tools"> Потрібні додаткові інструменти?</label><br>
+    <button type="submit">Зареєструватися</button>
   </form>
 
   <script>
-    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const data = {
-        name: document.getElementById('name').value,
-        surname: document.getElementById('surname').value,
+      const student = {
+        name: document.getElementById('name').value.trim(),
+        surname: document.getElementById('surname').value.trim(),
         dob: document.getElementById('dob').value,
-        email: document.getElementById('email').value,
+        email: document.getElementById('email').value.trim(),
         password: document.getElementById('password').value,
-        avatar: document.getElementById('avatar').value || "Флік",
-        learning_style: document.getElementById('learningStyle').value || "Візуальний",
-        support_tools: document.getElementById('supportTools').checked ? 1 : 0
+        avatar: document.getElementById('avatar').value,
+        learning_style: document.getElementById('learning_style').value,
+        support_tools: document.getElementById('support_tools').checked
       };
 
       try {
-        const res = await fetch('https://focused-server.onrender.com/register-student', {
+        const response = await fetch('https://focused-server.onrender.com/register-student', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify(student)
         });
 
-        const text = await res.text();
-        const msg = document.getElementById('responseMsg');
-        msg.innerText = text;
-
-        if (res.ok) {
-          msg.classList.remove('error');
-          msg.classList.add('success');
+        const text = await response.text();
+        if (response.ok) {
+          alert('Реєстрація успішна!');
+          window.location.href = 'login.html';
         } else {
-          msg.classList.remove('success');
-          msg.classList.add('error');
+          alert('Помилка: ' + text);
         }
-
-      } catch (err) {
-        document.getElementById('responseMsg').innerText = 'Помилка з’єднання з сервером.';
+      } catch (error) {
+        alert('⚠️ Сталася помилка під час з’єднання з сервером.');
       }
     });
   </script>
-
 </body>
 </html>
