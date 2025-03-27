@@ -63,7 +63,7 @@ app.post('/register-student', (req, res) => {
 });
 
 // 📌 Логін студента
-app.post('/login-student', (req, res) => {
+app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
