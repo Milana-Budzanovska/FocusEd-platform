@@ -114,5 +114,5 @@ app.get('/student/:id', (req, res) => {
 
 // 📌 Запуск сервера
 app.listen(port, '0.0.0.0', () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
+  console.log(`🚀 Server running on port ${port}`);
 });
