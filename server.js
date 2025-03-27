@@ -32,7 +32,7 @@ db.run(`
 `);
 
 // 📌 Реєстрація студента
-app.post('/register-student', (req, res) => {
+app.post('/login-student', (req, res) => {
   const { name, surname, dob, email, password, avatar, learning_style, support_tools } = req.body;
 
   if (!email || !password || !name || !surname) {
