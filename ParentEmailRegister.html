@@ -1,1 +1,96 @@
 
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Реєстрація email батьків</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .form-container h2 {
+      color: #00796b;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #00796b;
+      color: white;
+      font-size: 16px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Реєстрація пошти батьків</h2>
+    <form id="parentEmailForm">
+      <input type="email" id="parentEmail" placeholder="Введіть email одного з батьків" required />
+      <button type="submit">Зберегти</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('parentEmailForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const parentEmail = document.getElementById('parentEmail').value;
+
+      const studentId = localStorage.getItem('studentId');
+      if (!studentId) {
+        alert('Не знайдено ID учня. Спочатку увійдіть в обліковий запис.');
+        return;
+      }
+
+      try {
+        const response = await fetch('https://focused-server.onrender.com/register-parent-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ studentId, parentEmail }),
+        });
+
+        const text = await response.text();
+        alert(text);
+      } catch (err) {
+        console.error('Помилка:', err);
+        alert('Сталася помилка при збереженні.');
+      }
+    });
+  </script>
+</body>
+</html>
+
