@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Освітні методики для нейродивергентних учнів</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Основні стилі */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f5e6ff, #e0ccff);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 1em;
+            font-weight: 600;
+            margin: 0 15px;
+        }
+
+        .hero {
+            margin-top: 120px;
+            padding: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 2em;
+            font-weight: 600;
+            color: #7a2f8f;
+            text-transform: uppercase;
+        }
+
+        .photo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 300px;
+        }
+
+        .photo-container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .star {
+            position: absolute;
+            top: -40px;
+            left: 220px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .corner-photo {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+        }
+
+        .corner-photo.bottom-left { bottom: 10px; left: 10px; }
+        .corner-photo.bottom-right { bottom: 10px; right: 10px; }
+
+        /* Стилі для мобільних пристроїв */
+        @media only screen and (max-width: 768px) {
+            /* Робимо текст та зображення меншими для мобільних */
+            .hero h1 {
+                font-size: 1.5em;
+            }
+
+            .photo-container {
+                flex-direction: column;
+            }
+
+            .photo-container img {
+                width: 90%;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .navbar a {
+                font-size: 0.9em;
+            }
+
+            .button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+        }
+
+        /* Стилі для планшетів */
+        @media only screen and (max-width: 1024px) {
+            .photo-container {
+                flex-direction: row;
+                gap: 20px;
+            }
+
+            .photo-container img {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#">Головна</a>
+        <a href="#">Як це працює?</a>
+        <a href="#">Почати навчання</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <div class="hero">
+        <h1>Методики для нейродивергентних учнів</h1>
+
+        <div class="photo-container">
+            <img src="IMG_20250307_211711_162.png" alt="Дитина на фото">
+            <div class="star">
+                <img src="star_icon.png" alt="Зірка">
+            </div>
+            <div class="corner-photo bottom-left">
+                <img src="IMG_20250307_211711_621.png" alt="Фото з іншого ракурсу">
+            </div>
+            <div class="corner-photo bottom-right">
+                <img src="IMG_20250307_211711_727.png" alt="Ще одне фото">
+            </div>
+        </div>
+
+        <p>Навчання, яке підлаштовується під тебе</p>
+        <p>Розпочни навчання за методикою, яка підлаштовується під твої унікальні потреби і допоможе розкрити потенціал!</p>
+        <button class="button">Пройти тест і почати навчання</button>
+    </div>
+
+    <div class="platform-info">
+        <h2>Що робить нашу платформу унікальною?</h2>
+        <div class="info-cards">
+            <div class="card">
+                <img src="adapting_icon.png" alt="Адаптація контенту">
+                <p>АДАПТАЦІЯ КОНТЕНТУ</p>
+            </div>
+            <div class="card">
+                <img src="intellectual_icon.png" alt="Інтелектуальні підказки">
+                <p>ІНТЕЛЕКТУАЛЬНІ ПІДКАЗКИ</p>
+            </div>
+            <div class="card">
+                <img src="gameplay_icon.png" alt="Помашники">
+                <p>ПОМІШНІКИ</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
