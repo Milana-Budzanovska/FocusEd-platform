@@ -15,45 +15,32 @@ const db = new sqlite3.Database('./focused.db', (err) => {
   else console.log('🟢 Connected to SQLite database.');
 });
 
-// Таблиці
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS students (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT,
-      surname TEXT,
-      dob TEXT,
-      email TEXT UNIQUE,
-      password TEXT,
-      avatar TEXT,
-      learning_style TEXT,
-      support_tools INTEGER
-    )
-  `);
+// 📌 Створення таблиці parents
+db.run(`
+  CREATE TABLE IF NOT EXISTS parents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    parent_name TEXT,
+    parent_email TEXT,
+    child_email TEXT
+  )
+`);
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS interactions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      student_id INTEGER,
-      type TEXT,
-      duration INTEGER,
-      result TEXT,
-      emotion TEXT,
-      timestamp TEXT
-    )
-  `);
+// 📌 Створення таблиці students
+db.run(`
+  CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    surname TEXT,
+    dob TEXT,
+    email TEXT UNIQUE,
+    password TEXT,
+    avatar TEXT,
+    learning_style TEXT,
+    support_tools INTEGER
+  )
+`);
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS parents (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      student_email TEXT,
-      parent_name TEXT,
-      parent_email TEXT
-    )
-  `);
-});
-
-// Реєстрація студента
+// 📌 Реєстрація студента
 app.post('/register-student', (req, res) => {
   const { name, surname, dob, email, password, avatar, learning_style, support_tools } = req.body;
   if (!email || !password || !name || !surname) {
@@ -76,7 +63,7 @@ app.post('/register-student', (req, res) => {
   });
 });
 
-// Вхід студента
+// 📌 Вхід студента
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   db.get(`SELECT * FROM students WHERE email = ?`, [email], (err, row) => {
@@ -101,7 +88,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Отримання даних студента
+// 📌 Отримання студента за ID
 app.get('/student/:id', (req, res) => {
   const id = req.params.id;
   db.get(`SELECT id, name, avatar, learning_style FROM students WHERE id = ?`, [id], (err, row) => {
@@ -112,41 +99,33 @@ app.get('/student/:id', (req, res) => {
   });
 });
 
-// Збереження взаємодій
-app.post('/interaction', (req, res) => {
-  const { student_id, type, duration, result, emotion, timestamp } = req.body;
-  db.run(`
-    INSERT INTO interactions (student_id, type, duration, result, emotion, timestamp)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `, [student_id, type, duration, result, emotion, timestamp], function (err) {
-    if (err) {
-      console.error('❌ Interaction save error:', err.message);
-      return res.status(500).send('Помилка збереження активності.');
-    }
-    res.send('Активність збережено');
-  });
-});
+// 📌 Додавання батька для email-звітів
+app.post('/add-parent', (req, res) => {
+  const { parent_name, parent_email, child_email } = req.body;
 
-// Реєстрація батьків
-app.post('/register-parent', (req, res) => {
-  const { student_email, parent_name, parent_email } = req.body;
-  db.run(`
-    INSERT INTO parents (student_email, parent_name, parent_email)
+  if (!parent_name || !parent_email || !child_email) {
+    return res.status(400).send('Будь ласка, заповніть усі поля.');
+  }
+
+  const sql = `
+    INSERT INTO parents (parent_name, parent_email, child_email)
     VALUES (?, ?, ?)
-  `, [student_email, parent_name, parent_email], function (err) {
+  `;
+  db.run(sql, [parent_name, parent_email, child_email], function(err) {
     if (err) {
-      console.error('❌ Parent registration error:', err.message);
-      return res.status(500).send('Помилка збереження.');
+      console.error('❌ DB insert error (parents):', err.message);
+      return res.status(500).send('Помилка збереження даних батька.');
     }
-    res.send('Дані збережено!');
+    res.send('Дані збережено успішно!');
   });
 });
 
-// Тестування сервера
+// 📌 Тест сервера
 app.get('/', (req, res) => {
   res.send('🔧 FocusEd сервер працює');
 });
 
+// 📌 Запуск
 app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
 });
