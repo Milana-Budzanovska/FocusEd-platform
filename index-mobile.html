@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Методики для нейродивергентних учнів</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet"> <!-- Гарні шрифти -->
     <style>
         /* Основні стилі */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #f5e6ff, #e0ccff);
+            background: linear-gradient(to bottom, #e0ccff, #f5e6ff); /* Гарний фон з градієнтом */
             text-align: center;
             overflow-x: hidden;
         }
@@ -21,7 +21,7 @@
             justify-content: space-between;
             align-items: center;
             background: white;
-            padding: 10px 20px;
+            padding: 15px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
@@ -33,10 +33,15 @@
 
         .navbar a {
             text-decoration: none;
-            color: black;
-            font-size: 1em;
-            font-weight: 600;
+            color: #7a2f8f;
+            font-size: 1.1em;
+            font-weight: 500;
             margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #ff88cc; /* Плавний ефект при наведенні на посилання */
         }
 
         .hero {
@@ -49,20 +54,20 @@
         }
 
         .hero h1 {
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: 600;
             color: #7a2f8f;
             text-transform: uppercase;
             margin-bottom: 10px;
+            font-family: 'Quicksand', sans-serif; /* Змінений шрифт для заголовка */
         }
 
         .photo-container {
             position: relative;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             width: 100%;
-            height: auto;
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
@@ -99,7 +104,7 @@
             }
 
             .navbar a {
-                font-size: 0.8em;
+                font-size: 0.9em;
                 margin: 5px 0;
             }
 
@@ -116,27 +121,25 @@
 
             .photo-container img {
                 width: 80%;
-                max-width: 300px;
+                max-width: 250px;
                 margin-bottom: 15px;
-            }
-
-            .star {
-                left: 90px;
-                top: -20px;
-                width: 50px;
-                height: 50px;
             }
 
             .button {
                 font-size: 1.2em;
                 padding: 15px 35px;
                 margin-top: 20px;
+                background-color: #ffffff;
+                border: 3px solid #7a2f8f;
+                color: #7a2f8f;
+                cursor: pointer;
+                border-radius: 30px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 3D ефект кнопки */
+                transition: transform 0.2s ease;
             }
 
-            .button-container {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
+            .button:hover {
+                transform: scale(1.05); /* Збільшення кнопки при наведенні */
             }
 
             .info-container {
@@ -148,6 +151,14 @@
                 margin: 10px 0;
             }
         }
+
+        /* Картки на планшетах */
+        @media only screen and (max-width: 1024px) {
+            .photo-container img {
+                width: 40%;
+            }
+        }
+
     </style>
 </head>
 <body>
