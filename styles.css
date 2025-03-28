@@ -1,31 +1,104 @@
-/* Стилі для мобільних пристроїв (ширина екрану до 768px) */
-@media only screen and (max-width: 768px) {
-  body {
-    font-size: 14px; /* Зменшення шрифту для мобільних пристроїв */
-  }
+/* Загальний стиль для всіх пристроїв */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #D2B2FF, #F1C4FF, #FFFFFF, #D2B2FF); /* Градієнт */
+}
 
-  header {
+/* Для контейнерів, щоб вони були по центру */
+.container {
     display: flex;
-    flex-direction: column; /* Вертикальне вирівнювання елементів у хедері */
-  }
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+}
 
-  .container {
-    padding: 20px; /* Відступи для мобільних пристроїв */
-  }
+/* Стилі для заголовків */
+h1, h2, h3 {
+    font-size: 2rem;
+    margin: 20px 0;
+}
 
-  .step {
-    width: 100%; /* Картки займають всю ширину */
-    margin-bottom: 20px; /* Відступ між картками */
-  }
+/* Кнопки */
+.button {
+    background-color: #6A4CFF;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin: 20px auto;
+}
 
-  .button {
-    width: 100%; /* Кнопка займає всю ширину */
-    padding: 15px;
-    font-size: 16px; /* Більший шрифт для кнопки */
-  }
-
-  img {
-    width: 100%; /* Картинки займають всю ширину контейнера */
+/* Стилі для картинок */
+img {
+    max-width: 100%;
     height: auto;
-  }
+    border-radius: 10px;
+    margin: 10px;
+}
+
+/* Для великих екранів */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .button {
+        font-size: 1.5rem;
+        padding: 20px 40px;
+    }
+
+    img {
+        max-width: 80%;
+    }
+}
+
+/* Адаптація для мобільних пристроїв */
+@media screen and (max-width: 768px) {
+    body {
+        background: linear-gradient(to right, #D2B2FF, #F1C4FF, #FFFFFF, #D2B2FF); /* Градієнт */
+    }
+
+    .container {
+        padding: 10px;
+        display: block;
+        justify-content: center;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        width: 100%;
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+
+    img {
+        max-width: 90%;
+        margin: 10px 0;
+    }
+
+    /* Якщо є більше елементів, то зробити їх колонкою */
+    .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .container .item img {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
 }
