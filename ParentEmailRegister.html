@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Реєстрація email батьків</title>
+  <title>Підключити пошту батьків</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ddeaff, #e0f0ff);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,82 +14,82 @@
       margin: 0;
     }
 
-    .form-container {
+    .container {
       background: white;
       padding: 40px;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
+      max-width: 420px;
+      width: 90%;
       text-align: center;
     }
 
-    .form-container h2 {
-      color: #00796b;
+    h2 {
+      color: #0059b3;
       margin-bottom: 20px;
     }
 
-    input[type="email"] {
+    input {
       width: 100%;
       padding: 12px;
-      font-size: 16px;
+      margin-bottom: 15px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      margin-bottom: 20px;
+      font-size: 16px;
     }
 
     button {
-      background: #00796b;
+      width: 100%;
+      padding: 14px;
+      background-color: #007bff;
       color: white;
       font-size: 16px;
-      padding: 12px 24px;
+      font-weight: bold;
       border: none;
       border-radius: 10px;
       cursor: pointer;
     }
 
     button:hover {
-      background: #004d40;
+      background-color: #005bb5;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Реєстрація пошти батьків</h2>
-    <form id="parentEmailForm">
-      <input type="email" id="parentEmail" placeholder="Введіть email одного з батьків" required />
-      <button type="submit">Зберегти</button>
-    </form>
+  <div class="container">
+    <h2>Підключити звітність на пошту</h2>
+    <input type="email" id="parentEmail" placeholder="Ваша електронна пошта (батьків)">
+    <input type="email" id="childEmail" placeholder="Пошта вашої дитини (як вказувалась при реєстрації)">
+    <button onclick="submitParentEmail()">Зареєструвати</button>
+    <div class="message" id="messageBox"></div>
   </div>
 
   <script>
-    document.getElementById('parentEmailForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const parentEmail = document.getElementById('parentEmail').value;
-
-      const studentId = localStorage.getItem('studentId');
-      if (!studentId) {
-        alert('Не знайдено ID учня. Спочатку увійдіть в обліковий запис.');
-        return;
-      }
+    async function submitParentEmail() {
+      const parentEmail = document.getElementById('parentEmail').value.trim();
+      const childEmail = document.getElementById('childEmail').value.trim();
+      const msgBox = document.getElementById('messageBox');
 
       try {
-        const response = await fetch('https://focused-server.onrender.com/register-parent-email', {
+        const res = await fetch('https://focused-server.onrender.com/register-parent-email-by-child-email', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ studentId, parentEmail }),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ parentEmail, childEmail })
         });
 
-        const text = await response.text();
-        alert(text);
+        const msg = await res.text();
+        msgBox.textContent = msg;
+        msgBox.style.color = res.ok ? 'green' : 'red';
       } catch (err) {
-        console.error('Помилка:', err);
-        alert('Сталася помилка при збереженні.');
+        msgBox.textContent = '⚠️ Помилка з’єднання з сервером.';
+        msgBox.style.color = 'red';
       }
-    });
+    }
   </script>
 </body>
 </html>
-
