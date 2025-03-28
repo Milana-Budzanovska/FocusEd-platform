@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Підключення до БД
+// Підключення до бази
 const db = new sqlite3.Database('./focused.db', (err) => {
   if (err) console.error('❌ DB connection error:', err.message);
   else console.log('🟢 Connected to SQLite database.');
@@ -31,20 +31,17 @@ db.run(`
   )
 `);
 
-// Таблиця активностей
+// Таблиця для збереження email батьків
 db.run(`
-  CREATE TABLE IF NOT EXISTS activity_logs (
+  CREATE TABLE IF NOT EXISTS parent_emails (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id INTEGER,
-    activity_type TEXT,
-    duration_seconds INTEGER,
-    emotion TEXT,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    email TEXT,
     FOREIGN KEY(student_id) REFERENCES students(id)
   )
 `);
 
-// Реєстрація
+// Реєстрація студента
 app.post('/register-student', (req, res) => {
   const { name, surname, dob, email, password, avatar, learning_style, support_tools } = req.body;
   if (!email || !password || !name || !surname) {
@@ -103,26 +100,19 @@ app.get('/student/:id', (req, res) => {
   });
 });
 
-// Логування активності учня
-app.post('/log-activity', (req, res) => {
-  const { student_id, activity_type, duration_seconds, emotion } = req.body;
-
-  if (!student_id || !activity_type) {
-    return res.status(400).send('Недостатньо даних для логування.');
+// Додавання email батьків
+app.post('/register-parent-email', (req, res) => {
+  const { studentId, email } = req.body;
+  if (!studentId || !email) {
+    return res.status(400).send('Відсутні обов’язкові поля.');
   }
 
-  const sql = `
-    INSERT INTO activity_logs (student_id, activity_type, duration_seconds, emotion)
-    VALUES (?, ?, ?, ?)`;
-
-  db.run(sql, [student_id, activity_type, duration_seconds || null, emotion || null], function(err) {
+  db.run(`INSERT INTO parent_emails (student_id, email) VALUES (?, ?)`, [studentId, email], function(err) {
     if (err) {
-      console.error('❌ Activity log error:', err.message);
-      return res.status(500).send('Не вдалося зберегти активність.');
+      console.error('❌ Помилка збереження email батьків:', err.message);
+      return res.status(500).send('Помилка збереження.');
     }
-
-    console.log(`✅ Активність '${activity_type}' збережена для учня ID ${student_id}`);
-    res.send('Активність збережено');
+    res.send('Email батьків збережено.');
   });
 });
 
@@ -131,7 +121,6 @@ app.get('/', (req, res) => {
   res.send('🔧 FocusEd сервер працює');
 });
 
-// Запуск
 app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
 });
