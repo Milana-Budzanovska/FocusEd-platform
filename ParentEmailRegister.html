@@ -1,129 +1,116 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Реєстрація для звітності</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Реєстрація батьків</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+      font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #d0eaff, #f0f7ff);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      min-height: 100vh;
       margin: 0;
+      padding: 20px;
     }
 
-    .form-box {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .form-box h2 {
-      text-align: center;
-      color: #00796b;
-      margin-bottom: 30px;
-    }
-
-    .form-group {
+    h2 {
+      font-size: 32px;
+      color: #2c3e50;
       margin-bottom: 20px;
-      text-align: left;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #004d40;
-    }
-
-    .form-group input {
+    form {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
+      max-width: 420px;
+      animation: fadeIn 0.6s ease-out;
     }
 
-    .submit-btn {
+    input {
       width: 100%;
       padding: 14px;
-      background-color: #00acc1;
+      margin: 12px 0;
+      border-radius: 12px;
+      border: 1.5px solid #a0c4ff;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #5c9eff;
+      outline: none;
+      background: #f0f8ff;
+    }
+
+    button {
+      background: #6db5ff;
       color: white;
-      font-size: 18px;
+      padding: 14px;
       border: none;
-      border-radius: 10px;
+      width: 100%;
+      border-radius: 12px;
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s ease;
     }
 
-    .submit-btn:hover {
-      background-color: #00838f;
+    button:hover {
+      background: #4d9bff;
     }
 
-    .success-message {
-      display: none;
-      text-align: center;
-      margin-top: 15px;
-      color: green;
-      font-weight: bold;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="form-box">
-    <h2>Підписка для батьків</h2>
-    <div class="form-group">
-      <label for="parentName">Ваше ПІБ</label>
-      <input type="text" id="parentName" placeholder="Іваненко Іван Іванович" />
-    </div>
-    <div class="form-group">
-      <label for="parentEmail">Ваша електронна пошта</label>
-      <input type="email" id="parentEmail" placeholder="parent@email.com" />
-    </div>
-    <div class="form-group">
-      <label for="childEmail">Пошта вашої дитини</label>
-      <input type="email" id="childEmail" placeholder="child@email.com" />
-    </div>
-    <button class="submit-btn" onclick="submitForm()">Підписатися на звіти</button>
-    <div class="success-message" id="successMessage">✅ Дякуємо! Ви підписані на звітність.</div>
-  </div>
+
+  <h2>Форма для батьків</h2>
+
+  <form id="parentForm">
+    <input type="text" id="parentName" placeholder="Ваше ПІБ" required />
+    <input type="email" id="parentEmail" placeholder="Ваша електронна пошта" required />
+    <input type="email" id="childEmail" placeholder="Електронна пошта дитини" required />
+    <button type="submit">Зберегти</button>
+  </form>
 
   <script>
-    async function submitForm() {
-      const name = document.getElementById('parentName').value.trim();
-      const email = document.getElementById('parentEmail').value.trim();
-      const childEmail = document.getElementById('childEmail').value.trim();
+    document.getElementById('parentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-      if (!name || !email || !childEmail) {
-        alert('Будь ласка, заповніть усі поля.');
-        return;
-      }
+      const parent_name = document.getElementById('parentName').value.trim();
+      const parent_email = document.getElementById('parentEmail').value.trim();
+      const child_email = document.getElementById('childEmail').value.trim();
 
       try {
-        const response = await fetch('https://focused-server.onrender.com/parent-subscribe', {
+        const res = await fetch('https://focused-server.onrender.com/add-parent', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, childEmail })
+          body: JSON.stringify({ parent_name, parent_email, child_email })
         });
 
-        const result = await response.text();
-        if (response.ok) {
-          document.getElementById('successMessage').style.display = 'block';
+        if (res.ok) {
+          alert('✅ Дані батьків збережено!');
+          document.getElementById('parentForm').reset();
         } else {
-          alert(result);
+          const text = await res.text();
+          alert('❌ Помилка: ' + text);
         }
       } catch (err) {
+        alert('❌ Помилка з’єднання з сервером.');
         console.error(err);
-        alert('Помилка при з’єднанні з сервером.');
       }
-    }
+    });
   </script>
+
 </body>
 </html>
