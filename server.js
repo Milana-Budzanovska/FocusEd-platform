@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
@@ -16,7 +17,9 @@ const db = new sqlite3.Database('./focused.db', (err) => {
   else console.log('🟢 Connected to SQLite database.');
 });
 
-// Таблиця студентів
+// Створення таблиць
+
+// Студенти
 db.run(`
   CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,29 +34,29 @@ db.run(`
   )
 `);
 
-// Таблиця для збереження email батьків
+// Батьки
 db.run(`
-  CREATE TABLE IF NOT EXISTS parent_emails (
+  CREATE TABLE IF NOT EXISTS parents (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    student_id INTEGER,
+    name TEXT,
     email TEXT,
-    FOREIGN KEY(student_id) REFERENCES students(id)
+    child_email TEXT
   )
 `);
 
-// Реєстрація студента
+// 🔹 Реєстрація студента
 app.post('/register-student', (req, res) => {
   const { name, surname, dob, email, password, avatar, learning_style, support_tools } = req.body;
+
   if (!email || !password || !name || !surname) {
     return res.status(400).send('Відсутні обов’язкові поля.');
   }
 
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const sql = `
-    INSERT INTO students (name, surname, dob, email, password, avatar, learning_style, support_tools)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `;
-  db.run(sql, [name, surname, dob, email, hashedPassword, avatar, learning_style, support_tools ? 1 : 0], function(err) {
+  const sql = `INSERT INTO students (name, surname, dob, email, password, avatar, learning_style, support_tools)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+  db.run(sql, [name, surname, dob, email, hashedPassword, avatar, learning_style, support_tools ? 1 : 0], function (err) {
     if (err) {
       if (err.message.includes('UNIQUE constraint failed')) {
         return res.status(409).send('Такий email уже існує.');
@@ -64,9 +67,10 @@ app.post('/register-student', (req, res) => {
   });
 });
 
-// Вхід
+// 🔹 Вхід
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
+
   db.get(`SELECT * FROM students WHERE email = ?`, [email], (err, row) => {
     if (err || !row) {
       return res.status(401).json({ success: false, message: 'Невірна пошта або пароль.' });
@@ -89,7 +93,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Отримання даних студента
+// 🔹 Отримання студента по ID
 app.get('/student/:id', (req, res) => {
   const id = req.params.id;
   db.get(`SELECT id, name, avatar, learning_style FROM students WHERE id = ?`, [id], (err, row) => {
@@ -100,23 +104,24 @@ app.get('/student/:id', (req, res) => {
   });
 });
 
-// Додавання email батьків
-app.post('/register-parent-email', (req, res) => {
-  const { studentId, email } = req.body;
-  if (!studentId || !email) {
-    return res.status(400).send('Відсутні обов’язкові поля.');
+// 🔹 Підписка батьків
+app.post('/parent-subscribe', (req, res) => {
+  const { name, email, childEmail } = req.body;
+  if (!name || !email || !childEmail) {
+    return res.status(400).send('Всі поля є обов’язковими.');
   }
 
-  db.run(`INSERT INTO parent_emails (student_id, email) VALUES (?, ?)`, [studentId, email], function(err) {
+  const sql = `INSERT INTO parents (name, email, child_email) VALUES (?, ?, ?)`;
+  db.run(sql, [name, email, childEmail], function (err) {
     if (err) {
-      console.error('❌ Помилка збереження email батьків:', err.message);
-      return res.status(500).send('Помилка збереження.');
+      console.error('❌ DB error:', err.message);
+      return res.status(500).send('Помилка збереження даних.');
     }
-    res.send('Email батьків збережено.');
+    res.send('Батьків підписано на звітність.');
   });
 });
 
-// Перевірка
+// 🔹 Тестовий рут
 app.get('/', (req, res) => {
   res.send('🔧 FocusEd сервер працює');
 });
