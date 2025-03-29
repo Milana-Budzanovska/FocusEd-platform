@@ -11,24 +11,22 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
-// 📌 Підключення до БД
 const db = new sqlite3.Database('./focused.db', (err) => {
-  if (err) console.error('❌ DB error:', err.message);
-  else console.log('🟢 SQLite connected');
+  if (err) console.error('❌ DB connection error:', err.message);
+  else console.log('🟢 Connected to SQLite database.');
 });
 
-// 📌 Таблиці
+// ======= Створення таблиць =======
 db.run(`CREATE TABLE IF NOT EXISTS students (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT, surname TEXT, dob TEXT,
-  email TEXT UNIQUE, password TEXT,
-  avatar TEXT, learning_style TEXT, support_tools INTEGER
-)`);
-
-db.run(`CREATE TABLE IF NOT EXISTS interactions (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  student_id INTEGER, type TEXT, time_spent INTEGER,
-  result TEXT, emotion TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+  name TEXT,
+  surname TEXT,
+  dob TEXT,
+  email TEXT UNIQUE,
+  password TEXT,
+  avatar TEXT,
+  learning_style TEXT,
+  support_tools INTEGER
 )`);
 
 db.run(`CREATE TABLE IF NOT EXISTS parents (
@@ -38,109 +36,140 @@ db.run(`CREATE TABLE IF NOT EXISTS parents (
   child_email TEXT
 )`);
 
-// 📌 Реєстрація
+db.run(`CREATE TABLE IF NOT EXISTS interactions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  student_id INTEGER,
+  type TEXT,
+  duration INTEGER,
+  result TEXT,
+  emotion TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+)`);
+
+// ======= Реєстрація =======
 app.post('/register-student', (req, res) => {
   const { name, surname, dob, email, password, avatar, learning_style, support_tools } = req.body;
-  if (!email || !password || !name || !surname) return res.status(400).send('Обов’язкові поля');
-  const hashed = bcrypt.hashSync(password, 10);
-  db.run(`
-    INSERT INTO students (name, surname, dob, email, password, avatar, learning_style, support_tools)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [name, surname, dob, email, hashed, avatar, learning_style, support_tools ? 1 : 0],
-    function (err) {
-      if (err) return res.status(409).send('Email вже існує');
-      res.send('✅ Реєстрація успішна');
-    });
+  if (!email || !password || !name || !surname) return res.status(400).send('Відсутні обов’язкові поля.');
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const sql = `INSERT INTO students (name, surname, dob, email, password, avatar, learning_style, support_tools)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+  db.run(sql, [name, surname, dob, email, hashedPassword, avatar, learning_style, support_tools ? 1 : 0], function(err) {
+    if (err) {
+      if (err.message.includes('UNIQUE constraint failed')) return res.status(409).send('Такий email уже існує.');
+      return res.status(500).send('Помилка збереження.');
+    }
+    res.send('Реєстрація успішна!');
+  });
 });
 
-// 📌 Вхід
+// ======= Вхід =======
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   db.get(`SELECT * FROM students WHERE email = ?`, [email], (err, row) => {
-    if (!row || !bcrypt.compareSync(password, row.password)) {
-      return res.status(401).json({ success: false, message: 'Невірна пошта або пароль' });
-    }
-    res.json({ success: true, student: { id: row.id, name: row.name, avatar: row.avatar, learning_style: row.learning_style } });
+    if (err || !row) return res.status(401).json({ success: false, message: 'Невірна пошта або пароль.' });
+    const match = bcrypt.compareSync(password, row.password);
+    if (!match) return res.status(401).json({ success: false, message: 'Невірна пошта або пароль.' });
+    res.json({
+      success: true,
+      student: {
+        id: row.id,
+        name: row.name,
+        avatar: row.avatar,
+        learning_style: row.learning_style
+      }
+    });
   });
 });
 
-// 📌 Додавання активності
-app.post('/interaction', (req, res) => {
-  const { student_id, type, time_spent, result, emotion } = req.body;
-  db.run(`INSERT INTO interactions (student_id, type, time_spent, result, emotion) VALUES (?, ?, ?, ?, ?)`,
-    [student_id, type, time_spent, result, emotion], (err) => {
-      if (err) return res.status(500).send('Помилка збереження');
-      res.send('✅ Збережено активність');
-    });
-});
-
-// 📌 Додавання батьків
+// ======= Додавання батька =======
 app.post('/add-parent', (req, res) => {
   const { parent_name, parent_email, child_email } = req.body;
-  if (!parent_name || !parent_email || !child_email) return res.status(400).send('Усі поля обов’язкові');
-  db.run(`INSERT INTO parents (parent_name, parent_email, child_email) VALUES (?, ?, ?)`,
-    [parent_name, parent_email, child_email], (err) => {
-      if (err) return res.status(500).send('Помилка збереження');
-      res.send('✅ Дані батьків збережено');
-    });
-});
-
-// 📌 Перевірка батьків (тільки для тесту)
-app.get('/all-parents', (req, res) => {
-  db.all(`SELECT * FROM parents`, (err, rows) => {
-    if (err) return res.status(500).send('Помилка БД');
-    res.json(rows);
+  if (!parent_name || !parent_email || !child_email) return res.status(400).send('Заповніть усі поля.');
+  const sql = `INSERT INTO parents (parent_name, parent_email, child_email) VALUES (?, ?, ?)`;
+  db.run(sql, [parent_name, parent_email, child_email], function(err) {
+    if (err) {
+      console.error('❌ Помилка додавання батька:', err.message);
+      return res.status(500).send('Помилка збереження.');
+    }
+    res.send('Дані батьків збережено!');
   });
 });
 
-// 📌 Email-звітність
-app.get('/send-reports', (req, res) => {
-  db.all(`SELECT * FROM parents`, (err, parents) => {
-    if (err) return res.status(500).send('Помилка з батьками');
+// ======= Email-звітність =======
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ТУТ_ТВОЯ_АДРЕСА@gmail.com',
+    pass: 'ТУТ_APP_PASSWORD' // Скопійований app password із Google
+  }
+});
 
-    parents.forEach((p) => {
-      db.all(`SELECT * FROM students WHERE email = ?`, [p.child_email], (err, students) => {
-        if (!students?.length) return;
-        const student = students[0];
+app.post('/send-reports', (req, res) => {
+  const sql = `
+    SELECT p.parent_email, s.name AS student_name, i.type, i.duration, i.result, i.emotion, i.timestamp
+    FROM parents p
+    JOIN students s ON s.email = p.child_email
+    JOIN interactions i ON i.student_id = s.id
+    WHERE i.timestamp >= datetime('now', '-1 day')
+    ORDER BY p.parent_email, i.timestamp DESC
+  `;
+  db.all(sql, [], async (err, rows) => {
+    if (err) {
+      console.error('❌ DB report fetch error:', err.message);
+      return res.status(500).send('Помилка отримання звітів.');
+    }
 
-        db.all(`SELECT * FROM interactions WHERE student_id = ? ORDER BY timestamp DESC LIMIT 5`, [student.id], (err, interactions) => {
-          if (err) return;
+    const grouped = {};
+    rows.forEach(row => {
+      if (!grouped[row.parent_email]) grouped[row.parent_email] = [];
+      grouped[row.parent_email].push(row);
+    });
 
-          let message = `<h3>Звіт по ${student.name}:</h3>`;
-          if (interactions.length === 0) {
-            message += `<p>Діяльності ще не було.</p>`;
-          } else {
-            interactions.forEach((i) => {
-              message += `<p>• ${i.type} — ${i.time_spent}с, Емоція: ${i.emotion || 'немає'}, Час: ${i.timestamp}</p>`;
-            });
-          }
-
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'focusedplatform@gmail.com',
-              pass: 'gflo fmlg nycn pabc'
-            }
-          });
-
-          transporter.sendMail({
-            from: '"FocusEd Платформа" <focusedplatform@gmail.com>',
-            to: p.parent_email,
-            subject: `Звіт по ${student.name}`,
-            html: message
-          }, (error, info) => {
-            if (error) console.error('❌ Email error:', error.message);
-            else console.log(`📤 Email sent to ${p.parent_email}: ${info.response}`);
-          });
+    for (const email in grouped) {
+      const entries = grouped[email];
+      const student = entries[0].student_name;
+      const html = `
+        <h2>Звіт по ${student}</h2>
+        <ul>
+          ${entries.map(e => `<li><b>${e.type}</b>: ${e.duration} хв, емоція: ${e.emotion || 'н/д'}, результат: ${e.result || 'н/д'} <i>(${e.timestamp})</i></li>`).join('')}
+        </ul>
+      `;
+      try {
+        await transporter.sendMail({
+          from: 'FocusEd Звітність <ТУТ_ТВОЯ_АДРЕСА@gmail.com>',
+          to: email,
+          subject: `Щоденний звіт по ${student}`,
+          html
         });
-      });
-    });
+        console.log(`📩 Звіт надіслано: ${email}`);
+      } catch (e) {
+        console.error(`❌ Помилка надсилання до ${email}:`, e.message);
+      }
+    }
 
-    res.send('✅ Звіти надіслані (якщо знайдені дані)');
+    res.send('Звіти надіслані!');
   });
 });
 
-// 📌 Тест
+// ======= GET-версія для тесту через браузер =======
+app.get('/send-reports', (req, res) => {
+  fetch('https://focused-server.onrender.com/send-reports', {
+    method: 'POST'
+  })
+    .then(r => r.text())
+    .then(t => res.send(`<pre>${t}</pre>`))
+    .catch(e => res.status(500).send('Помилка запуску звіту: ' + e.message));
+});
+
+// ======= Інше =======
+app.get('/student/:id', (req, res) => {
+  const id = req.params.id;
+  db.get(`SELECT id, name, avatar, learning_style FROM students WHERE id = ?`, [id], (err, row) => {
+    if (err || !row) return res.status(404).send('Користувача не знайдено.');
+    res.json(row);
+  });
+});
+
 app.get('/', (req, res) => {
   res.send('🔧 FocusEd сервер працює');
 });
