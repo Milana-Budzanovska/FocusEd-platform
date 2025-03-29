@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const cron = require('node-cron');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,41 +17,45 @@ const db = new sqlite3.Database('./focused.db', (err) => {
   else console.log('🟢 Connected to SQLite database.');
 });
 
-// Створення таблиць
-db.run(`
-  CREATE TABLE IF NOT EXISTS students (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    surname TEXT,
-    dob TEXT,
-    email TEXT UNIQUE,
-    password TEXT,
-    avatar TEXT,
-    learning_style TEXT,
-    support_tools INTEGER
-  )
-`);
-db.run(`
-  CREATE TABLE IF NOT EXISTS interactions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    student_id INTEGER,
-    type TEXT,
-    time_spent INTEGER,
-    result TEXT,
-    emotion TEXT,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
-db.run(`
-  CREATE TABLE IF NOT EXISTS parents (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    parent_name TEXT,
-    parent_email TEXT,
-    child_email TEXT
-  )
-`);
+// ------------------- CREATE TABLES -------------------
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS students (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      surname TEXT,
+      dob TEXT,
+      email TEXT UNIQUE,
+      password TEXT,
+      avatar TEXT,
+      learning_style TEXT,
+      support_tools INTEGER
+    )
+  `);
 
-// Реєстрація учня
+  db.run(`
+    CREATE TABLE IF NOT EXISTS interactions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_id INTEGER,
+      activity TEXT,
+      time_spent INTEGER,
+      result TEXT,
+      emotion TEXT,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS parents (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      parent_name TEXT,
+      parent_email TEXT,
+      child_email TEXT
+    )
+  `);
+});
+
+// ------------------- STUDENT ROUTES -------------------
 app.post('/register-student', (req, res) => {
   const { name, surname, dob, email, password, avatar, learning_style, support_tools } = req.body;
   if (!email || !password || !name || !surname) {
@@ -73,7 +78,6 @@ app.post('/register-student', (req, res) => {
   });
 });
 
-// Вхід
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   db.get(`SELECT * FROM students WHERE email = ?`, [email], (err, row) => {
@@ -98,7 +102,6 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Отримання даних учня
 app.get('/student/:id', (req, res) => {
   const id = req.params.id;
   db.get(`SELECT id, name, avatar, learning_style FROM students WHERE id = ?`, [id], (err, row) => {
@@ -109,133 +112,77 @@ app.get('/student/:id', (req, res) => {
   });
 });
 
-// Збереження взаємодії
-app.post('/log-interaction', (req, res) => {
-  const { student_id, type, time_spent, result, emotion } = req.body;
-  db.run(`
-    INSERT INTO interactions (student_id, type, time_spent, result, emotion)
-    VALUES (?, ?, ?, ?, ?)
-  `, [student_id, type, time_spent, result, emotion], function(err) {
-    if (err) {
-      console.error('Помилка збереження активності:', err.message);
-      return res.status(500).send('Помилка збереження.');
-    }
-    res.send('Активність збережена!');
-  });
-});
-
-// Додати батька/матір
-app.post('/add-parent', (req, res) => {
+// ------------------- PARENT ROUTES -------------------
+app.post('/register-parent', (req, res) => {
   const { parent_name, parent_email, child_email } = req.body;
-  if (!parent_email || !child_email) {
-    return res.status(400).send('Обовʼязкові поля не заповнені.');
-  }
-
-  db.run(`
-    INSERT INTO parents (parent_name, parent_email, child_email)
-    VALUES (?, ?, ?)
-  `, [parent_name, parent_email, child_email], function(err) {
+  const sql = `INSERT INTO parents (parent_name, parent_email, child_email) VALUES (?, ?, ?)`;
+  db.run(sql, [parent_name, parent_email, child_email], function(err) {
     if (err) {
-      console.error('❌ Помилка збереження даних батьків:', err.message);
-      return res.status(500).send('Помилка збереження.');
+      console.error(err.message);
+      return res.status(500).send('Помилка збереження батьківських даних.');
     }
     res.send('Дані батьків збережено!');
   });
 });
 
-// Перегляд усіх батьків
-app.get('/all-parents', (req, res) => {
-  db.all(`SELECT * FROM parents`, [], (err, rows) => {
-    if (err) {
-      console.error('Помилка отримання батьків:', err.message);
-      return res.status(500).send('Помилка сервера.');
-    }
-    res.json(rows);
-  });
+// ------------------- EMAIL LOGIC -------------------
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'focusedplatform@gmail.com',         // ← замінити
+    pass: 'gflo fmlg nycn pabc'             // ← App password, не звичайний пароль
+  }
 });
 
-// Надсилання email-звітів
-app.get('/send-reports', (req, res) => {
-  db.all(`
-    SELECT p.parent_email, s.name AS student_name, i.type, i.time_spent, i.result, i.emotion, i.timestamp
-    FROM parents p
-    JOIN students s ON p.child_email = s.email
-    LEFT JOIN (
-      SELECT * FROM interactions
-      WHERE timestamp >= datetime('now', '-1 day')
-    ) i ON s.id = i.student_id
-  `, (err, rows) => {
-    if (err) {
-      console.error('❌ Помилка запиту:', err.message);
-      return res.status(500).send('Помилка отримання звітів.');
-    }
+// ------------------- /send-reports -------------------
+app.get('/send-reports', async (req, res) => {
+  try {
+    db.all(`SELECT * FROM parents`, [], (err, parents) => {
+      if (err) return res.status(500).send('Помилка отримання звітів.');
 
-    const reports = {};
+      parents.forEach((parent) => {
+        db.all(
+          `SELECT * FROM interactions WHERE student_id = (SELECT id FROM students WHERE email = ?) ORDER BY timestamp DESC LIMIT 5`,
+          [parent.child_email],
+          (err2, interactions) => {
+            if (err2 || interactions.length === 0) return;
 
-    rows.forEach(row => {
-      if (!reports[row.parent_email]) {
-        reports[row.parent_email] = {
-          student_name: row.student_name,
-          interactions: []
-        };
-      }
+            const activitySummary = interactions.map(log => 
+              `• ${log.activity} (${log.time_spent} сек): ${log.emotion || 'без емоції'}`
+            ).join('\n');
 
-      if (row.type) {
-        reports[row.parent_email].interactions.push({
-          type: row.type,
-          time_spent: row.time_spent,
-          result: row.result,
-          emotion: row.emotion,
-          timestamp: row.timestamp
-        });
-      }
-    });
+            const mailOptions = {
+              from: 'fousedplatform@gmail.com',
+              to: parent.parent_email,
+              subject: `Звіт про активність дитини (${parent.child_email})`,
+              text: `Останні взаємодії:\n\n${activitySummary}`
+            };
 
-    // Надсилання email
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'your.email@gmail.com', // заміни
-        pass: 'your_app_password'     // заміни
-      }
-    });
-
-    for (const parent in reports) {
-      const { student_name, interactions } = reports[parent];
-
-      let htmlContent = `<h2>Звіт про активність ${student_name}</h2>`;
-      if (interactions.length === 0) {
-        htmlContent += `<p>За останню добу не було активностей на платформі.</p>`;
-      } else {
-        htmlContent += `<ul>`;
-        interactions.forEach(inter => {
-          htmlContent += `<li>
-            <b>${inter.type}</b>: ${inter.time_spent} cек, результат: ${inter.result || '—'}, емоція: ${inter.emotion || '—'} <br>
-            <i>${inter.timestamp}</i>
-          </li>`;
-        });
-        htmlContent += `</ul>`;
-      }
-
-      transporter.sendMail({
-        from: 'FocusEd Platform <your.email@gmail.com>', // заміни
-        to: parent,
-        subject: `Звіт про навчання дитини`,
-        html: htmlContent
-      }, (err, info) => {
-        if (err) {
-          console.error(`❌ Email не надіслано до ${parent}:`, err.message);
-        } else {
-          console.log(`✅ Звіт надіслано до ${parent}`);
-        }
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) console.error(`❌ Email не надіслано:`, error);
+              else console.log(`✅ Email надіслано: ${info.response}`);
+            });
+          }
+        );
       });
-    }
 
-    res.send('Звіти обробляються');
-  });
+      res.send('Звіти відправлено.');
+    });
+  } catch (err) {
+    res.status(500).send('Помилка при надсиланні звітів.');
+  }
 });
 
-// Перевірка сервера
+// ------------------- АВТОМАТИЧНЕ надсилання о 20:00 -------------------
+cron.schedule('0 20 * * *', () => {
+  console.log('🕗 Запускається автоматичне надсилання звітів...');
+  fetch('https://focused-server.onrender.com/send-reports')
+    .then(res => res.text())
+    .then(text => console.log('🔔 Відповідь сервера:', text))
+    .catch(err => console.error('❌ Помилка fetch:', err.message));
+});
+
+// ------------------- ТЕСТ -------------------
 app.get('/', (req, res) => {
   res.send('🔧 FocusEd сервер працює');
 });
