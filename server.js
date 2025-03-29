@@ -174,7 +174,7 @@ app.get('/send-reports', async (req, res) => {
 });
 
 // ------------------- АВТОМАТИЧНЕ надсилання о 20:00 -------------------
-cron.schedule('0 20 * * *', () => {
+cron.schedule('0 18 * * *', () => {
   console.log('🕗 Запускається автоматичне надсилання звітів...');
   fetch('https://focused-server.onrender.com/send-reports')
     .then(res => res.text())
