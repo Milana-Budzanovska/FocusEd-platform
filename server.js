@@ -99,8 +99,8 @@ app.post('/add-parent', (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ТУТ_ТВОЯ_АДРЕСА@gmail.com',
-    pass: 'ТУТ_APP_PASSWORD' // Скопійований app password із Google
+    user: 'focusedplatform@gmail.com',
+    pass: 'gflo fmlg nycn pabc' // Скопійований app password із Google
   }
 });
 
@@ -136,7 +136,7 @@ app.post('/send-reports', (req, res) => {
       `;
       try {
         await transporter.sendMail({
-          from: 'FocusEd Звітність <ТУТ_ТВОЯ_АДРЕСА@gmail.com>',
+          from: 'FocusEd Звітність <focusedplatform@gmail.com>',
           to: email,
           subject: `Щоденний звіт по ${student}`,
           html
