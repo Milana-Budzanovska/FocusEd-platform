@@ -6,8 +6,8 @@
   <title>Реєстрація батьків</title>
   <style>
     body {
-      background: #e6f2ff;
-      font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+      background-color: #e0f0ff;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,101 +15,94 @@
       margin: 0;
     }
 
-    .container {
+    .form-container {
       background: white;
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       max-width: 400px;
+      width: 100%;
       text-align: center;
     }
 
     h2 {
-      color: #003366;
+      color: #1e3a5f;
       font-size: 26px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
-    input {
+    input[type="text"], input[type="email"] {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       margin: 10px 0;
-      font-size: 16px;
-      border: 2px solid #cce0ff;
+      border: 2px solid #a2c6ff;
       border-radius: 10px;
+      font-size: 16px;
       outline: none;
-      transition: 0.3s;
+      transition: border 0.3s;
     }
 
-    input:focus {
-      border-color: #3399ff;
+    input[type="text"]:focus, input[type="email"]:focus {
+      border-color: #4a90e2;
     }
 
     button {
-      background: #4da6ff;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      border: none;
-      padding: 14px 0;
       width: 100%;
-      border-radius: 12px;
-      margin-top: 20px;
+      padding: 15px;
+      background-color: #4a90e2;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
 
     button:hover {
-      background: #3385ff;
+      background-color: #3b7cd2;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <div class="form-container">
     <h2>Форма для батьків</h2>
-    <input type="text" id="parentName" placeholder="Ваше ПІБ" required />
-    <input type="email" id="parentEmail" placeholder="Ваша електронна пошта" required />
-    <input type="email" id="childEmail" placeholder="Електронна пошта дитини" required />
+    <input type="text" id="parent_name" placeholder="Ваше ПІБ" required />
+    <input type="email" id="parent_email" placeholder="Ваша електронна пошта" required />
+    <input type="email" id="child_email" placeholder="Електронна пошта дитини" required />
     <button onclick="submitForm()">Зберегти</button>
   </div>
 
   <script>
     async function submitForm() {
-      const parentName = document.getElementById('parentName').value.trim();
-      const parentEmail = document.getElementById('parentEmail').value.trim();
-      const childEmail = document.getElementById('childEmail').value.trim();
+      const name = document.getElementById("parent_name").value.trim();
+      const parentEmail = document.getElementById("parent_email").value.trim();
+      const childEmail = document.getElementById("child_email").value.trim();
 
-      if (!parentName || !parentEmail || !childEmail) {
-        alert("Будь ласка, заповніть всі поля.");
+      if (!name || !parentEmail || !childEmail) {
+        alert("Будь ласка, заповніть усі поля.");
         return;
       }
 
       try {
-        const res = await fetch('https://focused-server.onrender.com/add-parent', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+        const res = await fetch("https://focused-server.onrender.com/add-parent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            parent_name: parentName,
+            parent_name: name,
             parent_email: parentEmail,
-            child_email: childEmail
-          })
+            child_email: childEmail,
+          }),
         });
 
         if (res.ok) {
           alert("✅ Дані батьків збережено!");
-          document.getElementById('parentName').value = '';
-          document.getElementById('parentEmail').value = '';
-          document.getElementById('childEmail').value = '';
         } else {
-          const errorText = await res.text();
-          alert("❌ Помилка: " + errorText);
+          const msg = await res.text();
+          alert("⚠️ Помилка: " + msg);
         }
       } catch (err) {
-        alert("❌ Помилка з’єднання з сервером.");
-        console.error(err);
+        alert("❌ Помилка з'єднання з сервером.");
       }
     }
   </script>
