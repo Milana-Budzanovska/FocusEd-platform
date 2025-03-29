@@ -124,7 +124,7 @@ app.get('/send-reports', (req, res) => {
           });
 
           transporter.sendMail({
-            from: '"FocusEd Платформа" <YOUR_EMAIL@gmail.com>',
+            from: '"FocusEd Платформа" <focusedplatform@gmail.com>',
             to: p.parent_email,
             subject: `Звіт по ${student.name}`,
             html: message
