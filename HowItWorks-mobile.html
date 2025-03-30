@@ -1,109 +1,150 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Як це працює?</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #b0d0ff, #e6f0ff);
-            text-align: center;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background: white;
-            padding: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            margin: 20px auto;
-            width: 90%;
-            font-weight: bold;
-        }
-        .navbar a {
-            text-decoration: none;
-            color: black;
-            font-size: 16px;
-            padding: 5px 10px;
-            border-radius: 20px;
-        }
-        .active {
-            background: #d0e8ff;
-        }
-        .section {
-            padding: 50px;
-        }
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 90%;
-            margin: auto;
-        }
-        .step {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .step img {
-            width: 100px;
-            height: auto;
-        }
-        .step-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #6d489e;
-            margin-top: 10px;
-        }
-        .step-text {
-            font-size: 14px;
-            color: #6d6d6d;
-            margin-top: 5px;
-        }
-        .progress-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 50px auto;
-            max-width: 80%;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .progress-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #4d4d4d;
-        }
-        .progress-text {
-            font-size: 14px;
-            color: #6d6d6d;
-            margin-top: 10px;
-        }
-        .progress-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .progress-icons img {
-            width: 80px;
-            height: auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Як це працює?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #b0d0ff, #e6f0ff);
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      align-items: center;
+      background: white;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      margin: 20px auto;
+      width: 90%;
+      font-weight: bold;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      margin: 5px;
+    }
+
+    .active {
+      background: #d0e8ff;
+    }
+
+    .section {
+      padding: 30px 15px;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 90%;
+      margin: auto;
+    }
+
+    .step {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .step img {
+      width: 80px;
+      height: auto;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #6d489e;
+      margin-top: 10px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: #6d6d6d;
+      margin-top: 5px;
+    }
+
+    .progress-section {
+      background: white;
+      padding: 25px 15px;
+      border-radius: 15px;
+      margin: 40px auto;
+      max-width: 85%;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #4d4d4d;
+    }
+
+    .progress-text {
+      font-size: 14px;
+      color: #6d6d6d;
+      margin-top: 10px;
+    }
+
+    .progress-icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .progress-icons img {
+      width: 70px;
+      height: auto;
+    }
+
+    /* Адаптація для мобільного */
+    @media (max-width: 768px) {
+      .steps-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .step img {
+        width: 60px;
+      }
+      .step-title {
+        font-size: 15px;
+      }
+      .navbar {
+        flex-direction: column;
+        padding: 12px;
+      }
+      .navbar a {
+        font-size: 15px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <a href="EduStyle-mobile.html">Визначення стилю навчання</a>
-        <a href="HowItWorks-mobile.html" class="active">Як це працює?</a>
-        <a href="ProgressSystem-mobile.html">Система прогресу та рекомендацій</a>
-    </div>
+  <div class="navbar">
+    <a href="EduStyle-mobile.html">Визначення стилю навчання</a>
+    <a href="HowItWorks-mobile.html" class="active">Як це працює?</a>
+    <a href="ProgressSystem-mobile.html">Система прогресу та рекомендацій</a>
+  </div>
+
     <div class="card">
       <img src="1000043668-removebg-preview.png" alt="test" />
       <div class="card-title">Пройди тест</div>
