@@ -1,175 +1,161 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Як це працює?</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Система навчання</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #b0d0ff, #e6f0ff);
+      font-family: Arial, sans-serif;
+      background-color: #cce0ff;
       text-align: center;
     }
 
-    .navbar {
+    .top-nav {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       flex-wrap: wrap;
-      align-items: center;
+      gap: 10px;
       background: white;
-      padding: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      border-radius: 20px;
+      border-radius: 25px;
       margin: 20px auto;
+      padding: 10px 15px;
       width: 90%;
+      max-width: 500px;
       font-weight: bold;
     }
 
-    .navbar a {
+    .top-nav a {
       text-decoration: none;
-      color: black;
-      font-size: 14px;
-      padding: 6px 10px;
+      color: #000;
+      padding: 8px 14px;
       border-radius: 20px;
-      margin: 5px;
-    }
-
-    .active {
-      background: #d0e8ff;
-    }
-
-    .section {
-      padding: 30px 15px;
-    }
-
-    .steps-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 90%;
-      margin: auto;
-    }
-
-    .step {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .step img {
-      width: 80px;
-      height: auto;
-    }
-
-    .step-title {
-      font-size: 16px;
-      font-weight: bold;
-      color: #6d489e;
-      margin-top: 10px;
-    }
-
-    .step-text {
+      background-color: #e0f0ff;
       font-size: 14px;
-      color: #6d6d6d;
-      margin-top: 5px;
+      transition: background 0.3s;
     }
 
-    .progress-section {
+    .top-nav a:hover {
+      background-color: #bcdfff;
+    }
+
+    .block {
       background: white;
-      padding: 25px 15px;
-      border-radius: 15px;
-      margin: 40px auto;
-      max-width: 85%;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      padding: 20px 15px;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .progress-title {
-      font-size: 18px;
+    .block img {
+      width: 70px;
+      margin-bottom: 10px;
+    }
+
+    .block .title {
       font-weight: bold;
-      color: #4d4d4d;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      color: #8a2be2;
     }
 
-    .progress-text {
-      font-size: 14px;
-      color: #6d6d6d;
-      margin-top: 10px;
+    .block .subtitle {
+      font-size: 0.9em;
+      color: #555;
     }
 
-    .progress-icons {
+    .ufo-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 20px;
-      margin-top: 20px;
+      margin: 20px 0;
     }
 
-    .progress-icons img {
-      width: 70px;
-      height: auto;
+    .ufo {
+      width: 60px;
+      height: 30px;
+      background: pink;
+      border-radius: 50px 50px 20px 20px;
+      position: relative;
     }
 
-    /* Адаптація для мобільного */
-    @media (max-width: 768px) {
-      .steps-container {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-      .step img {
-        width: 60px;
-      }
-      .step-title {
-        font-size: 15px;
-      }
-      .navbar {
+    .ufo::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      width: 20px;
+      height: 10px;
+      background: #ffd6e7;
+      border-radius: 50%;
+    }
+
+    .btn {
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 1em;
+    }
+
+    @media (max-width: 480px) {
+      .top-nav {
         flex-direction: column;
-        padding: 12px;
+        align-items: center;
       }
-      .navbar a {
-        font-size: 15px;
+      .top-nav a {
         width: 100%;
         text-align: center;
+      }
+      .block img {
+        width: 60px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar">
+  <!-- Навігаційне меню -->
+  <div class="top-nav">
     <a href="EduStyle-mobile.html">Визначення стилю навчання</a>
-    <a href="HowItWorks-mobile.html" class="active">Як це працює?</a>
+    <a href="HowItWorks-mobile.html">Як це працює</a>
     <a href="ProgressSystem-mobile.html">Система прогресу та рекомендацій</a>
   </div>
 
-   <div class="block">
+  <!-- Контентні блоки -->
+  <div class="block">
     <img src="https://cdn-icons-png.flaticon.com/512/1995/1995574.png" alt="test" />
-    <div class="title" style="color: #8a2be2;">Пройти тест</div>
+    <div class="title">Пройти тест</div>
     <div class="subtitle">Визнач свій стиль навчання</div>
   </div>
 
   <div class="block">
     <img src="https://cdn-icons-png.flaticon.com/512/2933/2933811.png" alt="materials" />
-    <div class="title" style="color: #8a2be2;">Отримай адаптовані матеріали</div>
+    <div class="title">Отримай адаптовані матеріали</div>
     <div class="subtitle">Підлаштовані під твій спосіб сприйняття інформації</div>
   </div>
 
   <div class="block">
     <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="headphones" />
-    <div class="title" style="color: #8a2be2;">Вчись у комфортному форматі</div>
+    <div class="title">Вчись у комфортному форматі</div>
     <div class="subtitle">Відео, аудіо, інтерактивні чи текст</div>
   </div>
 
   <div class="block">
     <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="progress" />
-    <div class="title"><strong>Відстежуй прогрес</strong></div>
+    <div class="title">Відстежуй прогрес</div>
     <div class="subtitle">Система рекомендацій повторення, додає нові завдання й підтримку мотивацію</div>
   </div>
 
-  <button class="btn">На головну</button>
+  <!-- Кнопка -->
+  <button class="btn" onclick="location.href='index.html'">На головну</button>
 
 </body>
 </html>
