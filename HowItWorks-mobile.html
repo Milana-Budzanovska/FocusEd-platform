@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Як це працює</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background-color: #cce0ff;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    .pill {
+      background: white;
+      border-radius: 25px;
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-weight: bold;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      margin: 15px auto;
+      padding: 15px;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card img {
+      max-width: 80px;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #8a2be2;
+    }
+    .card-text {
+      font-size: 0.9em;
+      color: #333;
+    }
+    .btn {
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .ufo {
+      width: 60px;
+      height: 30px;
+      background: pink;
+      margin: 10px auto;
+      border-radius: 50px 50px 20px 20px;
+      position: relative;
+    }
+    .ufo::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      width: 20px;
+      height: 10px;
+      background: #ffd6e7;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <span class="pill">Визначення стилю навчання</span>
+      <span class="pill">Як це працює?</span>
+      <span class="pill">Система прогресу та рекомендацій</span>
+      
+    </div>
+
+    <div class="card">
+      <img src="1000043668-removebg-preview.png" alt="test" />
+      <div class="card-title">Пройди тест</div>
+      <div class="card-text">Визнач свій стиль навчання</div>
+    </div>
+
+    <div class="card">
+      <img src="1000043669-removebg-preview.png" alt="materials" />
+      <div class="card-title">Отримай адаптовані матеріали</div>
+      <div class="card-text">Підлаштовані під твій спосіб сприйняття інформації</div>
+    </div>
+
+    <div class="card">
+      <img src="1000043604-fotor-bg-remover-20250312221344.png" alt="headphones" />
+      <div class="card-title">Вчись у комфортному форматі</div>
+      <div class="card-text">Відео, аудіо, інтерактивні чи текст</div>
+    </div>
+
+    <div class="card">
+      <img src="1000043686-removebg-preview.png" alt="progress" />
+      <div class="card-title">Відстежуй прогрес</div>
+      <div class="card-text">Система рекомендацій повторення, додає нові завдання й підтримку мотивацію</div>
+    </div>
+
+    <div class="ufo"></div>
+    <div class="ufo"></div>
+    <div class="ufo"></div>
+    <div class="ufo"></div>
+    <div class="ufo"></div>
+
+    <button class="btn">На головну</button>
+  </div>
+</body>
+</html>
