@@ -191,7 +191,41 @@
     КОЖЕН ВЧИТЬСЯ ПО-СВОЄМУ. МИ ВИКОРИСТОВУЄМО НАУКОВО ОБҐРУНТОВАНИЙ ТЕСТ, ЩОБ ВИЗНАЧИТИ, ЯКИЙ ПІДХІД ПРАЦЮЄ САМЕ ДЛЯ ТЕБЕ.
   </div>
 
-  <button class="btn">Пройти тест</button>
+  <a href="test.html" class="fancy-button">ПРОЙТИ ТЕСТ І ПОЧАТИ НАВЧАННЯ</a>
+
+<style>
+  .fancy-button {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #ff69b4, #ff85a2);
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .fancy-button:hover {
+    background: linear-gradient(135deg, #ff85a2, #ff69b4);
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 480px) {
+    .fancy-button {
+      font-size: 16px;
+      padding: 12px 20px;
+      width: 90%;
+      display: block;
+    }
+  }
+</style>
+
 
   <!-- Футер -->
   <div class="footer">
