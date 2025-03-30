@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Визначення стилю навчання</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #cce0ff;
+      text-align: center;
+      color: #000;
+    }
+    .nav {
+      background-color: white;
+      border-radius: 25px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 450px;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .style-box {
+      background-color: white;
+      border-radius: 20px;
+      padding: 15px;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .style-box img {
+      width: 70px;
+      margin-bottom: 10px;
+    }
+    .steps {
+      text-align: left;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .steps p {
+      font-size: 0.95em;
+      margin: 10px 0;
+    }
+    .steps p::before {
+      content: "✅ ";
+    }
+    .subtext {
+      font-size: 0.85em;
+      margin-top: 20px;
+      text-align: center;
+      color: #333;
+      padding: 0 20px;
+    }
+    .btn {
+      margin: 25px auto;
+      background: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1em;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 10px;
+    }
+    .footer-btn {
+      background: pink;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <div>Визначення стилю навчання</div>
+    <div>Система прогресу та рекомендацій</div>
+  </div>
+
+  <div class="style-box">
+    <img src="1000043698-removebg-preview.png" alt="візуал">
+    <div><strong>Візуал</strong></div>
+  </div>
+
+  <div class="style-box">
+    <img src="1000043634-removebg-preview.png" alt="аудіал">
+    <div><strong>Аудіо</strong></div>
+  </div>
+
+  <div class="style-box">
+    <img src="1000043638-removebg-preview.png" alt="кінестетик">
+    <div><strong>Кінестетик</strong></div>
+  </div>
+
+  <div class="steps">
+    <p>Відповідаєш на 15 питань про те, як тобі зручніше вчитися.</p>
+    <p>Отримуєш результат: візуал, аудіал, кінестетик або змішаний стиль.</p>
+    <p>Система підлаштовує контент під твій стиль.</p>
+  </div>
+
+  <div class="subtext">
+    КОЖЕН ВЧИТЬСЯ ПО-СВОЄМУ. МИ ВИКОРИСТОВУЄМО НАУКОВО ОБҐРУНТОВАНИЙ ТЕСТ, ЩОБ ВИЗНАЧИТИ, ЯКИЙ ПІДХІД ПРАЦЮЄ САМЕ ДЛЯ ТЕБЕ.
+  </div>
+
+  <button class="btn">Пройти тест</button>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Футер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #b0d0ff, #e6f0ff);
+            text-align: center;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+        .footer-item {
+            position: relative;
+            text-align: center;
+            width: 220px;
+        }
+        .footer-item img {
+            width: 50px;
+            height: auto;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffebf5;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .footer-item a {
+            display: block;
+            background: #ffcce0;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            transition: 0.3s ease;
+        }
+        .footer-item a:hover {
+            background: #ff99cc;
+        }
+    </style>
+</head>
+<body>
+
+   <div class="footer">
+        <div class="footer-item">
+            <img src="1000043640-removebg-preview.png" alt="Про проект">
+            <a href="about.html">ПРО ПРОЄКТ</a>
+        </div>
+        <div class="footer-item">
+            <img src="1000043644-fotor-bg-remover-2025031222357.png" alt="Контакти">
+            <a href="contacts.html">КОНТАКТИ</a>
+        </div>
+        <div class="footer-item">
+            <img src="1000043642-fotor-bg-remover-2025031222423.png" alt="Політика конфіденційності">
+            <a href="privacy.html">ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ</a>
+        </div>
+        <div class="footer-item">
+            <img src="1000043637-fotor-bg-remover-2025031222515.png" alt="Соціальні мережі">
+            <a href="tap-link.html">СОЦІАЛЬНІ МЕРЕЖІ</a>
+        </div>
+    </div>
+
+</body>
+</html>
