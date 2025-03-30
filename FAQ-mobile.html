@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Часті питання</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #93c292;
+      text-align: center;
+    }
+
+    .nav {
+      background-color: white;
+      border-radius: 30px;
+      margin: 20px auto;
+      width: 95%;
+      max-width: 500px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 10px;
+      font-weight: bold;
+      gap: 10px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: black;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background-color: #e0f2e0;
+      font-size: 0.95em;
+      transition: background 0.3s;
+    }
+
+    .nav a:hover {
+      background-color: #cce5cc;
+    }
+
+    .section-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin: 25px 0 10px 0;
+    }
+
+    .question-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #d6eadf;
+      border-radius: 20px;
+      padding: 10px 15px;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 400px;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    .arrow {
+      width: 25px;
+      height: auto;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 450px;
+    }
+
+    .faq-item {
+      background-color: #e7f3e5;
+      border-radius: 20px;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навігаційне меню -->
+  <div class="nav">
+    <a href="index.html">Головна</a>
+    <a href="HowItWorks-mobile.html">Як це працює?</a>
+    <a href="StartEdu.html">Почати навчання</a>
+    <a href="faq.html">FAQ</a>
+  </div>
+
+  <div class="section-title">Часті питання (FAQ)</div>
+
+  <div class="question-block">
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="←">
+    ЯК ЗМІНИТИ СТИЛЬ НАВЧАННЯ, ЯКЩО ВІН МЕНІ НЕ ПІДХОДИТЬ?
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="→" style="transform: scaleX(-1);">
+  </div>
+
+  <div class="question-block">
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="←">
+    ЧИ МОЖУ Я ПРОХОДИТИ УРОКИ У ЗМІШАНОМУ ФОРМАТІ?
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="→" style="transform: scaleX(-1);">
+  </div>
+
+  <div class="question-block">
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="←">
+    ЯК ПРАЦЮЮТЬ РЕКОМЕНДАЦІЇ?
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="→" style="transform: scaleX(-1);">
+  </div>
+
+  <div class="question-block">
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="←">
+    ЧИ МОЖНА ПРОЙТИ ТЕСТ ДЕКІЛЬКА РАЗІВ?
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="→" style="transform: scaleX(-1);">
+  </div>
+
+  <div class="question-block">
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="←">
+    ЧИ ОТРИМАЮ Я СЕРТИФІКАТ ПІСЛЯ ПРОХОДЖЕННЯ КУРСУ?
+    <img class="arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="→" style="transform: scaleX(-1);">
+  </div>
+
+  <div class="section-title">FAQ для батьків</div>
+
+  <div class="faq-grid">
+    <div class="faq-item">ЩО ТАКЕ НАША ПЛАТФОРМА?</div>
+    <div class="faq-item">ЯК ПРАЦЮЄ АДАПТИВНЕ НАВЧАННЯ?</div>
+    <div class="faq-item">ЧИ ПОТРІБЕН КОНТРОЛЬ З БОКУ БАТЬКІВ?</div>
+    <div class="faq-item">ЧИ ПІДХОДИТЬ ЦЯ МЕТОДИКА ДЛЯ ДІТЕЙ З АУТИЗМОМ, СДУ, ДИСЛЕКСІЄЮ?</div>
+  </div>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAQ для батьків</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #93c292;
+      text-align: center;
+    }
+    .container {
+      padding: 20px 10px;
+    }
+    .question-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .question {
+      background-color: #e7f3e5;
+      border-radius: 20px;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .centered {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    .centered .question {
+      width: 80%;
+    }
+    h2 {
+      margin-top: 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      max-width: 500px;
+      margin: 15px auto;
+    }
+    .platform-grid .question {
+      font-size: 0.85em;
+    }
+    @media (max-width: 480px) {
+      .question-grid, .platform-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="question-grid">
+      <div class="question">ЯК ВИЗНАЧИТИ СТИЛЬ НАВЧАННЯ МОЄЇ ДИТИНИ?</div>
+      <div class="question">ЯК ВІДСТЕЖУВАТИ ПРОГРЕС ДИТИНИ?</div>
+      <div class="question">ТЕХНІЧНІ ПИТАННЯ: ЯКІ ПРИСТРОЇ ПІДТРИМУЮТЬСЯ?</div>
+      <div class="question">ЧИ МОЖНА ЗМІНИТИ СТИЛЬ НАВЧАННЯ?</div>
+      <div class="question">ЧИ ПІДХОДИТЬ МЕТОДИКА ДЛЯ ДОМАШНЬОГО НАВЧАННЯ?</div>
+      <div class="question">ЩО РОБИТИ, ЯКЩО ДИТИНА НЕ ХОЧЕ ВЧИТИСЯ?</div>
+    </div>
+
+    <div class="centered">
+      <div class="question">ЯК ЗВЕРНУТИСЬ В ТЕХПІДТРИМКУ?</div>
+    </div>
+
+    <h2>Що таке наша платформа?</h2>
+
+    <div class="platform-grid">
+      <div class="question">ЦЕ НАВЧАЛЬНИЙ ПРОСТІР, ЯКИЙ ПІДЛАШТОВУЄТЬСЯ ПІД НЕЙРОДИВЕРГЕНТНИХ УЧНІВ</div>
+      <div class="question">ІНТЕРАКТИВНИЙ ПІДХІД ЗАМІСТЬ ТРАДИЦІЙНОГО НАВЧАННЯ</div>
+      <div class="question" style="grid-column: span 2;">ВИКОРИСТАННЯ РІЗНИХ СТИЛІВ ДЛЯ СПРИЙНЯТТЯ ІНФОРМАЦІЇ</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Адаптивне навчання</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #93c292;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.4em;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      padding: 0 15px;
+      max-width: 500px;
+      margin: 0 auto 20px auto;
+    }
+    .single {
+      grid-column: span 2;
+    }
+    .box {
+      background-color: #e7f3e5;
+      border-radius: 20px;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      padding: 0 15px;
+      max-width: 500px;
+      margin: 0 auto 30px auto;
+    }
+    .heart {
+      width: 60px;
+      margin: 20px auto;
+    }
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .single {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Що таке наша платформа?</h2>
+  <div class="grid">
+    <div class="box">СИСТЕМА РЕКОМЕНДАЦІЙ ТА ПІДТРИМКИ МОТИВАЦІЇ.</div>
+    <div class="box">КОНТЕНТ ЗМІНЮЄТЬСЯ В ЗАЛЕЖНОСТІ ВІД ВЗАЄМОДІЇ ДИТИНИ</div>
+    <div class="box single">ДИНАМІЧНЕ КОРИГУВАННЯ МАТЕРІАЛІВ У РЕАЛЬНОМУ ЧАСІ</div>
+  </div>
+
+  <h2>Як працює адаптивне навчання?</h2>
+  <div class="column">
+    <div class="box">ЯКЩО ШВИДКО ПРОХОДИТЬ ТЕСТ – ПІДВИЩУЄТЬСЯ СКЛАДНІСТЬ ЗАВДАННЯ</div>
+    <div class="box">ЯКЩО УНИКАЄ ВІДЕО – ДОДАСТЬСЯ БІЛЬШЕ ТЕКСТОВОЇ ІНФОРМАЦІЇ</div>
+    <div class="box">ЯКЩО ДИТИНА НЕ ЧИТАЄ ТЕКСТ – БІЛЬШЕ АУДІО</div>
+  </div>
+
+  <img class="heart" src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="сердечко">
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Стиль навчання дитини</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #93c292;
+      color: black;
+      text-align: center;
+    }
+
+    .block {
+      background-color: #d6eadf;
+      margin: 20px auto 10px;
+      padding: 15px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 360px;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    .section-title {
+      background: white;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 30px auto 10px;
+    }
+
+    .process-title {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 20px 0 5px;
+    }
+
+    .process {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin: 10px 0 30px;
+      font-size: 0.95em;
+    }
+
+    .step {
+      background-color: #e7f3e5;
+      padding: 12px 15px;
+      border-radius: 20px;
+      max-width: 300px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .arrow {
+      font-size: 2em;
+      color: #ff69b4;
+    }
+
+    .manual-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .manual-section img {
+      width: 180px;
+      margin: 15px 0;
+    }
+
+    .manual-text {
+      font-size: 0.95em;
+      margin: 5px 0;
+      font-weight: bold;
+    }
+
+    .stars {
+      font-size: 1.5em;
+      color: #fff8dc;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 480px) {
+      .block, .step {
+        font-size: 0.95em;
+      }
+      .section-title {
+        font-size: 1em;
+      }
+      .manual-section img {
+        width: 130px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Вступні блоки -->
+  <div class="block">НАВЧАННЯ СТАЄ БІЛЬШ КОМФОРТНИМ І ЕФЕКТИВНИМ</div>
+  <div class="block">ПІДЛАШТОВУЄТЬСЯ ПІД ТЕМП НАВЧАННЯ КОЖНОЇ ДИТИНИ</div>
+
+  <!-- Заголовок -->
+  <div class="section-title">Як визначити стиль навчання моєї дитини?</div>
+
+  <!-- Процес -->
+  <div class="process-title">Процес:</div>
+  <div class="process">
+    <div class="step">ДИТИНА ПРОХОДИТЬ ТЕСТ (10 ПИТАНЬ)</div>
+    <div class="arrow">⬇️</div>
+    <div class="step">ПЛАТФОРМА АНАЛІЗУЄ ВІДПОВІДІ</div>
+    <div class="arrow">⬇️</div>
+    <div class="step">ПРОПОНУЄ НАЙКРАЩИЙ ФОРМАТ ПОДАЧІ МАТЕРІАЛУ</div>
+  </div>
+
+  <!-- Якщо дитина не хоче проходити -->
+  <div class="section-title">Якщо дитина не хоче проходити тест?</div>
+
+  <div class="manual-section">
+   <img src="IMG_20250307_005758_282.png" alt="діти">
+    <div class="manual-text">МОЖНА ЗМІНИТИ СТИЛЬ НАВЧАННЯ ВРУЧНУ В НАЛАШТУВАННЯХ</div>
+    <img src="1000043673-removebg-preview.png" alt="діти">
+    <div class="manual-text">ПРОГРАМА САМА КОРИГУЄ ФОРМАТ НА ОСНОВІ АКТИВНОСТІ</div>
+    <img src="IMG_20250307_005758_282.png" alt="діти">
+  </div>
+
+</body>
+</html>
