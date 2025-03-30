@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Особистий кабінет</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #cce0ff;
+      text-align: center;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: white;
+      border-radius: 25px;
+      margin: 20px auto;
+      padding: 10px 15px;
+      width: 90%;
+      max-width: 500px;
+      font-weight: bold;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: #000;
+      padding: 8px 14px;
+      border-radius: 20px;
+      background-color: #e0f0ff;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .top-nav a:hover {
+      background-color: #bcdfff;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #000;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+
+    .block {
+      background: white;
+      border-radius: 20px;
+      margin: 15px auto;
+      padding: 10px 15px;
+      max-width: 350px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 0.95em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .block img {
+      width: 40px;
+      height: auto;
+      margin-left: 10px;
+    }
+
+    .section-title {
+      margin-top: 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .ufo {
+      width: 60px;
+      height: 30px;
+      background: pink;
+      margin: 10px auto;
+      border-radius: 50px 50px 20px 20px;
+      position: relative;
+    }
+
+    .ufo::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      width: 20px;
+      height: 10px;
+      background: #ffd6e7;
+      border-radius: 50%;
+    }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .footer-btn {
+      background: pink;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    .btn {
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 480px) {
+      .top-nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .top-nav a {
+        width: 100%;
+        text-align: center;
+      }
+
+      .block {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .block img {
+        align-self: flex-end;
+        margin: 10px 0 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Верхнє меню -->
+  <div class="top-nav">
+    <a href="EduStyle-mobile.html">Визначення стилю навчання</a>
+    <a href="HowItWorks-mobile.html">Як це працює</a>
+    <a href="ProgressSystem-mobile.html">Система прогресу та рекомендацій</a>
+  </div>
+
+  <div class="container">
+    <h2>Що є в особистому кабінеті</h2>
+
+    <div class="block">
+      Відстеження пройдених тем та матеріалів
+      <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="галочка">
+    </div>
+    <img src="1000043592-fotor-bg-remover-20250312222151.png" alt="робот" width="80" style="margin: 10px auto;">
+
+    <div class="block">
+      Бейджі за досягнення ("Пройдено 5 уроків!", "Перша інтерактивна вправа!")
+      <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="галочка">
+    </div>
+    <img src="1000043707-removebg-preview.png" alt="нагорода" width="70" style="margin: 10px auto;">
+
+    <div class="block">
+      Персоналізовані рекомендації (що повторити, які теми ще пройти)
+      <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="галочка">
+    </div>
+    <img src="1000043646-removebg-preview.png" alt="геймпад" width="70" style="margin: 10px auto;">
+
+    <div class="section-title">Чому це унікально?</div>
+
+    <div class="block">
+      Учень отримує "підказки" залежно від своїх сильних і слабких сторін
+      <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="галочка">
+    </div>
+    <img src="pngegg.png" alt="лампочка" width="60" style="margin: 10px auto;">
+
+    <div class="block">
+      Прогрес не лише показується, а й аналізується, щоб давати персональні поради
+      <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="галочка">
+    </div>
+    <img src="1000043591-fotor-bg-remover-2025031222655.png" alt="аналітика" width="60" style="margin: 10px auto;">
+
+
+    <button class="btn" onclick="location.href='index.html'">На головну</button>
+  </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Футер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #b0d0ff, #e6f0ff);
+            text-align: center;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+        .footer-item {
+            position: relative;
+            text-align: center;
+            width: 220px;
+        }
+        .footer-item img {
+            width: 50px;
+            height: auto;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffebf5;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .footer-item a {
+            display: block;
+            background: #ffcce0;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            transition: 0.3s ease;
+        }
+        .footer-item a:hover {
+            background: #ff99cc;
+        }
+    </style>
+</head>
+<body>
+
+   <div class="footer">
+        <div class="footer-item">
+            <img src="1000043640-removebg-preview.png" alt="Про проект">
+            <a href="about.html">ПРО ПРОЄКТ</a>
+        </div>
+        <div class="footer-item">
+            <img src="1000043644-fotor-bg-remover-2025031222357.png" alt="Контакти">
+            <a href="contacts.html">КОНТАКТИ</a>
+        </div>
+        <div class="footer-item">
+            <img src="1000043642-fotor-bg-remover-2025031222423.png" alt="Політика конфіденційності">
+            <a href="privacy.html">ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ</a>
+        </div>
+        <div class="footer-item">
+            <img src="1000043637-fotor-bg-remover-2025031222515.png" alt="Соціальні мережі">
+            <a href="tap-link.html">СОЦІАЛЬНІ МЕРЕЖІ</a>
+        </div>
+    </div>
+
+</body>
+</html>
