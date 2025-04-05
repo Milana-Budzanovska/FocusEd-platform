@@ -1,6 +1,156 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Особистий кабінет</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #e9d0ff;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: white;
+      margin: 20px;
+      padding: 10px;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .navbar a.active {
+      color: #843d9f;
+    }
+
+    .profile {
+      background-color: #d9c4fc;
+      border-radius: 30px;
+      margin: 20px auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 800px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .left {
+      width: 35%;
+      text-align: center;
+    }
+
+    .left img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .left p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .middle {
+      width: 60%;
+    }
+
+    .middle h1 {
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .middle .info {
+      background-color: #f6ddf9;
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 10px 0;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .style-options {
+      margin-top: 20px;
+    }
+
+    .style-option {
+      background: #e0dfff;
+      margin: 10px auto;
+      width: 80%;
+      padding: 10px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .right {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .assistant-img {
+      width: 120px;
+    }
+
+    .assistant-name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+  <a href="EduStuff.html">Основний блок – Навчальні матеріали</a>
+        <a href="holovna.html" style="font-weight: bold; color: #7a2f8f;">Мій кабінет</a>
+    </div>
+   
+
+  <div class="profile">
+    <div class="left">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Icon-round-Question_mark.jpg" alt="Аватар" />
+      <p>ученик/учениця</p>
+
+      <div class="style-options">
+        <div class="style-option">🍄 Візуал</div>
+        <div class="style-option">🍄 Аудіо</div>
+        <div class="style-option">🍄 Відео</div>
+      </div>
+    </div>
+
+    <div class="middle">
+      <h1>ФІП</h1>
+      <div class="info">🍄 Стиль навчання</div>
+      <div class="info">🍄 Помічник у навчанні</div>
+    </div>
+
+    <div class="right">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Флік" class="assistant-img"/>
+      <div class="assistant-name">Флік</div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Особистий кабінет</title>
@@ -83,10 +233,6 @@
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="EduStuff.html">Основний блок – Навчальні матеріали</a>
-        <a href="holovna.html" style="font-weight: bold; color: #7a2f8f;">Мій кабінет</a>
-    </div>
 
     <div class="hero">Особистий кабінет</div>
     <h2>Варіанти відображення залежно від статусу учня:</h2>
@@ -127,7 +273,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Особистий кабінет</title>
     <style>
         body {
             background: linear-gradient(to bottom, #f6caff, #fad4ff, #f6caff);
