@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Меню предметів</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', 'OpenDyslexic', sans-serif;
+      background: linear-gradient(to bottom right, #fdf6ff, #e4faff);
+      color: #333;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+    h1 {
+      color: #6b6ba1;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: #ffffffcc;
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+    .card img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 10px;
+    }
+    .card span {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #5a5a9c;
+    }
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #e4e0ff;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    #assistant {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 120px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    #assistant img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="assistant">
+    <img src="/images/assistant.png" alt="Асистент">
+    <div id="assistant-text">Я допоможу вибрати предмет!</div>
+  </div>
+
+  <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
+  <h1 id="page-title">Обери предмет</h1>
+
+  <div class="grid" id="subject-grid"></div>
+
+  <script>
+    let isUkr = true;
+
+    const subjects = {
+      uk: [
+        { label: 'Математика', icon: 'math.png', link: '/math' },
+        { label: 'Читання', icon: 'literature.png', link: '/reading' },
+        { label: 'Українська мова', icon: 'ukr.png', link: '/ukrainian' },
+        { label: 'Англійська', icon: 'english.png', link: '/english' },
+        { label: 'Я досліджую світ', icon: 'science.png', link: '/science' },
+        { label: 'Мистецтво', icon: 'art.png', link: '/art' }
+      ],
+      en: [
+        { label: 'Math', icon: 'math.png', link: '/math' },
+        { label: 'Reading', icon: 'literature.png', link: '/reading' },
+        { label: 'Ukrainian', icon: 'ukr.png', link: '/ukrainian' },
+        { label: 'English', icon: 'english.png', link: '/english' },
+        { label: 'Science', icon: 'science.png', link: '/science' },
+        { label: 'Art', icon: 'art.png', link: '/art' }
+      ]
+    };
+
+    function renderSubjects() {
+      const lang = isUkr ? 'uk' : 'en';
+      document.getElementById('page-title').textContent = isUkr ? 'Обери предмет' : 'Choose a subject';
+      document.querySelector('.lang-toggle').textContent = isUkr ? 'EN' : 'UA';
+      document.getElementById('assistant-text').textContent = isUkr ? 'Я допоможу вибрати предмет!' : 'I can help you choose!';
+
+      const grid = document.getElementById('subject-grid');
+      grid.innerHTML = '';
+
+      subjects[lang].forEach(subj => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => location.href = subj.link;
+        card.innerHTML = `<img src="/icons/${subj.icon}" alt="${subj.label}"><span>${subj.label}</span>`;
+        grid.appendChild(card);
+      });
+    }
+
+    function toggleLanguage() {
+      isUkr = !isUkr;
+      renderSubjects();
+    }
+
+    renderSubjects();
+  </script>
+</body>
+</html>
