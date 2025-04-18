@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Меню класів</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #fef6f9, #e8f0ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    h1 {
+      color: #5a5a9c;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .btn {
+      background-color: #ffffffdd;
+      border: none;
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #5a5a9c;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background-color: #f7f1ff;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .btn img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
+    }
+
+    .preschool-section {
+      margin-bottom: 40px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #e4e0ff;
+      color: #5a5a9c;
+      border: none;
+      padding: 10px 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .lang-toggle:hover {
+      background: #d5d2fa;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
+  <h1 id="title">Обери свій рівень</h1>
+
+  <div class="preschool-section">
+    <button class="btn" id="preschool-btn" onclick="location.href='/preschool'">
+      <img src="/icons/preschool.png" alt="preschool icon" />
+      Дошкільнята
+    </button>
+  </div>
+
+  <div class="grid" id="menu"></div>
+
+  <div class="footer">© Focused Baby, 2025</div>
+
+  <script>
+    let isUkr = true;
+
+    const labels = {
+      uk: {
+        title: "Обери свій рівень",
+        preschool: "Дошкільнята",
+        class: "клас",
+        lang: "EN"
+      },
+      en: {
+        title: "Choose your level",
+        preschool: "Preschool",
+        class: "Grade",
+        lang: "UA"
+      }
+    };
+
+    function renderMenu() {
+      const lang = isUkr ? 'uk' : 'en';
+      document.getElementById('title').textContent = labels[lang].title;
+      document.querySelector('.lang-toggle').textContent = labels[lang].lang;
+      document.getElementById('preschool-btn').innerHTML =
+        `<img src="/icons/preschool.png" alt="preschool icon" /> ${labels[lang].preschool}`;
+
+      const menu = document.getElementById('menu');
+      menu.innerHTML = '';
+
+      for (let i = 1; i <= 9; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.innerHTML = `
+          <img src="/icons/${i}.png" alt="icon for ${i}" />
+          ${i} ${labels[lang].class}
+        `;
+        btn.onclick = () => location.href = `/class/${i}`;
+        menu.appendChild(btn);
+      }
+    }
+
+    function toggleLanguage() {
+      isUkr = !isUkr;
+      renderMenu();
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
