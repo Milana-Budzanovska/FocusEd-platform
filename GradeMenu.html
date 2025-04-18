@@ -45,6 +45,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
 
     .btn:hover {
@@ -105,7 +106,7 @@
   <h1 id="title">Обери свій рівень</h1>
 
   <div class="preschool-section">
-    <button class="btn" id="preschool-btn" onclick="location.href='/preschool'">
+    <button class="btn" id="preschool-btn">
       <img src="/icons/preschool.png" alt="preschool icon" />
       Дошкільнята
     </button>
@@ -133,24 +134,35 @@
       }
     };
 
+    function toSlug(text) {
+      return text
+        .toLowerCase()
+        .replace(/ /g, "-")
+        .replace(/[^\w\-а-яіїєґ]/gi, "");
+    }
+
     function renderMenu() {
       const lang = isUkr ? 'uk' : 'en';
-      document.getElementById('title').textContent = labels[lang].title;
-      document.querySelector('.lang-toggle').textContent = labels[lang].lang;
-      document.getElementById('preschool-btn').innerHTML =
-        `<img src="/icons/preschool.png" alt="preschool icon" /> ${labels[lang].preschool}`;
+      const l = labels[lang];
+
+      document.getElementById('title').textContent = l.title;
+      document.querySelector('.lang-toggle').textContent = l.lang;
+
+      const preschoolBtn = document.getElementById('preschool-btn');
+      preschoolBtn.innerHTML = `<img src="/icons/preschool.png" alt="icon" /> ${l.preschool}`;
+      preschoolBtn.onclick = () => location.href = '/' + toSlug(l.preschool);
 
       const menu = document.getElementById('menu');
       menu.innerHTML = '';
 
       for (let i = 1; i <= 9; i++) {
+        const label = `${i} ${l.class}`;
+        const slug = lang === 'uk' ? `${i}-${toSlug(l.class)}` : `grade-${i}`;
+
         const btn = document.createElement('button');
         btn.className = 'btn';
-        btn.innerHTML = `
-          <img src="/icons/${i}.png" alt="icon for ${i}" />
-          ${i} ${labels[lang].class}
-        `;
-        btn.onclick = () => location.href = `/class/${i}`;
+        btn.innerHTML = `<img src="/icons/${i}.png" alt="icon for ${label}" /> ${label}`;
+        btn.onclick = () => location.href = `/${slug}`;
         menu.appendChild(btn);
       }
     }
