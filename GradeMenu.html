@@ -46,6 +46,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+      text-decoration: none;
     }
 
     .btn:hover {
@@ -60,7 +61,7 @@
       margin-bottom: 10px;
     }
 
-    .preschool-section {
+    .preschool {
       margin-bottom: 40px;
     }
 
@@ -105,13 +106,7 @@
   <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
   <h1 id="title">Обери свій рівень</h1>
 
-  <div class="preschool-section">
-    <button class="btn" id="preschool-btn">
-      <img src="/icons/preschool.png" alt="preschool icon" />
-      Дошкільнята
-    </button>
-  </div>
-
+  <div class="preschool" id="preschool"></div>
   <div class="grid" id="menu"></div>
 
   <div class="footer">© Focused Baby, 2025</div>
@@ -119,52 +114,59 @@
   <script>
     let isUkr = true;
 
-    const labels = {
-      uk: {
-        title: "Обери свій рівень",
-        preschool: "Дошкільнята",
-        class: "клас",
-        lang: "EN"
-      },
-      en: {
-        title: "Choose your level",
-        preschool: "Preschool",
-        class: "Grade",
-        lang: "UA"
-      }
-    };
-
-    function toSlug(text) {
-      return text
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/[^\w\-а-яіїєґ]/gi, "");
-    }
-
     function renderMenu() {
       const lang = isUkr ? 'uk' : 'en';
-      const l = labels[lang];
-
-      document.getElementById('title').textContent = l.title;
-      document.querySelector('.lang-toggle').textContent = l.lang;
-
-      const preschoolBtn = document.getElementById('preschool-btn');
-      preschoolBtn.innerHTML = `<img src="/icons/preschool.png" alt="icon" /> ${l.preschool}`;
-      preschoolBtn.onclick = () => location.href = '/' + toSlug(l.preschool);
-
+      const title = document.getElementById('title');
+      const toggleBtn = document.querySelector('.lang-toggle');
+      const preschoolContainer = document.getElementById('preschool');
       const menu = document.getElementById('menu');
+
+      title.textContent = lang === 'uk' ? 'Обери свій рівень' : 'Choose your level';
+      toggleBtn.textContent = lang === 'uk' ? 'EN' : 'UA';
       menu.innerHTML = '';
+      preschoolContainer.innerHTML = '';
 
-      for (let i = 1; i <= 9; i++) {
-        const label = `${i} ${l.class}`;
-        const slug = lang === 'uk' ? `${i}-${toSlug(l.class)}` : `grade-${i}`;
+      // Дошкільнята / Preschool
+      const preschool = document.createElement('a');
+      preschool.href = lang === 'uk' ? '/doszkilnyata' : 'https://learning-bbkf.vercel.app/';
+      preschool.className = 'btn';
+      preschool.innerHTML = `<img src="/icons/preschool.png" alt="icon" /> ${
+        lang === 'uk' ? 'Дошкільнята' : 'Preschool'
+      }`;
+      preschoolContainer.appendChild(preschool);
 
-        const btn = document.createElement('button');
-        btn.className = 'btn';
-        btn.innerHTML = `<img src="/icons/${i}.png" alt="icon for ${label}" /> ${label}`;
-        btn.onclick = () => location.href = `/${slug}`;
-        menu.appendChild(btn);
-      }
+      // Класи / Grades
+      const classItems = lang === 'uk'
+        ? [
+            { label: '1 клас', icon: '1.png', link: '/klas-1' },
+            { label: '2 клас', icon: '2.png', link: '/klas-2' },
+            { label: '3 клас', icon: '3.png', link: '/klas-3' },
+            { label: '4 клас', icon: '4.png', link: '/klas-4' },
+            { label: '5 клас', icon: '5.png', link: '/klas-5' },
+            { label: '6 клас', icon: '6.png', link: '/klas-6' },
+            { label: '7 клас', icon: '7.png', link: '/klas-7' },
+            { label: '8 клас', icon: '8.png', link: '/klas-8' },
+            { label: '9 клас', icon: '9.png', link: '/klas-9' }
+          ]
+        : [
+            { label: 'Grade 1', icon: '1.png', link: '/grade-1' },
+            { label: 'Grade 2', icon: '2.png', link: '/grade-2' },
+            { label: 'Grade 3', icon: '3.png', link: '/grade-3' },
+            { label: 'Grade 4', icon: '4.png', link: '/grade-4' },
+            { label: 'Grade 5', icon: '5.png', link: '/grade-5' },
+            { label: 'Grade 6', icon: '6.png', link: '/grade-6' },
+            { label: 'Grade 7', icon: '7.png', link: '/grade-7' },
+            { label: 'Grade 8', icon: '8.png', link: '/grade-8' },
+            { label: 'Grade 9', icon: '9.png', link: '/grade-9' }
+          ];
+
+      classItems.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.link;
+        a.className = 'btn';
+        a.innerHTML = `<img src="/icons/${item.icon}" alt="${item.label}" />${item.label}`;
+        menu.appendChild(a);
+      });
     }
 
     function toggleLanguage() {
