@@ -190,7 +190,6 @@
             padding: 0;
         }
 
-        /* Заголовок */
         .header {
             background: white;
             padding: 20px;
@@ -200,7 +199,6 @@
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Контейнер кнопок */
         .faq-container {
             display: flex;
             flex-wrap: wrap;
@@ -208,9 +206,10 @@
             gap: 20px;
             margin-top: 30px;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Декоровані кнопки */
         .faq-button {
             background: white;
             padding: 15px 20px;
@@ -224,6 +223,7 @@
             width: 250px;
             text-align: center;
             display: inline-block;
+            position: relative;
         }
 
         .faq-button:hover {
@@ -232,36 +232,82 @@
             transform: scale(1.05);
         }
 
-        /* Адаптація для мобільних пристроїв */
+        .faq-answer {
+            display: none;
+            font-size: 16px;
+            color: #333;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 10px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            z-index: 10;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .faq-button:hover .faq-answer {
+            display: block;
+            pointer-events: auto;
+        }
+
         @media (max-width: 768px) {
             .faq-container {
                 flex-direction: column;
                 align-items: center;
             }
+            .faq-answer {
+                width: 90%;
+                left: 5%;
+                transform: none;
+            }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- Заголовок -->
     <div class="header">
         FAQ для батьків
     </div>
 
-    <!-- Контейнер кнопок -->
     <div class="faq-container">
-        <button class="faq-button">Що таке наша платформа?</button>
-        <button class="faq-button">Як працює адаптивне навчання?</button>
-        <button class="faq-button">Як визначити стиль навчання моєї дитини?</button>
-        <button class="faq-button">Як відстежувати прогрес дитини?</button>
-        <button class="faq-button">Чи підходить методика для домашнього навчання?</button>
-        <button class="faq-button">Чи потрібен контроль з боку батьків?</button>
-        <button class="faq-button">Чи підходить ця методика для дітей з аутизмом, СДУГ, дислексією?</button>
-        <button class="faq-button">Технічні питання: які пристрої підтримуються?</button>
-        <button class="faq-button">Чи можна змінити стиль навчання?</button>
-        <button class="faq-button">Що робити, якщо дитина не хоче вчитися?</button>
-        <button class="faq-button">Як звернутися в техпідтримку?</button>
+        <div class="faq-button">Що таке наша платформа?
+            <div class="faq-answer">Це онлайн-середовище для персоналізованого навчання дітей з урахуванням їхніх потреб.</div>
+        </div>
+        <div class="faq-button">Як працює адаптивне навчання?
+            <div class="faq-answer">Система підлаштовується під темп і стиль навчання дитини в реальному часі.</div>
+        </div>
+        <div class="faq-button">Як визначити стиль навчання моєї дитини?
+            <div class="faq-answer">Після короткого тесту ми пропонуємо оптимальний варіант навчання.</div>
+        </div>
+        <div class="faq-button">Як відстежувати прогрес дитини?
+            <div class="faq-answer">Батьки можуть переглядати звіти про успішність та активність дитини в особистому кабінеті.</div>
+        </div>
+        <div class="faq-button">Чи підходить методика для домашнього навчання?
+            <div class="faq-answer">Так, платформа ідеально підходить для індивідуального або домашнього навчання.</div>
+        </div>
+        <div class="faq-button">Чи потрібен контроль з боку батьків?
+            <div class="faq-answer">Контроль не обов’язковий, але рекомендується супровід для кращого результату.</div>
+        </div>
+        <div class="faq-button">Чи підходить ця методика для дітей з аутизмом, СДУГ, дислексією?
+            <div class="faq-answer">Так, ми розробили контент саме для нейровідмінних дітей.</div>
+        </div>
+        <div class="faq-button">Технічні питання: які пристрої підтримуються?
+            <div class="faq-answer">Платформа працює на смартфонах, планшетах і комп’ютерах з інтернетом.</div>
+        </div>
+        <div class="faq-button">Чи можна змінити стиль навчання?
+            <div class="faq-answer">Так, у налаштуваннях можна змінити стиль у будь-який момент.</div>
+        </div>
+        <div class="faq-button">Що робити, якщо дитина не хоче вчитися?
+            <div class="faq-answer">Ми пропонуємо мотиваційні елементи: героїв, бейджі, ігрові завдання.</div>
+        </div>
+        <div class="faq-button">Як звернутися в техпідтримку?
+            <div class="faq-answer">Через форму зворотного зв’язку або написати нам у чат на сайті.</div>
+        </div>
     </div>
 
 </body>
