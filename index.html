@@ -15,7 +15,7 @@
             text-align: center;
             overflow-x: hidden;
             position: relative;
-            font-size: 1.7em; /* Збільшено розмір шрифту */
+            font-size: 1.7em;
         }
         .navbar {
             display: flex;
@@ -37,6 +37,25 @@
             font-size: 1em;
             font-weight: 600;
             margin: 0 15px;
+        }
+        .lang-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 14px 24px;
+            font-size: 1em;
+            border-radius: 50px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff69b4, #ff85a2);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lang-switch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
         }
         .hero {
             margin-top: 120px;
@@ -83,6 +102,8 @@
     </style>
 </head>
 <body>
+    <a href="Educational-methods-en.html" class="lang-switch">EN</a>
+
     <div class="navbar">
         <a href="index.html">Головна</a>
         <a href="HowItWorks.html">Як це працює?</a>
@@ -99,6 +120,7 @@
     </div>
 </body>
 </html>
+
 
 <!DOCTYPE html>
 <html lang="uk">
