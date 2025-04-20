@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Особистий кабінет</title>
   <style>
     body {
@@ -30,6 +30,21 @@
 
     .navbar a.active {
       color: #843d9f;
+    }
+
+    .to-dashboard {
+      display: block;
+      margin: 10px auto 0;
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      background-color: #dcb7f9;
+      color: #4b007b;
+      padding: 8px 16px;
+      border-radius: 20px;
+      width: fit-content;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .profile {
@@ -148,6 +163,8 @@
     <a href="holovna.html" class="active">👤 Мій кабінет</a>
   </div>
 
+  <a href="holovna.html" class="to-dashboard">⬅️ Повернутися в особистий кабінет</a>
+
   <div class="profile">
     <div class="left">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Icon-round-Question_mark.jpg" alt="Аватар" />
@@ -211,7 +228,7 @@
           <div style="font-size: 12px;">${b.desc}</div>
         `;
         badgeList.appendChild(badge);
-        totalPoints += 100; // кожен бейдж = 100 балів
+        totalPoints += 100;
       }
     });
 
