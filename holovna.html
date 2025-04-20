@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Особистий кабінет</title>
   <style>
     body {
@@ -10,7 +10,6 @@
       font-family: "Segoe UI", sans-serif;
       background-color: #e9d0ff;
     }
-
     .navbar {
       display: flex;
       justify-content: space-around;
@@ -22,16 +21,13 @@
       font-size: 18px;
       font-weight: bold;
     }
-
     .navbar a {
       text-decoration: none;
       color: black;
     }
-
     .navbar a.active {
       color: #843d9f;
     }
-
     .to-dashboard {
       display: block;
       margin: 10px auto 0;
@@ -46,7 +42,6 @@
       width: fit-content;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
     .profile {
       background-color: #d9c4fc;
       border-radius: 30px;
@@ -58,31 +53,25 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
-
     .left {
       width: 35%;
       text-align: center;
     }
-
     .left img {
       width: 100px;
       margin-bottom: 10px;
     }
-
     .left p {
       font-size: 18px;
       font-weight: bold;
     }
-
     .middle {
       width: 60%;
     }
-
     .middle h1 {
       text-align: center;
       font-size: 28px;
     }
-
     .middle .info {
       background-color: #f6ddf9;
       border-radius: 20px;
@@ -93,11 +82,9 @@
       align-items: center;
       gap: 10px;
     }
-
     .style-options {
       margin-top: 20px;
     }
-
     .style-option {
       background: #e0dfff;
       margin: 10px auto;
@@ -109,29 +96,24 @@
       gap: 10px;
       font-weight: bold;
     }
-
     .right {
       width: 100%;
       text-align: center;
       margin-top: 20px;
     }
-
     .assistant-img {
       width: 120px;
     }
-
     .assistant-name {
       font-weight: bold;
       font-size: 18px;
     }
-
     .badges {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 30px;
     }
-
     .badge {
       background: white;
       border-radius: 15px;
@@ -141,12 +123,10 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       width: 130px;
     }
-
     .badge img {
       width: 60px;
       height: 60px;
     }
-
     .points {
       text-align: center;
       font-size: 20px;
@@ -154,16 +134,19 @@
       font-weight: bold;
       color: #6d36a8;
     }
+    .progress-block {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
-
   <div class="navbar">
     <a href="EduStuff.html">📘 Навчальні матеріали</a>
     <a href="holovna.html" class="active">👤 Мій кабінет</a>
   </div>
-
-  <a href="MyCourses.html" class="to-dashboard">⬅️ Повернутися до навчання</a>
+  <a href="MyCourses.html" class="to-dashboard">⬅️ Повернутися в особистий кабінет</a>
 
   <div class="profile">
     <div class="left">
@@ -175,14 +158,12 @@
         <div class="style-option">🎬 Відео</div>
       </div>
     </div>
-
     <div class="middle">
       <h1>Мій прогрес</h1>
       <div class="info">📚 Стиль навчання: Візуальний</div>
       <div class="info">🧑‍💻 Помічник: Флік</div>
       <div class="info">⭐ Рівень: Новачок</div>
     </div>
-
     <div class="right">
       <img src="flik (1).png" alt="Флік" class="assistant-img"/>
       <div class="assistant-name">Флік</div>
@@ -193,13 +174,16 @@
     🎯 Нараховано балів: <span id="points">0</span>
   </div>
 
-  <div class="badges" id="badgeList">
-    <!-- Бейджі будуть завантажуватись динамічно -->
+  <div class="progress-block">
+    🧩 Puzzle Completion: <span id="puzzleProgress">0%</span>
   </div>
+
+  <div class="badges" id="badgeList"></div>
 
   <script>
     const badgeList = document.getElementById('badgeList');
     const points = document.getElementById('points');
+    const puzzleProgress = document.getElementById('puzzleProgress');
 
     const badges = [
       {
@@ -233,7 +217,8 @@
     });
 
     points.textContent = totalPoints;
+    const puzzlePercent = localStorage.getItem('points_puzzleRus') || 0;
+    puzzleProgress.textContent = `${puzzlePercent}%`;
   </script>
-
 </body>
 </html>
