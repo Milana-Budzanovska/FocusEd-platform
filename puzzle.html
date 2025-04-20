@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz — History of Rus'</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: #f4f0ff;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .question {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .question h3 {
+      color: #5b2390;
+    }
+    .options button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #e4d4ff;
+    }
+    .options button:hover {
+      background-color: #ceb2ff;
+    }
+    .result {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: #dff5e1;
+      border-radius: 12px;
+    }
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 2px;
+      margin: 30px auto;
+      width: max-content;
+      background: #ccc;
+      border: 6px solid #a883dc;
+      border-radius: 12px;
+    }
+    .piece {
+      width: 100px;
+      height: 100px;
+      background-image: url('golden-gate-grid.jpg');
+      background-size: 300px 300px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .faded {
+      opacity: 0.3 !important;
+    }
+    .funfact {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff7d1;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 18px;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>📜 Quiz: History of Kyivan Rus'</h1>
+  <div id="quiz-container"></div>
+
+  <div class="result" id="result">
+    <h2>Your Puzzle</h2>
+    <div class="puzzle-grid" id="puzzle"></div>
+    <div class="funfact" id="fact">
+      🏰 Golden Gate was part of Kyiv's medieval defensive walls, originally built in the 11th century and reconstructed in 1982 to commemorate the city's 1500th anniversary.
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "Who was the Grand Prince of Kyiv during the Christianization of Rus'?",
+        options: ["Yaroslav the Wise", "Volodymyr the Great", "Oleh of Novgorod"],
+        answer: 1
+      },
+      {
+        q: "What religion did Volodymyr the Great adopt for Rus'?",
+        options: ["Islam", "Judaism", "Christianity"],
+        answer: 2
+      },
+      {
+        q: "What city was the capital of Kyivan Rus'?",
+        options: ["Moscow", "Kyiv", "Lviv"],
+        answer: 1
+      },
+      {
+        q: "What is the name of the ancient law code of Rus'?",
+        options: ["Russkaya Pravda", "Yasa", "Codex Slavi"],
+        answer: 0
+      },
+      {
+        q: "What year is traditionally considered the Christianization of Rus'?",
+        options: ["988", "1240", "1011"],
+        answer: 0
+      },
+      {
+        q: "Who was known as the 'father-in-law of Europe'?",
+        options: ["Volodymyr", "Yaroslav the Wise", "Ihor"],
+        answer: 1
+      },
+      {
+        q: "Which tribe formed the core of Kyivan Rus'?",
+        options: ["Polans", "Drevlians", "Scythians"],
+        answer: 0
+      },
+      {
+        q: "What famous gate was built in Kyiv as a symbol of power?",
+        options: ["Silver Gate", "Golden Gate", "Western Gate"],
+        answer: 1
+      },
+      {
+        q: "Which river was vital for trade in Rus'?",
+        options: ["Don", "Volga", "Dnieper"],
+        answer: 2
+      }
+    ];
+
+    let current = 0;
+    let correct = 0;
+
+    const container = document.getElementById('quiz-container');
+    const resultBox = document.getElementById('result');
+    const puzzle = document.getElementById('puzzle');
+    const fact = document.getElementById('fact');
+
+    function showQuestion(index) {
+      const q = questions[index];
+      container.innerHTML = `
+        <div class="question">
+          <h3>${q.q}</h3>
+          <div class="options">
+            ${q.options.map((opt, i) => `<button onclick="checkAnswer(${i})">${opt}</button>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function checkAnswer(selected) {
+      if (selected === questions[current].answer) correct++;
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      container.innerHTML = '';
+      resultBox.style.display = 'block';
+      const percent = (correct / questions.length) * 100;
+
+      let delay = 0;
+      for (let i = 0; i < 9; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'piece';
+        piece.style.backgroundPosition = `-${(i % 3) * 100}px -${Math.floor(i / 3) * 100}px`;
+        puzzle.appendChild(piece);
+
+        setTimeout(() => {
+          if (i < correct) {
+            piece.classList.add('revealed');
+          } else if (percent >= 70) {
+            piece.classList.add('revealed', 'faded');
+          }
+          if (i === 8) {
+            setTimeout(() => fact.style.display = 'block', 600);
+          }
+        }, delay);
+        delay += 200;
+      }
+    }
+
+    showQuestion(current);
+  </script>
+</body>
+</html>
