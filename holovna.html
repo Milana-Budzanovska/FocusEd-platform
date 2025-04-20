@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -27,20 +27,6 @@
     }
     .navbar a.active {
       color: #843d9f;
-    }
-    .to-dashboard {
-      display: block;
-      margin: 10px auto 0;
-      text-align: center;
-      font-size: 16px;
-      text-decoration: none;
-      font-weight: bold;
-      background-color: #dcb7f9;
-      color: #4b007b;
-      padding: 8px 16px;
-      border-radius: 20px;
-      width: fit-content;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .profile {
       background-color: #d9c4fc;
@@ -108,12 +94,6 @@
       font-weight: bold;
       font-size: 18px;
     }
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 30px;
-    }
     .badge {
       background: white;
       border-radius: 15px;
@@ -127,98 +107,77 @@
       width: 60px;
       height: 60px;
     }
-    .points {
+    .progress {
       text-align: center;
+      margin-top: 20px;
       font-size: 20px;
-      margin-top: 30px;
       font-weight: bold;
-      color: #6d36a8;
     }
-    .progress-block {
+    .back-button {
+      display: block;
       text-align: center;
       margin-top: 10px;
-      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      background: #dcb7f9;
+      color: #4b007b;
+      padding: 10px 20px;
+      border-radius: 20px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
   <div class="navbar">
     <a href="EduStuff.html">📘 Навчальні матеріали</a>
+    <a href="MyCourses.html">📂 Мої курси</a>
     <a href="holovna.html" class="active">👤 Мій кабінет</a>
   </div>
-  <a href="MyCourses.html" class="to-dashboard">⬅️ Повернутися в особистий кабінет</a>
 
   <div class="profile">
     <div class="left">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Icon-round-Question_mark.jpg" alt="Аватар" />
       <p>ученик/учениця</p>
       <div class="style-options">
-        <div class="style-option">👁️ Візуал</div>
-        <div class="style-option">🎧 Аудіо</div>
-        <div class="style-option">🎬 Відео</div>
+        <div class="style-option">🍄 Візуал</div>
+        <div class="style-option">🍄 Аудіо</div>
+        <div class="style-option">🍄 Відео</div>
       </div>
     </div>
+
     <div class="middle">
-      <h1>Мій прогрес</h1>
-      <div class="info">📚 Стиль навчання: Візуальний</div>
-      <div class="info">🧑‍💻 Помічник: Флік</div>
-      <div class="info">⭐ Рівень: Новачок</div>
+      <h1>ФІП</h1>
+      <div class="info">🍄 Стиль навчання</div>
+      <div class="info">🍄 Помічник у навчанні</div>
+      <div class="info" id="puzzleProgress">🧩 Прогрес тесту: 0%</div>
     </div>
+
     <div class="right">
-      <img src="flik (1).png" alt="Флік" class="assistant-img"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Флік" class="assistant-img"/>
       <div class="assistant-name">Флік</div>
     </div>
   </div>
 
-  <div class="points">
-    🎯 Нараховано балів: <span id="points">0</span>
+  <div class="progress">
+    <div class="badge" id="puzzleBadge" style="display: none;">
+      <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="badge" />
+      <div><strong>🧩 Puzzle Master</strong></div>
+      <div style="font-size: 12px;">Completed your first knowledge puzzle!</div>
+    </div>
   </div>
 
-  <div class="progress-block">
-    🧩 Puzzle Completion: <span id="puzzleProgress">0%</span>
-  </div>
-
-  <div class="badges" id="badgeList"></div>
+  <a href="MyCourses.html" class="back-button">📚 Назад до курсів</a>
 
   <script>
-    const badgeList = document.getElementById('badgeList');
-    const points = document.getElementById('points');
-    const puzzleProgress = document.getElementById('puzzleProgress');
+    const progress = localStorage.getItem('points_puzzleRus') || '0';
+    document.getElementById('puzzleProgress').innerHTML = `🧩 Прогрес тесту: ${progress}%`;
 
-    const badges = [
-      {
-        key: 'badge_firstPuzzle',
-        name: '🧩 Puzzle Master',
-        desc: 'Completed your first knowledge puzzle!',
-        icon: 'https://cdn-icons-png.flaticon.com/512/685/685655.png'
-      },
-      {
-        key: 'badge_audioLearner',
-        name: '🎧 Audio Explorer',
-        desc: 'Completed 5 audio lessons!',
-        icon: 'https://cdn-icons-png.flaticon.com/512/727/727245.png'
-      }
-    ];
-
-    let totalPoints = 0;
-
-    badges.forEach(b => {
-      if (localStorage.getItem(b.key) === 'true') {
-        const badge = document.createElement('div');
-        badge.className = 'badge';
-        badge.innerHTML = `
-          <img src="${b.icon}" alt="badge" />
-          <div><strong>${b.name}</strong></div>
-          <div style="font-size: 12px;">${b.desc}</div>
-        `;
-        badgeList.appendChild(badge);
-        totalPoints += 100;
-      }
-    });
-
-    points.textContent = totalPoints;
-    const puzzlePercent = localStorage.getItem('points_puzzleRus') || 0;
-    puzzleProgress.textContent = `${puzzlePercent}%`;
+    if (localStorage.getItem('badge_firstPuzzle') === 'true') {
+      document.getElementById('puzzleBadge').style.display = 'inline-block';
+    }
   </script>
 </body>
 </html>
