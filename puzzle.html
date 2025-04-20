@@ -85,6 +85,20 @@
       font-size: 18px;
       animation: fadeIn 1s ease forwards;
     }
+    .badge-toast {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #a6f0c6;
+      color: #123c26;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -102,6 +116,8 @@
       🏰 Golden Gate was part of Kyiv's medieval defensive walls, originally built in the 11th century and reconstructed in 1982 to commemorate the city's 1500th anniversary.
     </div>
   </div>
+
+  <div class="badge-toast" id="badgeToast">🏅 You earned a new badge: Puzzle Master!</div>
 
   <script>
     const questions = [
@@ -159,6 +175,7 @@
     const resultBox = document.getElementById('result');
     const puzzle = document.getElementById('puzzle');
     const fact = document.getElementById('fact');
+    const toast = document.getElementById('badgeToast');
 
     function showQuestion(index) {
       const q = questions[index];
@@ -182,10 +199,24 @@
       }
     }
 
+    function showToast(message) {
+      toast.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 4000);
+    }
+
     function showResult() {
       container.innerHTML = '';
       resultBox.style.display = 'block';
       const percent = (correct / questions.length) * 100;
+
+      localStorage.setItem('points_puzzleRus', Math.round(percent));
+      localStorage.setItem('puzzle_kyiv_completed', 'true');
+
+      if (percent >= 70) {
+        localStorage.setItem('badge_firstPuzzle', 'true');
+        showToast('🏅 You earned a new badge: Puzzle Master!');
+      }
 
       let delay = 0;
       for (let i = 0; i < 9; i++) {
