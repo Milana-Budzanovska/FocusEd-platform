@@ -22,10 +22,11 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
     .card {
+      position: relative;
       background-color: #ffffffcc;
       border-radius: 20px;
       padding: 30px 20px;
@@ -48,6 +49,25 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: #5a5a9c;
+    }
+    .tooltip {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff6e0;
+      color: #444;
+      font-size: 0.85rem;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: none;
+      z-index: 10;
+      width: 90%;
+      max-width: 240px;
+    }
+    .card:hover .tooltip {
+      display: block;
     }
     .lang-toggle {
       position: fixed;
@@ -102,36 +122,36 @@
 
     const subjects = {
       uk: [
-        { label: 'Математика', icon: 'math.png', link: '/math7' },
-        { label: 'Українська мова', icon: 'ukr.png', link: '/ukrainian7' },
-        { label: 'Українська література', icon: 'literature.png', link: '/lit7' },
-        { label: 'Англійська мова', icon: 'english.png', link: '/english7' },
-        { label: 'Історія України', icon: 'history.png', link: 'puzzle.html' },
-        { label: 'Всесвітня історія', icon: 'worldhistory.png', link: '/worldhistory7' },
-        { label: 'Біологія', icon: 'biology.png', link: '/biology7' },
-        { label: 'Географія', icon: 'geo.png', link: '/geography7' },
-        { label: 'Фізика', icon: 'physics.png', link: '/physics7' },
-        { label: 'Хімія', icon: 'chemistry.png', link: '/chemistry7' },
-        { label: 'Інформатика', icon: 'informatics.png', link: '/it7' },
-        { label: 'Мистецтво', icon: 'art.png', link: '/art7' },
-        { label: 'Трудове навчання', icon: 'labor.png', link: '/labor7' },
-        { label: 'Основи здоров’я', icon: 'health.png', link: '/health7' }
+        { label: 'Математика', icon: 'math.png', link: '/math7', desc: 'Розвʼязування рівнянь, пропорції, відсотки' },
+        { label: 'Українська мова', icon: 'ukr.png', link: '/ukrainian7', desc: 'Орфографія, пунктуація, частини мови' },
+        { label: 'Українська література', icon: 'literature.png', link: '/lit7', desc: 'Класика, вірші, аналіз текстів' },
+        { label: 'Англійська мова', icon: 'english.png', link: '/english7', desc: 'Граматика, читання, словниковий запас' },
+        { label: 'Історія України', icon: 'history.png', link: 'puzzle.html', desc: 'Київська Русь, Козаччина, Незалежність' },
+        { label: 'Всесвітня історія', icon: 'worldhistory.png', link: '/worldhistory7', desc: 'Стародавній світ, Середньовіччя' },
+        { label: 'Біологія', icon: 'biology.png', link: '/biology7', desc: 'Клітини, організми, анатомія людини' },
+        { label: 'Географія', icon: 'geo.png', link: '/geography7', desc: 'Материки, клімат, економіка країн' },
+        { label: 'Фізика', icon: 'physics.png', link: '/physics7', desc: 'Сили, енергія, закони Ньютона' },
+        { label: 'Хімія', icon: 'chemistry.png', link: '/chemistry7', desc: 'Атоми, молекули, хімічні реакції' },
+        { label: 'Інформатика', icon: 'informatics.png', link: '/it7', desc: 'Алгоритми, графіка, безпека онлайн' },
+        { label: 'Мистецтво', icon: 'art.png', link: '/art7', desc: 'Живопис, скульптура, дизайн' },
+        { label: 'Трудове навчання', icon: 'labor.png', link: '/labor7', desc: 'Практичні навички, створення виробів' },
+        { label: 'Основи здоров’я', icon: 'health.png', link: '/health7', desc: 'Гігієна, безпека, здоровий спосіб життя' }
       ],
       en: [
-        { label: 'Math', icon: 'math.png', link: '/math7' },
-        { label: 'Ukrainian Language', icon: 'ukr.png', link: '/ukrainian7' },
-        { label: 'Ukrainian Literature', icon: 'literature.png', link: '/lit7' },
-        { label: 'English', icon: 'english.png', link: '/english7' },
-        { label: 'History of Ukraine', icon: 'history.png', link: '/history7' },
-        { label: 'World History', icon: 'worldhistory.png', link: '/worldhistory7' },
-        { label: 'Biology', icon: 'biology.png', link: '/biology7' },
-        { label: 'Geography', icon: 'geo.png', link: '/geography7' },
-        { label: 'Physics', icon: 'physics.png', link: '/physics7' },
-        { label: 'Chemistry', icon: 'chemistry.png', link: '/chemistry7' },
-        { label: 'Informatics', icon: 'informatics.png', link: '/it7' },
-        { label: 'Art', icon: 'art.png', link: '/art7' },
-        { label: 'Labor Education', icon: 'labor.png', link: '/labor7' },
-        { label: 'Health Basics', icon: 'health.png', link: '/health7' }
+        { label: 'Math', icon: 'math.png', link: '/math7', desc: 'Equations, proportions, percentages' },
+        { label: 'Ukrainian Language', icon: 'ukr.png', link: '/ukrainian7', desc: 'Grammar, spelling, syntax' },
+        { label: 'Ukrainian Literature', icon: 'literature.png', link: '/lit7', desc: 'Poetry, prose, literary analysis' },
+        { label: 'English', icon: 'english.png', link: '/english7', desc: 'Vocabulary, reading, grammar' },
+        { label: 'History of Ukraine', icon: 'history.png', link: '/history7', desc: 'Kyivan Rus, Cossacks, Independence' },
+        { label: 'World History', icon: 'worldhistory.png', link: '/worldhistory7', desc: 'Ancient world, Middle Ages' },
+        { label: 'Biology', icon: 'biology.png', link: '/biology7', desc: 'Cells, organisms, human anatomy' },
+        { label: 'Geography', icon: 'geo.png', link: '/geography7', desc: 'Continents, climate, countries' },
+        { label: 'Physics', icon: 'physics.png', link: '/physics7', desc: 'Forces, energy, Newton’s laws' },
+        { label: 'Chemistry', icon: 'chemistry.png', link: '/chemistry7', desc: 'Atoms, molecules, reactions' },
+        { label: 'Informatics', icon: 'informatics.png', link: '/it7', desc: 'Algorithms, graphics, security' },
+        { label: 'Art', icon: 'art.png', link: '/art7', desc: 'Painting, sculpture, design' },
+        { label: 'Labor Education', icon: 'labor.png', link: '/labor7', desc: 'Practical skills, handicrafts' },
+        { label: 'Health Basics', icon: 'health.png', link: '/health7', desc: 'Hygiene, safety, lifestyle' }
       ]
     };
 
@@ -148,7 +168,11 @@
         const card = document.createElement('div');
         card.className = 'card';
         card.onclick = () => location.href = subj.link;
-        card.innerHTML = `<img src="/icons/${subj.icon}" alt="${subj.label}"><span>${subj.label}</span>`;
+        card.innerHTML = `
+          <img src="/icons/${subj.icon}" alt="${subj.label}">
+          <span>${subj.label}</span>
+          <div class="tooltip">${subj.desc}</div>
+        `;
         grid.appendChild(card);
       });
     }
