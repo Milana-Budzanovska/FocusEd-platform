@@ -99,6 +99,20 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       z-index: 999;
     }
+    .to-dashboard {
+      display: block;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      background-color: #dcb7f9;
+      color: #4b007b;
+      padding: 10px 20px;
+      border-radius: 20px;
+      width: fit-content;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -118,6 +132,7 @@
   </div>
 
   <div class="badge-toast" id="badgeToast">🏅 You earned a new badge: Puzzle Master!</div>
+  <a href="holovna.html" class="to-dashboard">⬅️ Back to Dashboard</a>
 
   <script>
     const questions = [
