@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Весела математика</title>
   <style>
+    @font-face {
+      font-family: 'OpenDyslexic';
+      src: url('fonts/woff/OpenDyslexic-Regular.woff') format('woff');
+    }
     body {
-      font-family: 'Comic Sans MS', 'OpenDyslexic', sans-serif;
+      font-family: 'OpenDyslexic', sans-serif;
       background: linear-gradient(to bottom right, #fdf6ff, #e4faff);
       color: #333;
       padding: 30px;
@@ -44,21 +48,27 @@
       font-size: 1.1rem;
       background-color: #fdfcff;
     }
-    .toggle-font, .toggle-lang {
+    .toggle-controls {
       position: fixed;
       top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-controls button {
       padding: 10px 16px;
       border-radius: 12px;
       cursor: pointer;
       font-weight: bold;
-    }
-    .toggle-font {
-      right: 20px;
-      background: #d3e2ff;
+      border: none;
     }
     .toggle-lang {
-      right: 160px;
       background: #ffd3d3;
+    }
+    .toggle-font {
+      background: #d3e2ff;
     }
     #assistant {
       position: fixed;
@@ -77,63 +87,15 @@
   </style>
 </head>
 <body>
-  <button class="toggle-lang" onclick="toggleLang()">EN</button>
-  <button class="toggle-font" onclick="toggleFont()">Шрифт: звичайний</button>
+  <div class="toggle-controls">
+    <button class="toggle-lang" onclick="toggleLang()">EN</button>
+    <button class="toggle-font" onclick="toggleFont()">Шрифт: звичайний</button>
+  </div>
+
   <h1 id="title">Весела математика</h1>
 
-  <div class="section" id="section1">
-    <h2>1. Числа в межах 1000</h2>
-    <div class="task"><label>Запиши число 385 як суму сотень, десятків і одиниць:</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Скільки сотень, десятків і одиниць у числі 742?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Яке найбільше число можна скласти з цифр 3, 8, 1?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Яке число стоїть перед 600?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Обери число, яке більше за 479, але менше за 500:</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Розташуй числа в порядку зростання: 812, 298, 730, 499:</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Яке число треба вставити: 699, ___, 701?</label><input type="text" onblur="checkInput(this)"></div>
-  </div>
-
-  <div class="section" id="section2">
-    <h2>2. Додавання і віднімання</h2>
-    <div class="task"><label>425 + 376 =</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>725 - 348 =</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>314 + 200 =</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Скільки треба відняти від 700, щоб отримати 385?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Сума двох чисел — 900. Одне з них — 550. Знайди інше.</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>1000 - 1 =</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Склади приклад на додавання, у якому відповідь — 638:</label><input type="text" onblur="checkInput(this)"></div>
-  </div>
-
-  <div class="section" id="section3">
-    <h2>3. Множення і ділення на 2–5</h2>
-    <div class="task"><label>4 × 5 =</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>20 : 4 =</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>У коробці 3 ряди по 4 кульки. Скільки всього кульок?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>У дітей по 5 цукерок. Скільки всього цукерок у 6 дітей?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Склади приклад на ділення, у якому відповідь — 3.</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Скільки потрібно по 2 грн, щоб назбирати 20 грн?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Поділи 18 яблук між 3 кошиками. Скільки в кожному?</label><input type="text" onblur="checkInput(this)"></div>
-  </div>
-
-  <div class="section" id="section4">
-    <h2>4. Числовий ряд, логіка</h2>
-    <div class="task"><label>Продовж ряд: 110, 120, 130, _, _</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Знайди помилку в ряду: 204, 214, 224, 234, 255</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Яке число стоїть між 599 і 601?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Закінчи закономірність: 2, 4, 8, 16, ___</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Яке число йде перед 321 і після 319?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Вибери зайве число: 12, 14, 16, 19, 18</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Знайди закономірність: 1000, 900, 800, _, _</label><input type="text" onblur="checkInput(this)"></div>
-  </div>
-
-  <div class="section" id="section5">
-    <h2>5. Одиниці довжини</h2>
-    <div class="task"><label>Скільки міліметрів у 7 сантиметрах?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Який предмет довший: ручка 15 см чи лінійка 30 см?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Знайди довжину червоного відрізка (зображення):</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Виміряй і запиши довжину олівця на малюнку:</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Яка довжина 3 однакових стрічок по 25 см кожна?</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>Обери правильну відповідь: 1 м = ___ см.</label><input type="text" onblur="checkInput(this)"></div>
-    <div class="task"><label>У Віки стрічка 1 м, у Марка — 90 см. Хто має довшу?</label><input type="text" onblur="checkInput(this)"></div>
+  <div id="content">
+    <!-- Сюди підставляється контент мовами -->
   </div>
 
   <div id="assistant">
@@ -142,20 +104,110 @@
   </div>
 
   <script>
-    let dysFont = false;
     let isUkr = true;
+    let dysFont = false;
 
-    function toggleFont() {
-      dysFont = !dysFont;
-      document.body.style.fontFamily = dysFont ? 'OpenDyslexic, sans-serif' : 'Comic Sans MS, sans-serif';
-      document.querySelector('.toggle-font').textContent = 'Шрифт: ' + (dysFont ? 'дислексиків' : 'звичайний');
-    }
+    const contentUA = `
+      <div class="section"><h2>1. Числа в межах 1000</h2>
+        <div class="task"><label>Запиши число 385 як суму сотень, десятків і одиниць:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Скільки сотень, десятків і одиниць у числі 742?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Яке найбільше число можна скласти з цифр 3, 8, 1?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Яке число стоїть перед 600?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Обери число, яке більше за 479, але менше за 500:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Розташуй числа в порядку зростання: 812, 298, 730, 499:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Яке число треба вставити: 699, ___, 701?</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>2. Додавання і віднімання</h2>
+        <div class="task"><label>425 + 376 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>725 - 348 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>314 + 200 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Скільки треба відняти від 700, щоб отримати 385?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Сума двох чисел — 900. Одне з них — 550. Знайди інше.</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>1000 - 1 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Склади приклад на додавання, у якому відповідь — 638:</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>3. Множення і ділення на 2–5</h2>
+        <div class="task"><label>4 × 5 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>20 : 4 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>У коробці 3 ряди по 4 кульки. Скільки всього кульок?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>У дітей по 5 цукерок. Скільки всього цукерок у 6 дітей?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Склади приклад на ділення, у якому відповідь — 3.</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Скільки потрібно по 2 грн, щоб назбирати 20 грн?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Поділи 18 яблук між 3 кошиками. Скільки в кожному?</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>4. Числовий ряд, логіка</h2>
+        <div class="task"><label>Продовж ряд: 110, 120, 130, _, _</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Знайди помилку в ряду: 204, 214, 224, 234, 255</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Яке число стоїть між 599 і 601?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Закінчи закономірність: 2, 4, 8, 16, ___</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Яке число йде перед 321 і після 319?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Вибери зайве число: 12, 14, 16, 19, 18</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Знайди закономірність: 1000, 900, 800, _, _</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>5. Одиниці довжини</h2>
+        <div class="task"><label>Скільки міліметрів у 7 сантиметрах?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Який предмет довший: ручка 15 см чи лінійка 30 см?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Знайди довжину червоного відрізка (зображення):</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Виміряй і запиши довжину олівця на малюнку:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Яка довжина 3 однакових стрічок по 25 см кожна?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Обери правильну відповідь: 1 м = ___ см.</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>У Віки стрічка 1 м, у Марка — 90 см. Хто має довшу?</label><input type="text" onblur="checkInput(this)"></div>
+      </div>`;
+
+    const contentEN = contentUA
+      .replace('Весела математика', 'Fun Math')
+      <div class="section"><h2>2. Addition and Subtraction</h2>
+  <div class="task"><label>425 + 376 =</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>725 - 348 =</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>314 + 200 =</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>How much needs to be subtracted from 700 to get 385?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>The sum of two numbers is 900. One of them is 550. Find the other.</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>1000 - 1 =</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Create an addition example that equals 638:</label><input type="text" onblur="checkInput(this)"></div>
+</div>
+
+<div class="section"><h2>3. Multiplication and Division by 2–5</h2>
+  <div class="task"><label>4 × 5 =</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>20 ÷ 4 =</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>There are 3 rows of 4 balls in a box. How many balls in total?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Each child has 5 candies. How many candies do 6 children have?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Create a division example where the result is 3:</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>How many 2 UAH coins are needed to make 20 UAH?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Divide 18 apples among 3 baskets. How many in each?</label><input type="text" onblur="checkInput(this)"></div>
+</div>
+
+<div class="section"><h2>4. Number Sequences and Logic</h2>
+  <div class="task"><label>Continue the sequence: 110, 120, 130, _, _</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Find the error in the sequence: 204, 214, 224, 234, 255</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>What number is between 599 and 601?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Complete the pattern: 2, 4, 8, 16, ___</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>What number comes before 321 and after 319?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Choose the odd number: 12, 14, 16, 19, 18</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Find the pattern: 1000, 900, 800, _, _</label><input type="text" onblur="checkInput(this)"></div>
+</div>
+
+<div class="section"><h2>5. Units of Length</h2>
+  <div class="task"><label>How many millimeters are in 7 centimeters?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Which is longer: a 15 cm pen or a 30 cm ruler?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Find the length of the red line (image):</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Measure and write the length of the pencil in the picture:</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>What is the total length of 3 identical ribbons, each 25 cm?</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Select the correct answer: 1 meter = ___ cm.</label><input type="text" onblur="checkInput(this)"></div>
+  <div class="task"><label>Vika's ribbon is 1 meter, Mark's is 90 cm. Who has the longer one?</label><input type="text" onblur="checkInput(this)"></div>
+</div>
 
     function toggleLang() {
       isUkr = !isUkr;
-      document.querySelector('.toggle-lang').textContent = isUkr ? 'EN' : 'UA';
       document.getElementById('title').textContent = isUkr ? 'Весела математика' : 'Fun Math';
       document.getElementById('assistant-text').textContent = isUkr ? 'Привіт! Я твій помічник 😊' : 'Hi! I am your assistant 😊';
+      document.querySelector('.toggle-lang').textContent = isUkr ? 'EN' : 'UA';
+      document.getElementById('content').innerHTML = isUkr ? contentUA : contentEN;
+    }
+
+    function toggleFont() {
+      dysFont = !dysFont;
+      document.body.style.fontFamily = dysFont ? 'OpenDyslexic, sans-serif' : 'OpenDyslexic, sans-serif';
+      document.querySelector('.toggle-font').textContent = 'Шрифт: ' + (dysFont ? 'дислексиків' : 'звичайний');
     }
 
     function checkInput(input) {
@@ -169,6 +221,8 @@
         assistantText.textContent = isUkr ? 'Чудово! Ти стараєшся! 💡' : 'Great! You are trying! 💡';
       }
     }
+
+    document.getElementById('content').innerHTML = contentUA;
   </script>
 </body>
 </html>
