@@ -1,10 +1,22 @@
+/* Підключення шрифту OpenDyslexic */
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('/fonts/woff/OpenDyslexic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Загальні стилі */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #D2B2FF, #F1C4FF, #FFFFFF, #D2B2FF); /* Градієнт фон */
+    background: linear-gradient(to right, #D2B2FF, #F1C4FF, #FFFFFF, #D2B2FF);
     color: #333;
+}
+
+body.dyslexic {
+    font-family: 'OpenDyslexic', sans-serif;
 }
 
 /* Контейнер для центрального вирівнювання */
@@ -55,7 +67,7 @@ img {
     .container {
         max-width: 1200px;
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 елементи в ряд */
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
 
@@ -87,11 +99,10 @@ img {
     }
 
     img {
-        max-width: 80%; /* зменшуємо розмір зображень */
+        max-width: 80%;
         margin: 15px 0;
     }
 
-    /* Зміна макету для маленьких екранів */
     .section {
         margin-bottom: 20px;
     }
