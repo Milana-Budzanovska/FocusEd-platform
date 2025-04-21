@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Особистий кабінет</title>
   <style>
+    @font-face {
+      font-family: 'OpenDyslexic';
+      src: url('fonts/woff/OpenDyslexic-Regular.woff') format('woff');
+    }
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
@@ -27,6 +31,28 @@
     }
     .navbar a.active {
       color: #843d9f;
+    }
+    .toggle-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-controls button {
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .toggle-lang {
+      background-color: #ffd3d3;
+    }
+    .toggle-font {
+      background-color: #d3e2ff;
     }
     .profile {
       background-color: #d9c4fc;
@@ -165,6 +191,11 @@
   </style>
 </head>
 <body>
+  <div class="toggle-controls">
+    <button class="toggle-lang" onclick="location.href='holovnaEn.html'">EN Version</button>
+    <button class="toggle-font" onclick="toggleFont()">Шрифт: звичайний</button>
+  </div>
+
   <div class="navbar">
     <a href="EduStuff.html">📘 Навчальні матеріали</a>
     <a href="MyCourses.html">📂 Мої курси</a>
@@ -214,6 +245,7 @@
   <a href="MyCourses.html" class="back-button">📚 Назад до курсів</a>
 
   <script>
+    let dysFont = false;
     const progress = localStorage.getItem('points_puzzleRus') || '0';
     document.getElementById('puzzleProgress').innerHTML = `🧩 Прогрес тесту: ${progress}%`;
 
@@ -225,6 +257,12 @@
     function toggleGallery() {
       const gallery = document.getElementById('gallery');
       gallery.style.display = gallery.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleFont() {
+      dysFont = !dysFont;
+      document.body.style.fontFamily = dysFont ? 'OpenDyslexic, sans-serif' : 'Segoe UI, sans-serif';
+      document.querySelector('.toggle-font').textContent = dysFont ? 'Шрифт: дислексиків' : 'Шрифт: звичайний';
     }
   </script>
 </body>
