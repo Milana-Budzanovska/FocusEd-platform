@@ -5,12 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz — History of Rus'</title>
   <style>
+    @font-face {
+      font-family: 'OpenDyslexic';
+      src: url('fonts/woff/OpenDyslexic-Regular.woff') format('woff');
+    }
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'OpenDyslexic', Arial, sans-serif;
       text-align: center;
       background: #f4f0ff;
       margin: 0;
       padding: 40px 20px;
+    }
+    .top-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .top-controls button {
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .toggle-lang {
+      background-color: #ffd3d3;
+    }
+    .toggle-font {
+      background-color: #d3e2ff;
     }
     .question {
       background: #fff;
@@ -120,11 +146,16 @@
   </style>
 </head>
 <body>
-  <h1>📜 Quiz: History of Kyivan Rus'</h1>
+  <div class="top-controls">
+    <button class="toggle-lang" onclick="toggleLang()">UA</button>
+    <button class="toggle-font" onclick="toggleFont()">Font: Dyslexic</button>
+  </div>
+
+  <h1 id="quiz-title">📜 Quiz: History of Kyivan Rus'</h1>
   <div id="quiz-container"></div>
 
   <div class="result" id="result">
-    <h2>Your Puzzle</h2>
+    <h2 id="puzzle-title">Your Puzzle</h2>
     <div class="puzzle-grid" id="puzzle"></div>
     <div class="funfact" id="fact">
       🏰 Golden Gate was part of Kyiv's medieval defensive walls, originally built in the 11th century and reconstructed in 1982 to commemorate the city's 1500th anniversary.
@@ -183,8 +214,22 @@
       }
     ];
 
+    const ukrQuestions = [
+      { q: "Хто був Великим князем Київським під час хрещення Русі?", options: ["Ярослав Мудрий", "Володимир Великий", "Олег Новгородський"] },
+      { q: "Яку релігію прийняв Володимир Великий для Русі?", options: ["Іслам", "Юдаїзм", "Християнство"] },
+      { q: "Яке місто було столицею Київської Русі?", options: ["Москва", "Київ", "Львів"] },
+      { q: "Як називалася давня правова система Русі?", options: ["Руська Правда", "Яса", "Слов'янський кодекс"] },
+      { q: "Який рік традиційно вважається роком хрещення Русі?", options: ["988", "1240", "1011"] },
+      { q: "Хто мав прізвисько 'тесть Європи'?", options: ["Володимир", "Ярослав Мудрий", "Ігор"] },
+      { q: "Яке плем'я було ядром Київської Русі?", options: ["Поляни", "Древляни", "Скіфи"] },
+      { q: "Які відомі ворота побудували у Києві як символ могутності?", options: ["Срібні ворота", "Золоті ворота", "Західні ворота"] },
+      { q: "Яка річка була важливою для торгівлі в Русі?", options: ["Дон", "Волга", "Дніпро"] }
+    ];
+
     let current = 0;
     let correct = 0;
+    let isUkr = false;
+    let dysFont = true;
 
     const container = document.getElementById('quiz-container');
     const resultBox = document.getElementById('result');
@@ -193,7 +238,8 @@
     const toast = document.getElementById('badgeToast');
 
     function showQuestion(index) {
-      const q = questions[index];
+      const source = isUkr && ukrQuestions.length > index ? ukrQuestions : questions;
+      const q = source[index];
       container.innerHTML = `
         <div class="question">
           <h3>${q.q}</h3>
@@ -252,6 +298,27 @@
         }, delay);
         delay += 200;
       }
+    }
+
+    function toggleLang() {
+      isUkr = !isUkr;
+      document.querySelector('.toggle-lang').textContent = isUkr ? 'EN' : 'UA';
+      document.getElementById('quiz-title').textContent = isUkr ? '📜 Вікторина: Історія Київської Русі' : "📜 Quiz: History of Kyivan Rus'";
+      document.getElementById('puzzle-title').textContent = isUkr ? 'Твоя мозаїка' : 'Your Puzzle';
+      document.getElementById('fact').textContent = isUkr
+        ? '🏰 Золоті ворота були частиною оборонних мурів Києва в середньовіччі. Зведені в XI столітті, відбудовані в 1982 році до 1500-річчя міста.'
+        : '🏰 Golden Gate was part of Kyiv\'s medieval defensive walls, originally built in the 11th century and reconstructed in 1982 to commemorate the city\'s 1500th anniversary.';
+      current = 0;
+      correct = 0;
+      puzzle.innerHTML = '';
+      resultBox.style.display = 'none';
+      showQuestion(current);
+    }
+
+    function toggleFont() {
+      dysFont = !dysFont;
+      document.body.style.fontFamily = dysFont ? 'OpenDyslexic, sans-serif' : 'Arial, sans-serif';
+      document.querySelector('.toggle-font').textContent = 'Font: ' + (dysFont ? 'Dyslexic' : 'Regular');
     }
 
     showQuestion(current);
