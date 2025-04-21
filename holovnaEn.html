@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #e9d0ff;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: white;
+      margin: 20px;
+      padding: 10px;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .navbar a {
+      text-decoration: none;
+      color: black;
+    }
+    .navbar a.active {
+      color: #843d9f;
+    }
+    .profile {
+      background-color: #d9c4fc;
+      border-radius: 30px;
+      margin: 20px auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 800px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .left {
+      width: 35%;
+      text-align: center;
+    }
+    .left img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+    .left p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .middle {
+      width: 60%;
+    }
+    .middle h1 {
+      text-align: center;
+      font-size: 28px;
+    }
+    .middle .info {
+      background-color: #f6ddf9;
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 10px 0;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .style-options {
+      margin-top: 20px;
+    }
+    .style-option {
+      background: #e0dfff;
+      margin: 10px auto;
+      width: 80%;
+      padding: 10px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+    .right {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .assistant-img {
+      width: 120px;
+    }
+    .assistant-name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .badge {
+      background: white;
+      border-radius: 15px;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 130px;
+    }
+    .badge img {
+      width: 60px;
+      height: 60px;
+    }
+    .progress {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      background: #dcb7f9;
+      color: #4b007b;
+      padding: 10px 20px;
+      border-radius: 20px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .gallery-button {
+      margin: 20px auto;
+      display: block;
+      font-weight: bold;
+      background: #fff3c2;
+      color: #4b007b;
+      padding: 12px 24px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .puzzle-gallery {
+      display: none;
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .gallery-item {
+      margin-bottom: 20px;
+    }
+    .gallery-item img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .gallery-item p {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="EduStuff.html">📘 Learning Materials</a>
+    <a href="MyCourses.html">📂 My Courses</a>
+    <a href="holovna.html" class="active">👤 My Dashboard</a>
+  </div>
+
+  <div class="profile">
+    <div class="left">
+      <img src="avatar.png" alt="Avatar" />
+      <p>Student</p>
+      <div class="style-options">
+        <div class="style-option">🍄 Visual</div>
+        <div class="style-option">🍄 Audio</div>
+        <div class="style-option">🍄 Video</div>
+      </div>
+    </div>
+
+    <div class="middle">
+      <h1>Full Name</h1>
+      <div class="info">🍄 Learning Style</div>
+      <div class="info">🍄 Learning Assistant</div>
+      <div class="info" id="puzzleProgress">🧩 Test Progress: 0%</div>
+    </div>
+
+    <div class="right">
+      <img src="flik (1).png" alt="Flik" class="assistant-img"/>
+      <div class="assistant-name">Flik</div>
+    </div>
+  </div>
+
+  <div class="progress">
+    <div class="badge" id="puzzleBadge" style="display: none;">
+      <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="badge" />
+      <div><strong>🧩 Puzzle Master</strong></div>
+      <div style="font-size: 12px;">Completed your first knowledge puzzle!</div>
+    </div>
+    <button class="gallery-button" onclick="toggleGallery()">🖼️ Open Puzzle Gallery</button>
+  </div>
+
+  <div class="puzzle-gallery" id="gallery">
+    <div class="gallery-item" id="goldenGate" style="display: none;">
+      <img src="golden-gate-grid.jpg" alt="Golden Gate">
+      <p>🏰 The Golden Gate was part of Kyiv's medieval defensive walls. Built in the 11th century, reconstructed in 1982 to mark the city's 1500th anniversary.</p>
+    </div>
+  </div>
+
+  <a href="MyCourses.html" class="back-button">📚 Back to Courses</a>
+
+  <script>
+    const progress = localStorage.getItem('points_puzzleRus') || '0';
+    document.getElementById('puzzleProgress').innerHTML = `🧩 Test Progress: ${progress}%`;
+
+    if (localStorage.getItem('badge_firstPuzzle') === 'true') {
+      document.getElementById('puzzleBadge').style.display = 'inline-block';
+      document.getElementById('goldenGate').style.display = 'block';
+    }
+
+    function toggleGallery() {
+      const gallery = document.getElementById('gallery');
+      gallery.style.display = gallery.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
