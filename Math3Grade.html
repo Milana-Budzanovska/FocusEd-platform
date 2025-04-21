@@ -154,47 +154,52 @@
         <div class="task"><label>У Віки стрічка 1 м, у Марка — 90 см. Хто має довшу?</label><input type="text" onblur="checkInput(this)"></div>
       </div>`;
 
-    const contentEN = contentUA
-      .replace('Весела математика', 'Fun Math')
+    const contentEN = `
+      <div class="section"><h2>1. Numbers within 1000</h2>
+        <div class="task"><label>Write the number 385 as a sum of hundreds, tens, and ones:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>How many hundreds, tens, and ones are in the number 742?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>What is the largest number you can make using the digits 3, 8, 1?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>What number comes before 600?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Choose a number greater than 479 but less than 500:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Arrange the numbers in ascending order: 812, 298, 730, 499:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Which number should be inserted: 699, ___, 701?</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
       <div class="section"><h2>2. Addition and Subtraction</h2>
-  <div class="task"><label>425 + 376 =</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>725 - 348 =</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>314 + 200 =</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>How much needs to be subtracted from 700 to get 385?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>The sum of two numbers is 900. One of them is 550. Find the other.</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>1000 - 1 =</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Create an addition example that equals 638:</label><input type="text" onblur="checkInput(this)"></div>
-</div>
-
-<div class="section"><h2>3. Multiplication and Division by 2–5</h2>
-  <div class="task"><label>4 × 5 =</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>20 ÷ 4 =</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>There are 3 rows of 4 balls in a box. How many balls in total?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Each child has 5 candies. How many candies do 6 children have?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Create a division example where the result is 3:</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>How many 2 UAH coins are needed to make 20 UAH?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Divide 18 apples among 3 baskets. How many in each?</label><input type="text" onblur="checkInput(this)"></div>
-</div>
-
-<div class="section"><h2>4. Number Sequences and Logic</h2>
-  <div class="task"><label>Continue the sequence: 110, 120, 130, _, _</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Find the error in the sequence: 204, 214, 224, 234, 255</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>What number is between 599 and 601?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Complete the pattern: 2, 4, 8, 16, ___</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>What number comes before 321 and after 319?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Choose the odd number: 12, 14, 16, 19, 18</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Find the pattern: 1000, 900, 800, _, _</label><input type="text" onblur="checkInput(this)"></div>
-</div>
-
-<div class="section"><h2>5. Units of Length</h2>
-  <div class="task"><label>How many millimeters are in 7 centimeters?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Which is longer: a 15 cm pen or a 30 cm ruler?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Find the length of the red line (image):</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Measure and write the length of the pencil in the picture:</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>What is the total length of 3 identical ribbons, each 25 cm?</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Select the correct answer: 1 meter = ___ cm.</label><input type="text" onblur="checkInput(this)"></div>
-  <div class="task"><label>Vika's ribbon is 1 meter, Mark's is 90 cm. Who has the longer one?</label><input type="text" onblur="checkInput(this)"></div>
-</div>
+        <div class="task"><label>425 + 376 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>725 - 348 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>314 + 200 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>How much must be subtracted from 700 to get 385?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>The sum of two numbers is 900. One of them is 550. Find the other.</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>1000 - 1 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Create an addition example where the answer is 638:</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>3. Multiplication and Division by 2–5</h2>
+        <div class="task"><label>4 × 5 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>20 ÷ 4 =</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>There are 3 rows of 4 balls in a box. How many balls are there in total?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Each child has 5 candies. How many candies do 6 children have in total?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Create a division example where the answer is 3:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>How many 2 UAH coins are needed to collect 20 UAH?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Divide 18 apples among 3 baskets. How many apples in each?</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>4. Number Sequences and Logic</h2>
+        <div class="task"><label>Continue the sequence: 110, 120, 130, _, _</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Find the error in the sequence: 204, 214, 224, 234, 255</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>What number is between 599 and 601?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Complete the pattern: 2, 4, 8, 16, ___</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>What number comes before 321 and after 319?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Choose the odd number: 12, 14, 16, 19, 18</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Find the pattern: 1000, 900, 800, _, _</label><input type="text" onblur="checkInput(this)"></div>
+      </div>
+      <div class="section"><h2>5. Units of Length</h2>
+        <div class="task"><label>How many millimeters are in 7 centimeters?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Which item is longer: a 15 cm pen or a 30 cm ruler?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Find the length of the red line (image):</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Measure and write the length of the pencil in the picture:</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>What is the total length of 3 identical ribbons, each 25 cm long?</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Select the correct answer: 1 m = ___ cm.</label><input type="text" onblur="checkInput(this)"></div>
+        <div class="task"><label>Vika's ribbon is 1 m, Mark's is 90 cm. Who has the longer one?</label><input type="text" onblur="checkInput(this)"></div>
+      </div>`;
 
     function toggleLang() {
       isUkr = !isUkr;
