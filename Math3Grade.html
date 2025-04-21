@@ -44,15 +44,21 @@
       font-size: 1.1rem;
       background-color: #fdfcff;
     }
-    .toggle-font {
+    .toggle-font, .toggle-lang {
       position: fixed;
       top: 20px;
-      right: 20px;
-      background: #d3e2ff;
       padding: 10px 16px;
       border-radius: 12px;
       cursor: pointer;
       font-weight: bold;
+    }
+    .toggle-font {
+      right: 20px;
+      background: #d3e2ff;
+    }
+    .toggle-lang {
+      right: 160px;
+      background: #ffd3d3;
     }
     #assistant {
       position: fixed;
@@ -71,10 +77,11 @@
   </style>
 </head>
 <body>
+  <button class="toggle-lang" onclick="toggleLang()">EN</button>
   <button class="toggle-font" onclick="toggleFont()">Шрифт: звичайний</button>
-  <h1>Весела математика</h1>
+  <h1 id="title">Весела математика</h1>
 
-  <div class="section">
+  <div class="section" id="section1">
     <h2>1. Числа в межах 1000</h2>
     <div class="task"><label>Запиши число 385 як суму сотень, десятків і одиниць:</label><input type="text" onblur="checkInput(this)"></div>
     <div class="task"><label>Скільки сотень, десятків і одиниць у числі 742?</label><input type="text" onblur="checkInput(this)"></div>
@@ -85,7 +92,7 @@
     <div class="task"><label>Яке число треба вставити: 699, ___, 701?</label><input type="text" onblur="checkInput(this)"></div>
   </div>
 
-  <div class="section">
+  <div class="section" id="section2">
     <h2>2. Додавання і віднімання</h2>
     <div class="task"><label>425 + 376 =</label><input type="text" onblur="checkInput(this)"></div>
     <div class="task"><label>725 - 348 =</label><input type="text" onblur="checkInput(this)"></div>
@@ -96,7 +103,7 @@
     <div class="task"><label>Склади приклад на додавання, у якому відповідь — 638:</label><input type="text" onblur="checkInput(this)"></div>
   </div>
 
-  <div class="section">
+  <div class="section" id="section3">
     <h2>3. Множення і ділення на 2–5</h2>
     <div class="task"><label>4 × 5 =</label><input type="text" onblur="checkInput(this)"></div>
     <div class="task"><label>20 : 4 =</label><input type="text" onblur="checkInput(this)"></div>
@@ -107,7 +114,7 @@
     <div class="task"><label>Поділи 18 яблук між 3 кошиками. Скільки в кожному?</label><input type="text" onblur="checkInput(this)"></div>
   </div>
 
-  <div class="section">
+  <div class="section" id="section4">
     <h2>4. Числовий ряд, логіка</h2>
     <div class="task"><label>Продовж ряд: 110, 120, 130, _, _</label><input type="text" onblur="checkInput(this)"></div>
     <div class="task"><label>Знайди помилку в ряду: 204, 214, 224, 234, 255</label><input type="text" onblur="checkInput(this)"></div>
@@ -118,7 +125,7 @@
     <div class="task"><label>Знайди закономірність: 1000, 900, 800, _, _</label><input type="text" onblur="checkInput(this)"></div>
   </div>
 
-  <div class="section">
+  <div class="section" id="section5">
     <h2>5. Одиниці довжини</h2>
     <div class="task"><label>Скільки міліметрів у 7 сантиметрах?</label><input type="text" onblur="checkInput(this)"></div>
     <div class="task"><label>Який предмет довший: ручка 15 см чи лінійка 30 см?</label><input type="text" onblur="checkInput(this)"></div>
@@ -136,21 +143,30 @@
 
   <script>
     let dysFont = false;
+    let isUkr = true;
+
     function toggleFont() {
       dysFont = !dysFont;
       document.body.style.fontFamily = dysFont ? 'OpenDyslexic, sans-serif' : 'Comic Sans MS, sans-serif';
       document.querySelector('.toggle-font').textContent = 'Шрифт: ' + (dysFont ? 'дислексиків' : 'звичайний');
     }
 
+    function toggleLang() {
+      isUkr = !isUkr;
+      document.querySelector('.toggle-lang').textContent = isUkr ? 'EN' : 'UA';
+      document.getElementById('title').textContent = isUkr ? 'Весела математика' : 'Fun Math';
+      document.getElementById('assistant-text').textContent = isUkr ? 'Привіт! Я твій помічник 😊' : 'Hi! I am your assistant 😊';
+    }
+
     function checkInput(input) {
       const assistantText = document.getElementById('assistant-text');
       const value = input.value.trim();
       if (value === '') {
-        assistantText.textContent = 'Спробуй написати відповідь 😊';
+        assistantText.textContent = isUkr ? 'Спробуй написати відповідь 😊' : 'Try to write an answer 😊';
       } else if (value.length <= 2) {
-        assistantText.textContent = 'Можливо, ще трошки подумай 🤔';
+        assistantText.textContent = isUkr ? 'Можливо, ще трошки подумай 🤔' : 'Maybe think a bit more 🤔';
       } else {
-        assistantText.textContent = 'Чудово! Ти стараєшся! 💡';
+        assistantText.textContent = isUkr ? 'Чудово! Ти стараєшся! 💡' : 'Great! You are trying! 💡';
       }
     }
   </script>
