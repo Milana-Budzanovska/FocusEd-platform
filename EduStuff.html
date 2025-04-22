@@ -88,22 +88,37 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
         }
+        .toggle-lang {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #8c52ff;
+            color: #8c52ff;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-lang:hover {
+            background-color: #8c52ff;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <a href="EduStuff.html">Основний блок – Навчальні матеріали</a>
-        <a href="holovna.html" style="font-weight: bold; color: #7a2f8f;">Мій кабінет</a>
+        <a href="EduStuff.html" id="navEdu">Основний блок – Навчальні матеріали</a>
+        <a href="holovna.html" class="active" id="navCabinet">Мій кабінет</a>
     </div>
 
-    <div class="hero">Особистий кабінет</div>
+    <div class="hero" id="heroTitle">Особистий кабінет</div>
 
-    <h2>Кожна картка містить:</h2>
+    <h2 id="cardTitle">Кожна картка містить:</h2>
 
     <div class="card-container">
-        <div class="card">Назву теми</div>
-        <div class="card">Рекомендований стиль навчання</div>
-        <div class="card">Очікуваний час на проходження</div>
+        <div class="card" id="card1">Назву теми</div>
+        <div class="card" id="card2">Рекомендований стиль навчання</div>
+        <div class="card" id="card3">Очікуваний час на проходження</div>
     </div>
 
     <div class="icons">
@@ -114,44 +129,26 @@
         <img src="1000043600-fotor-bg-remover-20250312221316.png" alt="Іконка 5">
     </div>
 
-<div class="buttons">
-    <a href="GradeMenu.html" class="button">✅ Почати</a>
-</div>
+    <div class="buttons">
+        <a href="GradeMenu.html" class="button" id="startBtn">✅ Почати</a>
+    </div>
 
-</body>
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Перехід на головну</title>
-    <style>
-        body {
-            margin-top: 2cm;
-            text-align: center;
-        }
+    <button class="toggle-lang" onclick="toggleLanguage()" id="langToggle">ENG</button>
 
-        .home-button {
-            padding: 10px 20px;
-            background-color: #fff;
-            border: 2px solid #8c52ff;
-            color: #8c52ff;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .home-button:hover {
-            background-color: #8c52ff;
-            color: #fff;
-        }
-    </style>
-</head>
-<body>
-
-    <a href="index.html">
-        <button class="home-button">На головну</button>
-    </a>
-
+    <script>
+      let isUkr = true;
+      function toggleLanguage() {
+        isUkr = !isUkr;
+        document.getElementById('navEdu').textContent = isUkr ? 'Основний блок – Навчальні матеріали' : 'Main Section – Educational Materials';
+        document.getElementById('navCabinet').textContent = isUkr ? 'Мій кабінет' : 'My Dashboard';
+        document.getElementById('heroTitle').textContent = isUkr ? 'Особистий кабінет' : 'Personal Dashboard';
+        document.getElementById('cardTitle').textContent = isUkr ? 'Кожна картка містить:' : 'Each card contains:';
+        document.getElementById('card1').textContent = isUkr ? 'Назву теми' : 'Topic title';
+        document.getElementById('card2').textContent = isUkr ? 'Рекомендований стиль навчання' : 'Recommended learning style';
+        document.getElementById('card3').textContent = isUkr ? 'Очікуваний час на проходження' : 'Expected duration';
+        document.getElementById('startBtn').textContent = isUkr ? '✅ Почати' : '✅ Start';
+        document.getElementById('langToggle').textContent = isUkr ? 'ENG' : 'УКР';
+      }
+    </script>
 </body>
 </html>
