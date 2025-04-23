@@ -126,16 +126,14 @@
       menu.innerHTML = '';
       preschoolContainer.innerHTML = '';
 
-      // Дошкільнята / Preschool
       const preschool = document.createElement('a');
-      preschool.href = lang === 'uk' ? 'https://learning-bbkf.vercel.app/' : 'https://learning-bbkf.vercel.app/';
+      preschool.href = 'https://learning-bbkf.vercel.app/';
       preschool.className = 'btn';
       preschool.innerHTML = `<img src="1000050973-removebg-preview.png" alt="icon" /> ${
         lang === 'uk' ? 'Дошкільнята' : 'Preschool'
       }`;
       preschoolContainer.appendChild(preschool);
 
-      // Класи / Grades
       const classItems = lang === 'uk'
         ? [
             { label: '1 клас', icon: '1000050972-removebg-preview.png', link: '/klas-1' },
@@ -164,7 +162,7 @@
         const a = document.createElement('a');
         a.href = item.link;
         a.className = 'btn';
-        a.innerHTML = `<img src="/icons/${item.icon}" alt="${item.label}" />${item.label}`;
+        a.innerHTML = `<img src="${item.icon}" alt="${item.label}" />${item.label}`;
         menu.appendChild(a);
       });
     }
